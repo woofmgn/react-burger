@@ -1,3 +1,24 @@
+.container {
+  max-height: 65vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.container::-webkit-scrollbar {
+  height: 464px;
+  width: 10px;
+  background-color: #2F2F37;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background: #8585AD;
+  border-radius: 5px;
+}
+.wrapper::-webkit-scrollbar-track-piece:end {
+  background: transparent;
+  margin-bottom: 10px; 
+}
+
 .grid {
   max-width: 600px;
   margin: 24px 0 0;

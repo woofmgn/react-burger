@@ -11,13 +11,18 @@ export const Filling = ({ name, price, image }: any) => {
     >
       <img className="ml-4 mr-4" src={image} alt="ингредиент" />
       <span
-        className="mt-1 text text_type_main-default"
+        className="mt-1 text text_type_digits-default"
         style={{ display: "flex", gap: "8px" }}
       >
         {price}
         <CurrencyIcon type="primary" />
       </span>
-      <h3 className="mt-1 text text_type_main-default">{name}</h3>
+      <h3
+        style={{ textAlign: "center" }}
+        className="mt-1 text text_type_main-default"
+      >
+        {name}
+      </h3>
     </li>
   );
 };

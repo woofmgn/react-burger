@@ -24,7 +24,7 @@ export const BurgerIngredients = () => {
   return (
     <section className="pt-10">
       <h1 className="text text_type_main-large">Соберите бургер</h1>
-      <div style={{ display: "flex" }} className="mt-5">
+      <div style={{ display: "flex" }} className="mt-5 mb-10">
         <Tab value="one" active={current === "one"} onClick={setCurrent}>
           Булки
         </Tab>
@@ -35,45 +35,47 @@ export const BurgerIngredients = () => {
           Начинки
         </Tab>
       </div>
-      <h2 className="mt-10 text text_type_main-medium">Булки</h2>
-      <ul className={styles.grid}>
-        {breadList.map((item: any) => {
-          return (
-            <Bread
-              key={item._id}
-              name={item.name}
-              price={item.price}
-              image={item.image}
-            />
-          );
-        })}
-      </ul>
-      <h2 className="mt-10 text text_type_main-medium">Соусы</h2>
-      <ul className={styles.grid}>
-        {sauceList.map((item: any) => {
-          return (
-            <Sauce
-              key={item._id}
-              name={item.name}
-              price={item.price}
-              image={item.image}
-            />
-          );
-        })}
-      </ul>
-      <h2 className="mt-10 text text_type_main-medium">Начинка</h2>
-      <ul className={styles.grid}>
-        {fillingList.map((item: any) => {
-          return (
-            <Filling
-              key={item._id}
-              name={item.name}
-              price={item.price}
-              image={item.image}
-            />
-          );
-        })}
-      </ul>
+      <div className={styles.container}>
+        <h2 className="text text_type_main-medium">Булки</h2>
+        <ul className={styles.grid}>
+          {breadList.map((item: any) => {
+            return (
+              <Bread
+                key={item._id}
+                name={item.name}
+                price={item.price}
+                image={item.image}
+              />
+            );
+          })}
+        </ul>
+        <h2 className="mt-10 text text_type_main-medium">Соусы</h2>
+        <ul className={styles.grid}>
+          {sauceList.map((item: any) => {
+            return (
+              <Sauce
+                key={item._id}
+                name={item.name}
+                price={item.price}
+                image={item.image}
+              />
+            );
+          })}
+        </ul>
+        <h2 className="mt-10 text text_type_main-medium">Начинка</h2>
+        <ul className={styles.grid}>
+          {fillingList.map((item: any) => {
+            return (
+              <Filling
+                key={item._id}
+                name={item.name}
+                price={item.price}
+                image={item.image}
+              />
+            );
+          })}
+        </ul>
+      </div>
     </section>
   );
 };
