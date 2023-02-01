@@ -16,16 +16,16 @@
 
 .list::-webkit-scrollbar {
   height: 464px;
-  width: 10px;
+  width: 8px;
   background-color: #2F2F37;
 }
 
 .list::-webkit-scrollbar-thumb {
   background: #8585AD;
-  border-radius: 5px;
 }
 
 .item {
   display: flex;
   align-items: center;
+  margin-right: 8px;
 }

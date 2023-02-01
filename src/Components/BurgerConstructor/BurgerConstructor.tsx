@@ -12,8 +12,12 @@ export const BurgerConstructor = () => {
   return (
     <section className={styles.section}>
       <div
-        style={{ display: "flex", flexDirection: "column", gap: "10px" }}
-        className="ml-4 mr-4"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+        }}
+        className="ml-4"
       >
         <div className="ml-8">
           <ConstructorElement
