@@ -5,12 +5,6 @@ import {
 
 import PropTypes from "prop-types";
 
-Sauce.propTypes = {
-  name: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
-};
-
 export const Sauce = ({ name, price, image }) => {
   return (
     <li
@@ -37,4 +31,10 @@ export const Sauce = ({ name, price, image }) => {
       </h3>
     </li>
   );
+};
+
+Sauce.propTypes = {
+  name: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
 };

@@ -26,8 +26,6 @@ export const ingredientsObject = PropTypes.shape({
   __v: PropTypes.number,
 });
 
-BurgerConstructor.propTypes = PropTypes.arrayOf(ingredientsObject);
-
 export const BurgerConstructor = () => {
   const [ingredients, setIngredients] = useState([]);
 
@@ -98,3 +96,5 @@ export const BurgerConstructor = () => {
     </section>
   );
 };
+
+BurgerConstructor.propTypes = PropTypes.arrayOf(ingredientsObject);

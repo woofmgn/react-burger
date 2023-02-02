@@ -5,12 +5,6 @@ import {
 
 import PropTypes from "prop-types";
 
-Bread.propTypes = {
-  name: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
-};
-
 export const Bread = ({ name, price, image }) => {
   return (
     <li
@@ -38,4 +32,10 @@ export const Bread = ({ name, price, image }) => {
       </h3>
     </li>
   );
+};
+
+Bread.propTypes = {
+  name: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
 };

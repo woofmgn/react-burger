@@ -4,12 +4,6 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 
-Filling.propTypes = {
-  name: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
-};
-
 export const Filling = ({ name, price, image }) => {
   return (
     <li
@@ -36,4 +30,10 @@ export const Filling = ({ name, price, image }) => {
       </h3>
     </li>
   );
+};
+
+Filling.propTypes = {
+  name: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
 };
