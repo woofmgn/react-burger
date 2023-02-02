@@ -8,9 +8,9 @@ import styles from "./styles.module.css";
 
 export const BurgerIngredients = () => {
   const [current, setCurrent] = useState("one");
-  const [breadList, setBreadList] = useState<any>([]);
-  const [sauceList, setSauceList] = useState<any>([]);
-  const [fillingList, setFillingList] = useState<any>([]);
+  const [breadList, setBreadList] = useState([]);
+  const [sauceList, setSauceList] = useState([]);
+  const [fillingList, setFillingList] = useState([]);
 
   useEffect(() => {
     const bun = data.filter((item) => item.type === "bun");
@@ -38,7 +38,7 @@ export const BurgerIngredients = () => {
       <div className={styles.container}>
         <h2 className="text text_type_main-medium">Булки</h2>
         <ul className={styles.grid}>
-          {breadList.map((item: any) => {
+          {breadList.map((item) => {
             return (
               <Bread
                 key={item._id}
@@ -51,7 +51,7 @@ export const BurgerIngredients = () => {
         </ul>
         <h2 className="mt-10 text text_type_main-medium">Соусы</h2>
         <ul className={styles.grid}>
-          {sauceList.map((item: any) => {
+          {sauceList.map((item) => {
             return (
               <Sauce
                 key={item._id}
@@ -64,7 +64,7 @@ export const BurgerIngredients = () => {
         </ul>
         <h2 className="mt-10 text text_type_main-medium">Начинка</h2>
         <ul className={styles.grid}>
-          {fillingList.map((item: any) => {
+          {fillingList.map((item) => {
             return (
               <Filling
                 key={item._id}

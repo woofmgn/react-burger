@@ -1,6 +1,17 @@
-import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import {
+  Counter,
+  CurrencyIcon,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 
-export const Sauce = ({ name, price, image }: any) => {
+import PropTypes from "prop-types";
+
+Sauce.propTypes = {
+  name: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
+};
+
+export const Sauce = ({ name, price, image }) => {
   return (
     <li
       style={{
@@ -9,6 +20,7 @@ export const Sauce = ({ name, price, image }: any) => {
         alignItems: "center",
       }}
     >
+      <Counter count={0} size="default" extraClass="m-1" />
       <img className="ml-4 mr-4" src={image} alt="ингредиент" />
       <span
         className="mt-1 text text text_type_digits-default"
