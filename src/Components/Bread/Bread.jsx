@@ -2,8 +2,7 @@ import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-
-import PropTypes from "prop-types";
+import { ingredientItem } from "../../utils/prop-types";
 
 export const Bread = ({ name, price, image }) => {
   return (
@@ -34,8 +33,4 @@ export const Bread = ({ name, price, image }) => {
   );
 };
 
-Bread.propTypes = {
-  name: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
-};
+Bread.propTypes = ingredientItem.PropTypes;

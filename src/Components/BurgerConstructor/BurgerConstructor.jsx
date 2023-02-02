@@ -3,34 +3,21 @@ import {
   ConstructorElement,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { data } from "../../utils/data";
+import { ingredientsObject } from "../../utils/prop-types";
 import { Ingredient } from "../Ingredient/Ingredient";
 import styles from "./styles.module.css";
 
 const img = "https://code.s3.yandex.net/react/code/bun-02.png";
 
-export const ingredientsObject = PropTypes.shape({
-  _id: PropTypes.string,
-  name: PropTypes.string,
-  type: PropTypes.string,
-  proteins: PropTypes.number,
-  fat: PropTypes.number,
-  carbohydrates: PropTypes.string,
-  calories: PropTypes.number,
-  price: PropTypes.number,
-  image: PropTypes.string,
-  image_mobile: PropTypes.string,
-  image_large: PropTypes.string,
-  __v: PropTypes.number,
-});
-
 export const BurgerConstructor = () => {
   const [ingredients, setIngredients] = useState([]);
 
   useEffect(() => {
-    setIngredients(data);
+    if (data) {
+      setIngredients(data);
+    }
   }, []);
 
   return (
@@ -97,4 +84,4 @@ export const BurgerConstructor = () => {
   );
 };
 
-BurgerConstructor.propTypes = PropTypes.arrayOf(ingredientsObject);
+BurgerConstructor.propTypes = ingredientsObject.PropTypes;
