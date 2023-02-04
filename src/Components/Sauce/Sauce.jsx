@@ -11,6 +11,7 @@ export const Sauce = ({ name, price, image }) => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        position: "relative",
       }}
     >
       <Counter count={0} size="default" extraClass="m-1" />
