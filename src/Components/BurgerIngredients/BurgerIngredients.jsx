@@ -1,25 +1,25 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useEffect, useState } from "react";
-import { data } from "../../utils/data";
+// import { data } from "../../utils/data";
 import { Bread } from "../Bread/Bread";
 import { Filling } from "../Filling/Filling";
 import { Sauce } from "../Sauce/Sauce";
 import styles from "./styles.module.css";
 
-export const BurgerIngredients = () => {
+export const BurgerIngredients = ({ dataList }) => {
   const [current, setCurrent] = useState("one");
   const [breadList, setBreadList] = useState([]);
   const [sauceList, setSauceList] = useState([]);
   const [fillingList, setFillingList] = useState([]);
 
   useEffect(() => {
-    const bun = data.filter((item) => item.type === "bun");
-    const sauce = data.filter((item) => item.type === "sauce");
-    const filling = data.filter((item) => item.type === "main");
+    const bun = dataList.filter((item) => item.type === "bun");
+    const sauce = dataList.filter((item) => item.type === "sauce");
+    const filling = dataList.filter((item) => item.type === "main");
     setBreadList(bun);
     setSauceList(sauce);
     setFillingList(filling);
-  }, []);
+  }, [dataList]);
 
   return (
     <section className="pt-10">

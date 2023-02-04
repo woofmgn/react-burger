@@ -4,21 +4,21 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useEffect, useState } from "react";
-import { data } from "../../utils/data";
+// import { data } from "../../utils/data";
 import { ingredientsObject } from "../../utils/prop-types";
 import { Ingredient } from "../Ingredient/Ingredient";
 import styles from "./styles.module.css";
 
 const img = "https://code.s3.yandex.net/react/code/bun-02.png";
 
-export const BurgerConstructor = () => {
+export const BurgerConstructor = ({ dataList }) => {
   const [ingredients, setIngredients] = useState([]);
 
   useEffect(() => {
-    if (data) {
-      setIngredients(data);
+    if (dataList) {
+      setIngredients(dataList);
     }
-  }, []);
+  }, [dataList]);
 
   return (
     <section className={styles.section}>
