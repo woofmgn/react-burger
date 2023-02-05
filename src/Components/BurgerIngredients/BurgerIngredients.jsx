@@ -3,14 +3,27 @@ import { useEffect, useState } from "react";
 // import { data } from "../../utils/data";
 import { Bread } from "../Bread/Bread";
 import { Filling } from "../Filling/Filling";
+import { ModalIngredients } from "../ModalIngredients/ModalIngredients";
+import { ModalOverlay } from "../ModalOverlay/ModalOverlay";
 import { Sauce } from "../Sauce/Sauce";
 import styles from "./styles.module.css";
 
 export const BurgerIngredients = ({ dataList }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [modalData, setModalData] = useState({});
   const [current, setCurrent] = useState("one");
   const [breadList, setBreadList] = useState([]);
   const [sauceList, setSauceList] = useState([]);
   const [fillingList, setFillingList] = useState([]);
+
+  const handleOpenModal = (card) => {
+    setModalData(card);
+    setIsVisible(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsVisible(false);
+  };
 
   useEffect(() => {
     const bun = dataList.filter((item) => item.type === "bun");
@@ -45,6 +58,12 @@ export const BurgerIngredients = ({ dataList }) => {
                 name={item.name}
                 price={item.price}
                 image={item.image}
+                imageLarge={item.image_large}
+                calories={item.calories}
+                proteins={item.proteins}
+                fat={item.fat}
+                carbohydrates={item.carbohydrates}
+                onOpen={handleOpenModal}
               />
             );
           })}
@@ -58,6 +77,12 @@ export const BurgerIngredients = ({ dataList }) => {
                 name={item.name}
                 price={item.price}
                 image={item.image}
+                imageLarge={item.image_large}
+                calories={item.calories}
+                proteins={item.proteins}
+                fat={item.fat}
+                carbohydrates={item.carbohydrates}
+                onOpen={handleOpenModal}
               />
             );
           })}
@@ -71,11 +96,21 @@ export const BurgerIngredients = ({ dataList }) => {
                 name={item.name}
                 price={item.price}
                 image={item.image}
+                imageLarge={item.image_large}
+                calories={item.calories}
+                proteins={item.proteins}
+                fat={item.fat}
+                carbohydrates={item.carbohydrates}
+                onOpen={handleOpenModal}
               />
             );
           })}
         </ul>
       </div>
+      <ModalOverlay isOpen={isVisible} onClose={handleCloseModal}>
+        <h2 className="text text_type_main-large">Детали ингредиента</h2>
+        <ModalIngredients data={modalData} />
+      </ModalOverlay>
     </section>
   );
 };

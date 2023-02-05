@@ -4,7 +4,6 @@ import { BurgerConstructor } from "../BurgerConstructor/BurgerConstructor";
 import { BurgerIngredients } from "../BurgerIngredients/BurgerIngredients";
 import { Footer } from "../Footer/Footer";
 import { Header } from "../Header/Header";
-import { ModalOverlay } from "../ModalOverlay/ModalOverlay";
 import styles from "./styles.module.css";
 
 function App() {
@@ -31,7 +30,7 @@ function App() {
         <BurgerConstructor dataList={dataList} />
       </main>
       <Footer />
-      <ModalOverlay />
+      {/* <ModalOverlay /> */}
     </div>
   );
 }

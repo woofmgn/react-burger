@@ -4,14 +4,37 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ingredientItem } from "../../utils/prop-types";
 
-export const Filling = ({ name, price, image }) => {
+export const Filling = ({
+  name,
+  price,
+  image,
+  imageLarge,
+  calories,
+  proteins,
+  fat,
+  carbohydrates,
+  onOpen,
+}) => {
+  const handlerOpenModal = () => {
+    onOpen({
+      name: name,
+      imageLarge: imageLarge,
+      calories: calories,
+      proteins: proteins,
+      fat: fat,
+      carbohydrates: carbohydrates,
+    });
+  };
+
   return (
     <li
+      onClick={handlerOpenModal}
       style={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         position: "relative",
+        cursor: "pointer",
       }}
     >
       <Counter count={0} size="default" extraClass="m-1" />
