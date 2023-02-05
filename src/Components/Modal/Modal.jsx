@@ -3,6 +3,17 @@ import React from "react";
 import styles from "./styles.module.css";
 
 export const Modal = ({ children, onClose }) => {
+  React.useEffect(() => {
+    const closeModal = (evt) => {
+      if (evt.key === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", closeModal);
+
+    return () => window.removeEventListener("keydown", closeModal);
+  }, [onClose]);
   return (
     <div className={styles.container}>
       <button onClick={() => onClose()} className={styles.close}>
