@@ -4,14 +4,12 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
+import { imgBun } from "../../utils/constants";
 import { ingredientsArr } from "../../utils/prop-types";
 import { Ingredient } from "../Ingredient/Ingredient";
 import { OrderDetails } from "../ModalOrder/OrderDetails";
 import { ModalOverlay } from "../ModalOverlay/ModalOverlay";
 import styles from "./styles.module.css";
-
-const img = "https://code.s3.yandex.net/react/code/bun-02.png";
-
 export const BurgerConstructor = ({ dataList }) => {
   const [ingredients, setIngredients] = React.useState([]);
   const [isVisible, setIsVisible] = React.useState(false);
@@ -52,7 +50,7 @@ export const BurgerConstructor = ({ dataList }) => {
             isLocked={true}
             text="Краторная булка N-200i (верх)"
             price={200}
-            thumbnail={img}
+            thumbnail={imgBun}
           />
         </div>
         <ul className={styles.list}>
@@ -73,7 +71,7 @@ export const BurgerConstructor = ({ dataList }) => {
             isLocked={true}
             text="Краторная булка N-200i (низ)"
             price={200}
-            thumbnail={img}
+            thumbnail={imgBun}
           />
         </div>
       </div>
