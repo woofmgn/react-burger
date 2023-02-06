@@ -24,6 +24,12 @@ export const BurgerConstructor = ({ dataList }) => {
     setIsVisible(false);
   };
 
+  const calculateTotalOrder = React.useMemo(() => {
+    return dataList.reduce((acc, item) => {
+      return acc + item.price;
+    }, 0);
+  }, [dataList]);
+
   React.useEffect(() => {
     if (dataList) {
       setIngredients(dataList);
@@ -83,7 +89,7 @@ export const BurgerConstructor = ({ dataList }) => {
           className="text text_type_digits-medium mr-10"
           style={{ display: "flex", gap: "8px", alignItems: "center" }}
         >
-          {"20"}
+          {calculateTotalOrder}
           <CurrencyIcon type="primary" />
         </p>
         <Button
