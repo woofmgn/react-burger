@@ -8,8 +8,9 @@ import { imgBun } from "../../utils/constants";
 import { ingredientsArr } from "../../utils/prop-types";
 import { Ingredient } from "../Ingredient/Ingredient";
 import { OrderDetails } from "../ModalOrder/OrderDetails";
-import { ModalOverlay } from "../ModalOverlay/ModalOverlay";
+import { Portal } from "../Portal/Portal";
 import styles from "./styles.module.css";
+
 export const BurgerConstructor = ({ dataList }) => {
   const [ingredients, setIngredients] = React.useState([]);
   const [isVisible, setIsVisible] = React.useState(false);
@@ -99,9 +100,11 @@ export const BurgerConstructor = ({ dataList }) => {
           Оформить заказ
         </Button>
       </div>
-      <ModalOverlay isOpen={isVisible} onClose={handleCloseModal}>
-        <OrderDetails />
-      </ModalOverlay>
+      <Portal
+        children={<OrderDetails />}
+        isOpen={isVisible}
+        onClose={handleCloseModal}
+      />
     </section>
   );
 };

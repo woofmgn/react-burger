@@ -1,10 +1,10 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useEffect, useState } from "react";
+import { createRef, useEffect, useState } from "react";
 import { ingredientsArr } from "../../utils/prop-types";
 import { Bread } from "../Bread/Bread";
 import { Filling } from "../Filling/Filling";
 import { IngredientDetails } from "../ModalIngredients/IngredientDetails";
-import { ModalOverlay } from "../ModalOverlay/ModalOverlay";
+import { Portal } from "../Portal/Portal";
 import { Sauce } from "../Sauce/Sauce";
 import styles from "./styles.module.css";
 
@@ -15,6 +15,9 @@ export const BurgerIngredients = ({ dataList }) => {
   const [breadList, setBreadList] = useState([]);
   const [sauceList, setSauceList] = useState([]);
   const [fillingList, setFillingList] = useState([]);
+  const bunRef = createRef(null);
+  const sauceRef = createRef(null);
+  const fillingRef = createRef(null);
 
   const handleOpenModal = (card) => {
     setModalData(card);
@@ -23,6 +26,11 @@ export const BurgerIngredients = ({ dataList }) => {
 
   const handleCloseModal = () => {
     setIsVisible(false);
+  };
+
+  const handleScrollToRef = (isRef, str) => {
+    isRef.current.scrollIntoView({ behavior: "smooth" }, true);
+    setCurrent(str);
   };
 
   useEffect(() => {
@@ -38,18 +46,32 @@ export const BurgerIngredients = ({ dataList }) => {
     <section className="pt-10">
       <h1 className="text text_type_main-large">Соберите бургер</h1>
       <div style={{ display: "flex" }} className="mt-5 mb-10">
-        <Tab value="one" active={current === "one"} onClick={setCurrent}>
+        <Tab
+          value="one"
+          active={current === "one"}
+          onClick={() => handleScrollToRef(bunRef, "one")}
+        >
           Булки
         </Tab>
-        <Tab value="two" active={current === "two"} onClick={setCurrent}>
+        <Tab
+          value="two"
+          active={current === "two"}
+          onClick={() => handleScrollToRef(sauceRef, "two")}
+        >
           Соусы
         </Tab>
-        <Tab value="three" active={current === "three"} onClick={setCurrent}>
+        <Tab
+          value="three"
+          active={current === "three"}
+          onClick={() => handleScrollToRef(fillingRef, "three")}
+        >
           Начинки
         </Tab>
       </div>
       <div className={styles.container}>
-        <h2 className="text text_type_main-medium">Булки</h2>
+        <h2 ref={bunRef} className="text text_type_main-medium">
+          Булки
+        </h2>
         <ul className={styles.grid}>
           {breadList.map((item) => {
             return (
@@ -68,7 +90,9 @@ export const BurgerIngredients = ({ dataList }) => {
             );
           })}
         </ul>
-        <h2 className="mt-10 text text_type_main-medium">Соусы</h2>
+        <h2 ref={sauceRef} className="mt-10 text text_type_main-medium">
+          Соусы
+        </h2>
         <ul className={styles.grid}>
           {sauceList.map((item) => {
             return (
@@ -87,7 +111,9 @@ export const BurgerIngredients = ({ dataList }) => {
             );
           })}
         </ul>
-        <h2 className="mt-10 text text_type_main-medium">Начинка</h2>
+        <h2 ref={fillingRef} className="mt-10 text text_type_main-medium">
+          Начинка
+        </h2>
         <ul className={styles.grid}>
           {fillingList.map((item) => {
             return (
@@ -107,10 +133,12 @@ export const BurgerIngredients = ({ dataList }) => {
           })}
         </ul>
       </div>
-      <ModalOverlay isOpen={isVisible} onClose={handleCloseModal}>
-        <h2 className="text text_type_main-large">Детали ингредиента</h2>
-        <IngredientDetails data={modalData} />
-      </ModalOverlay>
+      <Portal
+        children={<IngredientDetails data={modalData} />}
+        isOpen={isVisible}
+        onClose={handleCloseModal}
+        title={"Детали ингредиента"}
+      />
     </section>
   );
 };

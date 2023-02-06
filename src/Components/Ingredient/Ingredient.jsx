@@ -3,7 +3,6 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ingredientItem } from "../../utils/prop-types";
-
 import styles from "./styles.module.css";
 
 export const Ingredient = ({ image, name, price }) => {
