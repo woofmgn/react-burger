@@ -1,9 +1,9 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useEffect, useState } from "react";
-// import { data } from "../../utils/data";
+import { ingredientsArr } from "../../utils/prop-types";
 import { Bread } from "../Bread/Bread";
 import { Filling } from "../Filling/Filling";
-import { ModalIngredients } from "../ModalIngredients/ModalIngredients";
+import { IngredientDetails } from "../ModalIngredients/IngredientDetails";
 import { ModalOverlay } from "../ModalOverlay/ModalOverlay";
 import { Sauce } from "../Sauce/Sauce";
 import styles from "./styles.module.css";
@@ -109,8 +109,12 @@ export const BurgerIngredients = ({ dataList }) => {
       </div>
       <ModalOverlay isOpen={isVisible} onClose={handleCloseModal}>
         <h2 className="text text_type_main-large">Детали ингредиента</h2>
-        <ModalIngredients data={modalData} />
+        <IngredientDetails data={modalData} />
       </ModalOverlay>
     </section>
   );
+};
+
+BurgerIngredients.propTypes = {
+  dataList: ingredientsArr,
 };

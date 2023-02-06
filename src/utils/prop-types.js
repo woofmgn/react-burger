@@ -6,7 +6,7 @@ export const ingredientsObject = PropTypes.shape({
   type: PropTypes.string.isRequired,
   proteins: PropTypes.number.isRequired,
   fat: PropTypes.number.isRequired,
-  carbohydrates: PropTypes.string.isRequired,
+  carbohydrates: PropTypes.number.isRequired,
   calories: PropTypes.number.isRequired,
   price: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
@@ -15,8 +15,15 @@ export const ingredientsObject = PropTypes.shape({
   __v: PropTypes.number.isRequired,
 });
 
-export const ingredientItem = PropTypes.arrayOf({
-  name: PropTypes.string,
-  price: PropTypes.number,
-  image: PropTypes.string,
+export const ingredientsArr = PropTypes.arrayOf(ingredientsObject);
+
+export const ingredientItem = PropTypes.shape({
+  name: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
+  imageLarge: PropTypes.string.isRequired,
+  calories: PropTypes.number.isRequired,
+  proteins: PropTypes.number.isRequired,
+  fat: PropTypes.number.isRequired,
+  carbohydrates: PropTypes.number.isRequired,
 });

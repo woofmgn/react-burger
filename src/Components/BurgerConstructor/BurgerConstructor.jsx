@@ -3,18 +3,28 @@ import {
   ConstructorElement,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useEffect, useState } from "react";
-// import { data } from "../../utils/data";
-import { ingredientsObject } from "../../utils/prop-types";
+import React from "react";
+import { ingredientsArr } from "../../utils/prop-types";
 import { Ingredient } from "../Ingredient/Ingredient";
+import { OrderDetails } from "../ModalOrder/OrderDetails";
+import { ModalOverlay } from "../ModalOverlay/ModalOverlay";
 import styles from "./styles.module.css";
 
 const img = "https://code.s3.yandex.net/react/code/bun-02.png";
 
 export const BurgerConstructor = ({ dataList }) => {
-  const [ingredients, setIngredients] = useState([]);
+  const [ingredients, setIngredients] = React.useState([]);
+  const [isVisible, setIsVisible] = React.useState(false);
 
-  useEffect(() => {
+  const handleToggleOpenModal = () => {
+    setIsVisible((prev) => !prev);
+  };
+
+  const handleCloseModal = () => {
+    setIsVisible(false);
+  };
+
+  React.useEffect(() => {
     if (dataList) {
       setIngredients(dataList);
     }
@@ -76,12 +86,22 @@ export const BurgerConstructor = ({ dataList }) => {
           {"20"}
           <CurrencyIcon type="primary" />
         </p>
-        <Button htmlType="button" type="primary" size="large">
+        <Button
+          onClick={handleToggleOpenModal}
+          htmlType="button"
+          type="primary"
+          size="large"
+        >
           Оформить заказ
         </Button>
       </div>
+      <ModalOverlay isOpen={isVisible} onClose={handleCloseModal}>
+        <OrderDetails />
+      </ModalOverlay>
     </section>
   );
 };
 
-BurgerConstructor.propTypes = ingredientsObject.PropTypes;
+BurgerConstructor.propTypes = {
+  dataList: ingredientsArr,
+};

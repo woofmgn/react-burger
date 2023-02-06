@@ -1,7 +1,8 @@
 import React from "react";
+import { ingredientsObject } from "../../utils/prop-types";
 import styles from "./styles.module.css";
 
-export const ModalIngredients = ({ data }) => {
+export const IngredientDetails = ({ data }) => {
   const { name, imageLarge, calories, proteins, fat, carbohydrates } = data;
 
   return (
@@ -52,3 +53,5 @@ export const ModalIngredients = ({ data }) => {
     </>
   );
 };
+
+IngredientDetails.propTypes = ingredientsObject.propTypes;

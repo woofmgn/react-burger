@@ -1,5 +1,6 @@
 import React from "react";
 import { api } from "../../api/Api";
+import { ingredientsArr } from "../../utils/prop-types";
 import { BurgerConstructor } from "../BurgerConstructor/BurgerConstructor";
 import { BurgerIngredients } from "../BurgerIngredients/BurgerIngredients";
 import { Footer } from "../Footer/Footer";
@@ -30,9 +31,10 @@ function App() {
         <BurgerConstructor dataList={dataList} />
       </main>
       <Footer />
-      {/* <ModalOverlay /> */}
     </div>
   );
 }
 
 export default App;
+
+App.propTypes = ingredientsArr.PropTypes;

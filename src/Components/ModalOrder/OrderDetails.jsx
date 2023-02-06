@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./styles.module.css";
 
-export const ModalOrder = () => {
+export const OrderDetails = () => {
   return (
     <div className={styles.wrapper} style={{ textAlign: "center" }}>
       <h2
