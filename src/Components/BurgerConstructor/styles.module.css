@@ -1,0 +1,31 @@
+.section {
+  padding-top: 100px;
+}
+
+.list {
+  max-height: 42vh;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.list::-webkit-scrollbar {
+  height: 464px;
+  width: 8px;
+  background-color: #2F2F37;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background: #8585AD;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+}

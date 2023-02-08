@@ -1,0 +1,11 @@
+@import url('./vendor/fonts/styles.css');
+
+body {
+  margin: 0;
+  font-family: 'JetBrains Mono', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #131316;
+  width: 100%;
+}
+
