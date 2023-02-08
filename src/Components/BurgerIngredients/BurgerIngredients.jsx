@@ -3,8 +3,8 @@ import { createRef, useEffect, useState } from "react";
 import { ingredientsArr } from "../../utils/prop-types";
 import { Bread } from "../Bread/Bread";
 import { Filling } from "../Filling/Filling";
+import { Modal } from "../Modal/Modal";
 import { IngredientDetails } from "../ModalIngredients/IngredientDetails";
-import { Portal } from "../Portal/Portal";
 import { Sauce } from "../Sauce/Sauce";
 import styles from "./styles.module.css";
 
@@ -133,7 +133,7 @@ export const BurgerIngredients = ({ dataList }) => {
           })}
         </ul>
       </div>
-      <Portal
+      <Modal
         children={<IngredientDetails data={modalData} />}
         isOpen={isVisible}
         onClose={handleCloseModal}
