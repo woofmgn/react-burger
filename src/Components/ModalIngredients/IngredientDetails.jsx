@@ -1,4 +1,5 @@
 import React from "react";
+import { classNames } from "../../helpers/classNames";
 import { ingredientsObject } from "../../utils/prop-types";
 import styles from "./styles.module.css";
 
@@ -10,8 +11,9 @@ export const IngredientDetails = ({ data }) => {
       <div className={styles.wrapper}>
         <img src={imageLarge} alt="" className="ml-5 mr-5" />
         <p
-          className="text text_type_main-medium mt-4"
-          style={{ textAlign: "center" }}
+          className={classNames(styles.title, {}, [
+            "text text_type_main-medium mt-4",
+          ])}
         >
           {name}
         </p>
