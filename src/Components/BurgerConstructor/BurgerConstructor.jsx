@@ -12,7 +12,7 @@ import { Modal } from "../Modal/Modal";
 import { OrderDetails } from "../ModalOrder/OrderDetails";
 import styles from "./styles.module.css";
 
-export const BurgerConstructor = ({ dataList }) => {
+export const BurgerConstructor = React.memo(({ dataList }) => {
   const [ingredients, setIngredients] = React.useState([]);
   const [isVisible, setIsVisible] = React.useState(false);
 
@@ -95,7 +95,7 @@ export const BurgerConstructor = ({ dataList }) => {
       />
     </section>
   );
-};
+});
 
 BurgerConstructor.propTypes = {
   dataList: ingredientsArr,
