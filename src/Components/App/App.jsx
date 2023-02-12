@@ -1,6 +1,7 @@
 import React from "react";
-import { api } from "../../api/Api";
+import { useDispatch, useSelector } from "react-redux";
 import { classNames } from "../../helpers/classNames";
+import { getIndredients } from "../../services/actions/getIngredients";
 import { ingredientsArr } from "../../utils/prop-types";
 import { BurgerConstructor } from "../BurgerConstructor/BurgerConstructor";
 import { BurgerIngredients } from "../BurgerIngredients/BurgerIngredients";
@@ -9,27 +10,27 @@ import { Header } from "../Header/Header";
 import styles from "./styles.module.css";
 
 function App() {
-  const [dataList, setDataList] = React.useState([]);
+  const { data, feedRequest } = useSelector(
+    (state) => state.ingredientsReducer
+  );
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
-    const getDataList = async () => {
-      try {
-        const res = await api.getData();
-        setDataList(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    getDataList();
-  }, []);
+    dispatch(getIndredients());
+  }, [dispatch]);
 
   return (
     <div className={classNames(styles.app, {}, [])}>
       <Header />
       <main className={classNames(styles.main, {}, [])}>
-        <BurgerIngredients dataList={dataList} />
-        <BurgerConstructor dataList={dataList} />
+        {feedRequest ? (
+          <div>Loading...</div>
+        ) : (
+          <>
+            <BurgerIngredients dataList={data} />
+            <BurgerConstructor dataList={data} />
+          </>
+        )}
       </main>
       <Footer />
     </div>
