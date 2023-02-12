@@ -1,15 +1,14 @@
 import React from "react";
+import { classNames } from "../../helpers/classNames";
 import styles from "./styles.module.css";
 
 export const OrderDetails = () => {
   return (
     <div className={styles.wrapper} style={{ textAlign: "center" }}>
       <h2
-        className="text text_type_digits-large"
-        style={{
-          textShadow:
-            "0px 0px 16px rgba(51, 51, 255, 0.25), 0px 0px 8px rgba(51, 51, 255, 0.25), 0px 4px 32px rgba(51, 51, 255, 0.5)",
-        }}
+        className={classNames(styles.title, {}, [
+          "text text_type_digits-large",
+        ])}
       >
         034536
       </h2>

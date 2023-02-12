@@ -1,5 +1,5 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import { createRef, useEffect, useState } from "react";
+import React, { createRef, useEffect, useState } from "react";
 import { ingredientsArr } from "../../utils/prop-types";
 import { Bread } from "../Bread/Bread";
 import { Filling } from "../Filling/Filling";
@@ -8,7 +8,7 @@ import { IngredientDetails } from "../ModalIngredients/IngredientDetails";
 import { Sauce } from "../Sauce/Sauce";
 import styles from "./styles.module.css";
 
-export const BurgerIngredients = ({ dataList }) => {
+export const BurgerIngredients = React.memo(({ dataList }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [modalData, setModalData] = useState({});
   const [current, setCurrent] = useState("one");
@@ -141,7 +141,7 @@ export const BurgerIngredients = ({ dataList }) => {
       />
     </section>
   );
-};
+});
 
 BurgerIngredients.propTypes = {
   dataList: ingredientsArr,

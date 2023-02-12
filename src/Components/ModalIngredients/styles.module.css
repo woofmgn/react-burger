@@ -6,6 +6,10 @@
   flex-direction: column;
 }
 
+.title {
+  text-align: center;
+}
+
 .structure {
   list-style-type: none;
   padding: 0;

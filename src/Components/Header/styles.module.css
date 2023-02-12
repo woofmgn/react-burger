@@ -1,7 +1,22 @@
+.container {
+  display: flex; 
+  justify-content: space-between;
+}
+
 .wrapper {
   display: flex;
   max-width: 784px;
   width: 100%;
   justify-content: space-between;
   align-items: center;
+}
+
+.nav {
+  display: flex; 
+  gap: 8px;
+}
+
+.link {
+  text-decoration: none;
+  display: flex;
 }

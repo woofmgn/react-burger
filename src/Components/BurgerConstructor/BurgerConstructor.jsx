@@ -4,6 +4,7 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
+import { classNames } from "../../helpers/classNames";
 import { imgBun } from "../../utils/constants";
 import { ingredientsArr } from "../../utils/prop-types";
 import { Ingredient } from "../Ingredient/Ingredient";
@@ -11,7 +12,7 @@ import { Modal } from "../Modal/Modal";
 import { OrderDetails } from "../ModalOrder/OrderDetails";
 import styles from "./styles.module.css";
 
-export const BurgerConstructor = ({ dataList }) => {
+export const BurgerConstructor = React.memo(({ dataList }) => {
   const [ingredients, setIngredients] = React.useState([]);
   const [isVisible, setIsVisible] = React.useState(false);
 
@@ -37,14 +38,7 @@ export const BurgerConstructor = ({ dataList }) => {
 
   return (
     <section className={styles.section}>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "10px",
-        }}
-        className="ml-4"
-      >
+      <div className={classNames(styles.container, {}, ["ml-4"])}>
         <div className="ml-8">
           <ConstructorElement
             type="top"
@@ -76,17 +70,11 @@ export const BurgerConstructor = ({ dataList }) => {
           />
         </div>
       </div>
-      <div
-        className="mt-10"
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "flex-end",
-        }}
-      >
+      <div className={classNames(styles.wrapper, {}, ["mt-10"])}>
         <p
-          className="text text_type_digits-medium mr-10"
-          style={{ display: "flex", gap: "8px", alignItems: "center" }}
+          className={classNames(styles.total, {}, [
+            "text text_type_digits-medium mr-10",
+          ])}
         >
           {calculateTotalOrder}
           <CurrencyIcon type="primary" />
@@ -107,7 +95,7 @@ export const BurgerConstructor = ({ dataList }) => {
       />
     </section>
   );
-};
+});
 
 BurgerConstructor.propTypes = {
   dataList: ingredientsArr,

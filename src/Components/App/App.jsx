@@ -1,5 +1,6 @@
 import React from "react";
 import { api } from "../../api/Api";
+import { classNames } from "../../helpers/classNames";
 import { ingredientsArr } from "../../utils/prop-types";
 import { BurgerConstructor } from "../BurgerConstructor/BurgerConstructor";
 import { BurgerIngredients } from "../BurgerIngredients/BurgerIngredients";
@@ -24,9 +25,9 @@ function App() {
   }, []);
 
   return (
-    <div className={styles.app}>
+    <div className={classNames(styles.app, {}, [])}>
       <Header />
-      <main className={styles.main}>
+      <main className={classNames(styles.main, {}, [])}>
         <BurgerIngredients dataList={dataList} />
         <BurgerConstructor dataList={dataList} />
       </main>

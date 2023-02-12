@@ -4,20 +4,17 @@ import {
   Logo,
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { classNames } from "../../helpers/classNames";
 import styles from "./styles.module.css";
 
 export const Header = () => {
   return (
-    <header
-      style={{ display: "flex", justifyContent: "space-between" }}
-      className={"pt-4 pb-4"}
-    >
+    <header className={classNames(styles.container, {}, ["pt-4 pb-4"])}>
       <div className={styles.wrapper}>
-        <nav style={{ display: "flex", gap: "8px" }}>
+        <nav className={styles.nav}>
           <a
             href={"/constructor"}
-            className={"pt-4 pr-5 pb-4 "}
-            style={{ textDecoration: "none", display: "flex" }}
+            className={classNames(styles.link, {}, ["pt-4 pr-5 pb-4 "])}
           >
             <BurgerIcon type="secondary" />
             <p className="pl-2 text text_type_main-default text_color_inactive">
@@ -25,9 +22,8 @@ export const Header = () => {
             </p>
           </a>
           <a
-            href={"/constructor"}
-            className={"pt-4 pr-5 pb-4 pl-5"}
-            style={{ textDecoration: "none", display: "flex" }}
+            href={"/orders"}
+            className={classNames(styles.link, {}, ["pt-4 pr-5 pb-4 pl-5"])}
           >
             <ListIcon type="secondary" />
             <p className="pl-2 text text_type_main-default text_color_inactive">
@@ -38,9 +34,8 @@ export const Header = () => {
         <Logo />
       </div>
       <a
-        href={"/constructor"}
-        className={"pt-4 pb-4 pl-5"}
-        style={{ textDecoration: "none", display: "flex" }}
+        href={"/acoount"}
+        className={classNames(styles.link, {}, ["pt-4 pb-4 pl-5"])}
       >
         <ProfileIcon type="secondary" />
         <p className="pl-2 text text_type_main-default text_color_inactive">
