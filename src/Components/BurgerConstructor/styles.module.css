@@ -1,15 +1,22 @@
 .section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding-top: 100px;
+  /* height: 100%; */
 }
 
 .container {
   display: flex;
+  height: 100%;
   flex-direction: column;
+  justify-content: space-between;
   gap: 10px;
 }
 
 .list {
   max-height: 42vh;
+  /* height: 100%; */
   margin: 0;
   padding: 0;
   list-style: none;

@@ -6,14 +6,14 @@ import {
 import React from "react";
 import { classNames } from "../../helpers/classNames";
 import { imgBun } from "../../utils/constants";
-import { ingredientsArr } from "../../utils/prop-types";
-import { Ingredient } from "../Ingredient/Ingredient";
+// import { Ingredient } from "../Ingredient/Ingredient";
 import { Modal } from "../Modal/Modal";
 import { OrderDetails } from "../ModalOrder/OrderDetails";
 import styles from "./styles.module.css";
 
-export const BurgerConstructor = React.memo(({ dataList }) => {
-  const [ingredients, setIngredients] = React.useState([]);
+// export const BurgerConstructor = React.memo(({ dataList }) => {
+export const BurgerConstructor = React.memo(() => {
+  // const [ingredients, setIngredients] = React.useState([]);
   const [isVisible, setIsVisible] = React.useState(false);
 
   const handleToggleOpenModal = () => {
@@ -24,17 +24,17 @@ export const BurgerConstructor = React.memo(({ dataList }) => {
     setIsVisible(false);
   };
 
-  const calculateTotalOrder = React.useMemo(() => {
-    return dataList.reduce((acc, item) => {
-      return acc + item.price;
-    }, 0);
-  }, [dataList]);
+  // const calculateTotalOrder = React.useMemo(() => {
+  //   return dataList.reduce((acc, item) => {
+  //     return acc + item.price;
+  //   }, 0);
+  // }, [dataList]);
 
-  React.useEffect(() => {
-    if (dataList) {
-      setIngredients(dataList);
-    }
-  }, [dataList]);
+  // React.useEffect(() => {
+  //   if (dataList) {
+  //     setIngredients(dataList);
+  //   }
+  // }, [dataList]);
 
   return (
     <section className={styles.section}>
@@ -49,7 +49,7 @@ export const BurgerConstructor = React.memo(({ dataList }) => {
           />
         </div>
         <ul className={styles.list}>
-          {ingredients.map((item) => {
+          {/* {ingredients.map((item) => {
             return (
               <Ingredient
                 key={item._id}
@@ -58,7 +58,7 @@ export const BurgerConstructor = React.memo(({ dataList }) => {
                 image={item.image}
               />
             );
-          })}
+          })} */}
         </ul>
         <div className="ml-8">
           <ConstructorElement
@@ -76,7 +76,8 @@ export const BurgerConstructor = React.memo(({ dataList }) => {
             "text text_type_digits-medium mr-10",
           ])}
         >
-          {calculateTotalOrder}
+          {/* {calculateTotalOrder} */}
+          {123}
           <CurrencyIcon type="primary" />
         </p>
         <Button
@@ -97,6 +98,6 @@ export const BurgerConstructor = React.memo(({ dataList }) => {
   );
 });
 
-BurgerConstructor.propTypes = {
-  dataList: ingredientsArr,
-};
+// BurgerConstructor.propTypes = {
+//   dataList: ingredientsArr,
+// };
