@@ -5,6 +5,7 @@ import {
   legacy_createStore as createStore,
 } from "redux";
 import thunk from "redux-thunk";
+import { detailsReducer } from "./reducers/detailsReduser";
 import { ingredientsReducer } from "./reducers/ingredientsReducer";
 
 const composeEnhancers =
@@ -14,6 +15,7 @@ const composeEnhancers =
 
 const rootReducer = combineReducers({
   ingredientsReducer,
+  detailsReducer,
 });
 
 const store = createStore(

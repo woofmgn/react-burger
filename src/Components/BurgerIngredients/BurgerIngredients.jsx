@@ -1,7 +1,7 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import React, { createRef, useState } from "react";
-// import { ingredientsArr } from "../../utils/prop-types";
 import { useDispatch, useSelector } from "react-redux";
+import { setDetails } from "../../services/actions/details";
 import { getIndredients } from "../../services/actions/getIngredients";
 import { Bread } from "../Bread/Bread";
 import { Filling } from "../Filling/Filling";
@@ -12,7 +12,6 @@ import styles from "./styles.module.css";
 
 export const BurgerIngredients = React.memo(() => {
   const [isVisible, setIsVisible] = useState(false);
-  const [modalData, setModalData] = useState({});
   const [current, setCurrent] = useState("one");
   const bunRef = createRef(null);
   const sauceRef = createRef(null);
@@ -24,7 +23,7 @@ export const BurgerIngredients = React.memo(() => {
   const dispatch = useDispatch();
 
   const handleOpenModal = (card) => {
-    setModalData(card);
+    dispatch(setDetails(card));
     setIsVisible(true);
   };
 
@@ -143,7 +142,7 @@ export const BurgerIngredients = React.memo(() => {
         </div>
       )}
       <Modal
-        children={<IngredientDetails data={modalData} />}
+        children={<IngredientDetails />}
         isOpen={isVisible}
         onClose={handleCloseModal}
         title={"Детали ингредиента"}
