@@ -1,4 +1,4 @@
-import { RESET, SET_INGREDIENTS } from "../../utils/constants";
+import { SET_INGREDIENTS } from "../../utils/constants";
 
 const initialState = {
   feedReq: false,
@@ -22,11 +22,6 @@ export function detailsReducer(state = initialState, action) {
         proteins: action.proteins,
         fat: action.fat,
         carbohydrates: action.carbohydrates,
-      };
-    }
-    case RESET: {
-      return {
-        state,
       };
     }
     default: {

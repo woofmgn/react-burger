@@ -1,7 +1,7 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import React, { createRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setDetails } from "../../services/actions/details";
+import { resetDetails, setDetails } from "../../services/actions/details";
 import { getIndredients } from "../../services/actions/getIngredients";
 import { Bread } from "../Bread/Bread";
 import { Filling } from "../Filling/Filling";
@@ -29,6 +29,7 @@ export const BurgerIngredients = React.memo(() => {
 
   const handleCloseModal = () => {
     setIsVisible(false);
+    dispatch(resetDetails());
   };
 
   const handleScrollToRef = (isRef, str) => {
