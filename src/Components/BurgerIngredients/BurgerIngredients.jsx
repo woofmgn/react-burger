@@ -3,11 +3,9 @@ import React, { createRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { resetDetails, setDetails } from "../../services/actions/details";
 import { getIndredients } from "../../services/actions/getIngredients";
-import { Bread } from "../Bread/Bread";
-import { Filling } from "../Filling/Filling";
+import { Card } from "../Card/Card";
 import { Modal } from "../Modal/Modal";
 import { IngredientDetails } from "../ModalIngredients/IngredientDetails";
-import { Sauce } from "../Sauce/Sauce";
 import styles from "./styles.module.css";
 
 export const BurgerIngredients = React.memo(() => {
@@ -79,8 +77,9 @@ export const BurgerIngredients = React.memo(() => {
               .filter((item) => item.type === "bun")
               .map((item) => {
                 return (
-                  <Bread
+                  <Card
                     key={item._id}
+                    id={item._id}
                     name={item.name}
                     price={item.price}
                     image={item.image}
@@ -102,8 +101,9 @@ export const BurgerIngredients = React.memo(() => {
               .filter((item) => item.type === "sauce")
               .map((item) => {
                 return (
-                  <Sauce
+                  <Card
                     key={item._id}
+                    id={item._id}
                     name={item.name}
                     price={item.price}
                     image={item.image}
@@ -125,8 +125,9 @@ export const BurgerIngredients = React.memo(() => {
               .filter((item) => item.type === "main")
               .map((item) => {
                 return (
-                  <Filling
+                  <Card
                     key={item._id}
+                    id={item._id}
                     name={item.name}
                     price={item.price}
                     image={item.image}
