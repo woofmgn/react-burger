@@ -9,10 +9,23 @@ const initialState = {
 export function constructorReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_INGREDIENTS: {
-      return {
-        ...state,
-        ingredients: [...state.ingredients, action],
-      };
+      if (action.types === "bun") {
+        return {
+          ...state,
+          ingredients: [action, ...state.ingredients, action],
+        };
+      } else {
+        const mainIngredients = [...state.ingredients].slice(1, -1);
+        return {
+          ...state,
+          ingredients: [
+            state.ingredients[0],
+            ...mainIngredients,
+            action,
+            state.ingredients[state.ingredients.length - 1],
+          ],
+        };
+      }
     }
     default: {
       return state;

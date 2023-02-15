@@ -6,9 +6,9 @@ import {
 import React from "react";
 import { useDrop } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
+import { v4 as uuid } from "uuid";
 import { classNames } from "../../helpers/classNames";
 import { addIngredients } from "../../services/actions/constructor";
-import { imgBun } from "../../utils/constants";
 import { Ingredient } from "../Ingredient/Ingredient";
 import { Modal } from "../Modal/Modal";
 import { OrderDetails } from "../ModalOrder/OrderDetails";
@@ -35,6 +35,10 @@ export const BurgerConstructor = React.memo(() => {
     setIsVisible(false);
   };
 
+  const filteredBun = React.useMemo(() => {
+    return ingredients.filter((item) => item.types === "bun");
+  }, [ingredients]);
+
   const calculateTotalOrder = React.useMemo(() => {
     return ingredients.reduce((acc, item) => {
       return acc + item.price;
@@ -47,36 +51,42 @@ export const BurgerConstructor = React.memo(() => {
         ref={dropTargetRef}
         className={classNames(styles.container, {}, ["ml-4"])}
       >
-        <div className="ml-8">
-          <ConstructorElement
-            type="top"
-            isLocked={true}
-            text="Краторная булка N-200i (верх)"
-            price={200}
-            thumbnail={imgBun}
-          />
-        </div>
+        {filteredBun[0] && (
+          <div className="ml-8">
+            <ConstructorElement
+              type="top"
+              isLocked={true}
+              text={`${filteredBun[0].name} (верх)`}
+              price={filteredBun[0].price}
+              thumbnail={filteredBun[0].image}
+            />
+          </div>
+        )}
         <ul className={styles.list}>
-          {ingredients.map((item) => {
-            return (
-              <Ingredient
-                key={item.id}
-                price={item.price}
-                name={item.name}
-                image={item.image}
-              />
-            );
-          })}
+          {ingredients
+            .filter((item) => item.types !== "bun")
+            .map((item) => {
+              return (
+                <Ingredient
+                  key={uuid()}
+                  price={item.price}
+                  name={item.name}
+                  image={item.image}
+                />
+              );
+            })}
         </ul>
-        <div className="ml-8">
-          <ConstructorElement
-            type="bottom"
-            isLocked={true}
-            text="Краторная булка N-200i (низ)"
-            price={200}
-            thumbnail={imgBun}
-          />
-        </div>
+        {filteredBun[0] && (
+          <div className="ml-8">
+            <ConstructorElement
+              type="bottom"
+              isLocked={true}
+              text={`${filteredBun[0].name} (низ)`}
+              price={filteredBun[0].price}
+              thumbnail={filteredBun[0].image}
+            />
+          </div>
+        )}
       </div>
       <div className={classNames(styles.wrapper, {}, ["mt-10"])}>
         <p

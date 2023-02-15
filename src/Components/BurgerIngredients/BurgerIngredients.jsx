@@ -82,6 +82,7 @@ export const BurgerIngredients = React.memo(() => {
                     id={item._id}
                     name={item.name}
                     price={item.price}
+                    type={item.type}
                     image={item.image}
                     imageLarge={item.image_large}
                     calories={item.calories}
@@ -106,6 +107,7 @@ export const BurgerIngredients = React.memo(() => {
                     id={item._id}
                     name={item.name}
                     price={item.price}
+                    type={item.type}
                     image={item.image}
                     imageLarge={item.image_large}
                     calories={item.calories}
@@ -130,6 +132,7 @@ export const BurgerIngredients = React.memo(() => {
                     id={item._id}
                     name={item.name}
                     price={item.price}
+                    type={item.type}
                     image={item.image}
                     imageLarge={item.image_large}
                     calories={item.calories}

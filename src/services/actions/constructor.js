@@ -11,4 +11,5 @@ export const addIngredients = (payload) => ({
   proteins: payload.proteins,
   fat: payload.fat,
   carbohydrates: payload.carbohydrates,
+  types: payload.type,
 });
