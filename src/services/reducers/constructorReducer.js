@@ -1,4 +1,8 @@
-import { ADD_INGREDIENTS, REMOVE_INGREDIENTS } from "../../utils/constants";
+import {
+  ADD_INGREDIENTS,
+  REMOVE_ALL_INGREDIENTS,
+  REMOVE_INGREDIENTS,
+} from "../../utils/constants";
 
 const initialState = {
   feedRequest: false,
@@ -17,7 +21,7 @@ export function constructorReducer(state = initialState, action) {
           ...state,
           ingredients: [action, ...fiteredBun, action],
         };
-      } else if (action.types !== "bun" && state.ingredients.length >= 0) {
+      } else if (action.types !== "bun" && state.ingredients.length === 0) {
         return {
           ...state,
           ingredients: [...state.ingredients, action],
@@ -42,6 +46,9 @@ export function constructorReducer(state = initialState, action) {
           (item, index) => index !== action.index + 1
         ),
       };
+    }
+    case REMOVE_ALL_INGREDIENTS: {
+      return action;
     }
     default: {
       return state;

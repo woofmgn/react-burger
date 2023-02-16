@@ -1,8 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { classNames } from "../../helpers/classNames";
 import styles from "./styles.module.css";
 
 export const OrderDetails = () => {
+  const { order } = useSelector((state) => state.orderReducer);
+
   return (
     <div className={styles.wrapper} style={{ textAlign: "center" }}>
       <h2
@@ -10,7 +13,7 @@ export const OrderDetails = () => {
           "text text_type_digits-large",
         ])}
       >
-        034536
+        {order.number}
       </h2>
       <p className="text text_type_main-medium mt-8">индентификатор заказа</p>
       <div className={styles.icon}></div>

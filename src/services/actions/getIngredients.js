@@ -1,5 +1,4 @@
 import {
-  API_URL,
   GET_INGREDIENTS,
   GET_INGREDIENTS_FAILED,
   GET_INGREDIENTS_SUCCES,
@@ -13,7 +12,7 @@ export function getIndredients() {
       type: GET_INGREDIENTS,
     });
     api
-      .getData(API_URL)
+      .getData()
       .then((res) => {
         if (res && res.success) {
           dispatch({

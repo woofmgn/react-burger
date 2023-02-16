@@ -1,4 +1,8 @@
-import { ADD_INGREDIENTS, REMOVE_INGREDIENTS } from "../../utils/constants";
+import {
+  ADD_INGREDIENTS,
+  REMOVE_ALL_INGREDIENTS,
+  REMOVE_INGREDIENTS,
+} from "../../utils/constants";
 
 export const addIngredients = (payload) => ({
   type: ADD_INGREDIENTS,
@@ -17,4 +21,9 @@ export const addIngredients = (payload) => ({
 export const removeIngredients = (index) => ({
   type: REMOVE_INGREDIENTS,
   index: index,
+});
+
+export const removeAllIngredients = () => ({
+  type: REMOVE_ALL_INGREDIENTS,
+  ingredients: [],
 });

@@ -3,12 +3,16 @@ import {
   ConstructorElement,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import React from "react";
+import React, { useCallback } from "react";
 import { useDrop } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
 import { classNames } from "../../helpers/classNames";
-import { addIngredients } from "../../services/actions/constructor";
+import {
+  addIngredients,
+  removeAllIngredients,
+} from "../../services/actions/constructor";
+import { setOrder } from "../../services/actions/order";
 import { Ingredient } from "../Ingredient/Ingredient";
 import { Modal } from "../Modal/Modal";
 import { OrderDetails } from "../ModalOrder/OrderDetails";
@@ -18,6 +22,7 @@ export const BurgerConstructor = React.memo(() => {
   const ingredients = useSelector(
     (state) => state.constructorReducer.ingredients
   );
+  const { success } = useSelector((state) => state.orderReducer);
   const [isVisible, setIsVisible] = React.useState(false);
   const dispatch = useDispatch();
   const [, dropTargetRef] = useDrop({
@@ -27,11 +32,15 @@ export const BurgerConstructor = React.memo(() => {
     },
   });
 
-  const handleToggleOpenModal = () => {
+  const handleToggleOpenModal = useCallback(() => {
+    let newOrder = [];
+    ingredients.forEach((item) => newOrder.push(item._id));
+    dispatch(setOrder(newOrder));
     setIsVisible((prev) => !prev);
-  };
+  }, [dispatch, ingredients]);
 
   const handleCloseModal = () => {
+    dispatch(removeAllIngredients());
     setIsVisible(false);
   };
 
@@ -108,11 +117,13 @@ export const BurgerConstructor = React.memo(() => {
           Оформить заказ
         </Button>
       </div>
-      <Modal
-        children={<OrderDetails />}
-        isOpen={isVisible}
-        onClose={handleCloseModal}
-      />
+      {success && (
+        <Modal
+          children={<OrderDetails />}
+          isOpen={isVisible}
+          onClose={handleCloseModal}
+        />
+      )}
     </section>
   );
 });

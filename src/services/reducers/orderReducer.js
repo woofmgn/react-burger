@@ -1,10 +1,15 @@
-import { SET_ORDER } from "../../utils/constants";
+import {
+  SET_ORDER,
+  SET_ORDER_FAILED,
+  SET_ORDER_SUCCES,
+} from "../../utils/constants";
 
 const initialState = {
   feedReq: false,
-  feedRes: false,
-  order: 0,
-  ingredients: [],
+  feedFailed: false,
+  name: "",
+  order: {},
+  success: false,
 };
 
 export function orderReducer(state = initialState, action) {
@@ -12,9 +17,23 @@ export function orderReducer(state = initialState, action) {
     case SET_ORDER: {
       return {
         ...state,
-        feedRes: true,
-        order: state.order + 1,
-        ingredients: action,
+        feedReq: true,
+        feedFailed: false,
+      };
+    }
+    case SET_ORDER_SUCCES: {
+      console.log(action);
+      return {
+        ...state,
+        ...action,
+        feedReq: false,
+      };
+    }
+    case SET_ORDER_FAILED: {
+      return {
+        ...state,
+        feedReq: false,
+        feedFailed: true,
       };
     }
     default: {
