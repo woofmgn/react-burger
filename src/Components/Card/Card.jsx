@@ -4,6 +4,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
 import { useDrag } from "react-dnd";
+import { useSelector } from "react-redux";
 import { classNames } from "../../helpers/classNames";
 import { ingredientItem } from "../../utils/prop-types";
 import styles from "./styles.module.css";
@@ -22,6 +23,8 @@ export const Card = React.memo(
     carbohydrates,
     onOpen,
   }) => {
+    const { ingredients } = useSelector((state) => state.constructorReducer);
+
     const [, dragRef] = useDrag({
       type: "ingredient",
       item: {
@@ -37,6 +40,11 @@ export const Card = React.memo(
         carbohydrates,
       },
     });
+
+    const checkCount = () => {
+      const inCart = ingredients.filter((item) => item._id === id);
+      return inCart.length;
+    };
 
     const handlerOpenModal = () => {
       onOpen({
@@ -55,7 +63,7 @@ export const Card = React.memo(
         onClick={handlerOpenModal}
         className={classNames(styles.item, {}, [])}
       >
-        <Counter count={0} size="default" extraClass="m-1" />
+        <Counter count={checkCount()} size="default" extraClass="m-1" />
         <img className="ml-4 mr-4" src={image} alt="ингредиент" />
         <span
           className={classNames(styles.price, {}, [

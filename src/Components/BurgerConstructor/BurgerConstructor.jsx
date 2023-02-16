@@ -65,13 +65,15 @@ export const BurgerConstructor = React.memo(() => {
         <ul className={styles.list}>
           {ingredients
             .filter((item) => item.types !== "bun")
-            .map((item) => {
+            .map((item, index) => {
               return (
                 <Ingredient
                   key={uuid()}
                   price={item.price}
                   name={item.name}
                   image={item.image}
+                  id={item._id}
+                  index={index}
                 />
               );
             })}

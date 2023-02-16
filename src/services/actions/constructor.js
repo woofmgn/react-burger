@@ -1,8 +1,8 @@
-import { ADD_INGREDIENTS } from "../../utils/constants";
+import { ADD_INGREDIENTS, REMOVE_INGREDIENTS } from "../../utils/constants";
 
 export const addIngredients = (payload) => ({
   type: ADD_INGREDIENTS,
-  id: payload.id,
+  _id: payload.id,
   name: payload.name,
   price: payload.price,
   image: payload.image,
@@ -12,4 +12,9 @@ export const addIngredients = (payload) => ({
   fat: payload.fat,
   carbohydrates: payload.carbohydrates,
   types: payload.type,
+});
+
+export const removeIngredients = (index) => ({
+  type: REMOVE_INGREDIENTS,
+  index: index,
 });
