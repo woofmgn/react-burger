@@ -20,7 +20,6 @@ class Api {
   }
 
   async newOrder(data) {
-    console.log(data);
     const res = await fetch(this._urlOrder, {
       method: "POST",
       headers: {

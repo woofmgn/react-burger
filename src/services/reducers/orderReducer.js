@@ -1,6 +1,7 @@
 import {
   SET_ORDER,
   SET_ORDER_FAILED,
+  SET_ORDER_REMOVE,
   SET_ORDER_SUCCES,
 } from "../../utils/constants";
 
@@ -22,7 +23,6 @@ export function orderReducer(state = initialState, action) {
       };
     }
     case SET_ORDER_SUCCES: {
-      console.log(action);
       return {
         ...state,
         ...action,
@@ -35,6 +35,9 @@ export function orderReducer(state = initialState, action) {
         feedReq: false,
         feedFailed: true,
       };
+    }
+    case SET_ORDER_REMOVE: {
+      return action;
     }
     default: {
       return state;

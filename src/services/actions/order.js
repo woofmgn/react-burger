@@ -2,6 +2,7 @@ import { api } from "../../api/Api";
 import {
   SET_ORDER,
   SET_ORDER_FAILED,
+  SET_ORDER_REMOVE,
   SET_ORDER_SUCCES,
 } from "../../utils/constants";
 
@@ -14,7 +15,6 @@ export const setOrder = (payload) => {
       .newOrder(payload)
       .then((res) => {
         if (res) {
-          console.log(res.name);
           dispatch({
             type: SET_ORDER_SUCCES,
             ...res,
@@ -32,3 +32,7 @@ export const setOrder = (payload) => {
       });
   };
 };
+
+export const removeOrder = () => ({
+  type: SET_ORDER_REMOVE,
+});

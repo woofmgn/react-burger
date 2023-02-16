@@ -12,19 +12,21 @@ import {
   addIngredients,
   removeAllIngredients,
 } from "../../services/actions/constructor";
-import { setOrder } from "../../services/actions/order";
+import { removeOrder, setOrder } from "../../services/actions/order";
 import { Ingredient } from "../Ingredient/Ingredient";
 import { Modal } from "../Modal/Modal";
 import { OrderDetails } from "../ModalOrder/OrderDetails";
 import styles from "./styles.module.css";
 
 export const BurgerConstructor = React.memo(() => {
+  const [isVisible, setIsVisible] = React.useState(false);
+
   const ingredients = useSelector(
     (state) => state.constructorReducer.ingredients
   );
   const { success } = useSelector((state) => state.orderReducer);
-  const [isVisible, setIsVisible] = React.useState(false);
   const dispatch = useDispatch();
+
   const [, dropTargetRef] = useDrop({
     accept: "ingredient",
     drop(item) {
@@ -39,10 +41,11 @@ export const BurgerConstructor = React.memo(() => {
     setIsVisible((prev) => !prev);
   }, [dispatch, ingredients]);
 
-  const handleCloseModal = () => {
+  const handleCloseModal = useCallback(() => {
     dispatch(removeAllIngredients());
+    dispatch(removeOrder());
     setIsVisible(false);
-  };
+  }, [dispatch]);
 
   const filteredBun = React.useMemo(() => {
     return ingredients.filter((item) => item.types === "bun");
