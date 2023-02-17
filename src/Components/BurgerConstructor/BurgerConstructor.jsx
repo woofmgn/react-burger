@@ -75,9 +75,8 @@ export const BurgerConstructor = React.memo(() => {
           </div>
         )}
         <ul className={styles.list}>
-          {ingredients
-            .filter((item) => item.types !== "bun")
-            .map((item, index) => {
+          {ingredients.map((item, index) => {
+            if (item.types !== "bun") {
               return (
                 <Ingredient
                   key={uuid()}
@@ -86,9 +85,11 @@ export const BurgerConstructor = React.memo(() => {
                   image={item.image}
                   id={item._id}
                   index={index}
+                  elem={item}
                 />
               );
-            })}
+            }
+          })}
         </ul>
         {filteredBun[0] && (
           <div className="ml-8">

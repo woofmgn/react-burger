@@ -9,12 +9,25 @@ import { classNames } from "../../helpers/classNames";
 import { ingredientItem } from "../../utils/prop-types";
 import styles from "./styles.module.css";
 
-export const Card = React.memo(
-  ({
+// export const Card = React.memo(
+//   ({
+//     id,
+//     name,
+//     price,
+//     type,
+//     image,
+//     imageLarge,
+//     calories,
+//     proteins,
+//     fat,
+//     carbohydrates,
+//     onOpen,
+//   }) => {
+export const Card = React.memo((props) => {
+  const {
     id,
     name,
     price,
-    type,
     image,
     imageLarge,
     calories,
@@ -22,68 +35,69 @@ export const Card = React.memo(
     fat,
     carbohydrates,
     onOpen,
-  }) => {
-    const { ingredients } = useSelector((state) => state.constructorReducer);
+  } = props;
 
-    const [, dragRef] = useDrag({
-      type: "ingredient",
-      item: {
-        id,
-        name,
-        price,
-        type,
-        image,
-        imageLarge,
-        calories,
-        proteins,
-        fat,
-        carbohydrates,
-      },
+  const { ingredients } = useSelector((state) => state.constructorReducer);
+
+  const [, dragRef] = useDrag({
+    type: "ingredient",
+    item: { ...props },
+    // item: {
+    //   id,
+    //   name,
+    //   price,
+    //   type,
+    //   image,
+    //   imageLarge,
+    //   calories,
+    //   proteins,
+    //   fat,
+    //   carbohydrates,
+    // },
+  });
+
+  const checkCount = () => {
+    const inCart = ingredients.filter((item) => item._id === id);
+    return inCart.length;
+  };
+
+  const handlerOpenModal = () => {
+    onOpen({
+      name: name,
+      imageLarge: imageLarge,
+      calories: calories,
+      proteins: proteins,
+      fat: fat,
+      carbohydrates: carbohydrates,
     });
+  };
 
-    const checkCount = () => {
-      const inCart = ingredients.filter((item) => item._id === id);
-      return inCart.length;
-    };
-
-    const handlerOpenModal = () => {
-      onOpen({
-        name: name,
-        imageLarge: imageLarge,
-        calories: calories,
-        proteins: proteins,
-        fat: fat,
-        carbohydrates: carbohydrates,
-      });
-    };
-
-    return (
-      <li
-        ref={dragRef}
-        onClick={handlerOpenModal}
-        className={classNames(styles.item, {}, [])}
+  return (
+    <li
+      ref={dragRef}
+      onClick={handlerOpenModal}
+      className={classNames(styles.item, {}, [])}
+    >
+      <Counter count={checkCount()} size="default" extraClass="m-1" />
+      <img className="ml-4 mr-4" src={image} alt="ингредиент" />
+      <span
+        className={classNames(styles.price, {}, [
+          "mt-1 text text_type_digits-default",
+        ])}
       >
-        <Counter count={checkCount()} size="default" extraClass="m-1" />
-        <img className="ml-4 mr-4" src={image} alt="ингредиент" />
-        <span
-          className={classNames(styles.price, {}, [
-            "mt-1 text text_type_digits-default",
-          ])}
-        >
-          {price}
-          <CurrencyIcon type="primary" />
-        </span>
-        <h3
-          style={{ textAlign: "center" }}
-          className={classNames(styles.title, {}, [
-            "mt-1 text text_type_main-default",
-          ])}
-        >
-          {name}
-        </h3>
-      </li>
-    );
-  }
-);
+        {price}
+        <CurrencyIcon type="primary" />
+      </span>
+      <h3
+        style={{ textAlign: "center" }}
+        className={classNames(styles.title, {}, [
+          "mt-1 text text_type_main-default",
+        ])}
+      >
+        {name}
+      </h3>
+    </li>
+  );
+});
 
 Card.propTypes = ingredientItem.PropTypes;

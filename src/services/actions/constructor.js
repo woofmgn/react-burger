@@ -2,6 +2,7 @@ import {
   ADD_INGREDIENTS,
   REMOVE_ALL_INGREDIENTS,
   REMOVE_INGREDIENTS,
+  REPLASE_INGREDIENT,
 } from "../../utils/constants";
 
 export const addIngredients = (payload) => ({
@@ -27,3 +28,11 @@ export const removeAllIngredients = () => ({
   type: REMOVE_ALL_INGREDIENTS,
   ingredients: [],
 });
+
+export const replaceIngredient = (payload) => {
+  return {
+    type: REPLASE_INGREDIENT,
+    dragItem: payload.item.index,
+    hoverItem: payload.index,
+  };
+};

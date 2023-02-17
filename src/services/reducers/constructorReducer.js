@@ -2,6 +2,7 @@ import {
   ADD_INGREDIENTS,
   REMOVE_ALL_INGREDIENTS,
   REMOVE_INGREDIENTS,
+  REPLASE_INGREDIENT,
 } from "../../utils/constants";
 
 const initialState = {
@@ -49,6 +50,15 @@ export function constructorReducer(state = initialState, action) {
     }
     case REMOVE_ALL_INGREDIENTS: {
       return action;
+    }
+    case REPLASE_INGREDIENT: {
+      const newState = [...state.ingredients];
+      newState[action.dragItem] = state.ingredients[action.hoverItem];
+      newState[action.hoverItem] = state.ingredients[action.dragItem];
+      return {
+        ...state,
+        ingredients: newState,
+      };
     }
     default: {
       return state;
