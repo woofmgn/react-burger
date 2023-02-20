@@ -1,11 +1,11 @@
-// export const API_URL = "https://norma.nomoreparties.space/api/ingredients";
-// export const API_ORDER_URL = 'https://norma.nomoreparties.space/api/orders';
-export const imgBun = "https://code.s3.yandex.net/react/code/bun-02.png";
-
 const API_URL = {
   urlGetData: "https://norma.nomoreparties.space/api/ingredients",
   urlNewOrder: "https://norma.nomoreparties.space/api/orders",
 };
+
+const BUN = "bun";
+const SAUCE = "sauce";
+const FILLING = "filling";
 
 const GET_INGREDIENTS = "GET_INGREDIENTS";
 const GET_INGREDIENTS_SUCCES = "GET_INGREDIENTS_SUCCES";
@@ -23,6 +23,9 @@ const RESET = "RESET";
 
 export {
   API_URL,
+  BUN,
+  SAUCE,
+  FILLING,
   GET_INGREDIENTS,
   GET_INGREDIENTS_SUCCES,
   GET_INGREDIENTS_FAILED,

@@ -8,14 +8,16 @@ import { useDrop } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
 import { classNames } from "../../helpers/classNames";
+
 import {
   addIngredients,
   removeAllIngredients,
 } from "../../services/actions/constructor";
 import { removeOrder, setOrder } from "../../services/actions/order";
+import { BUN } from "../../utils/constants";
 import { Ingredient } from "../Ingredient/Ingredient";
 import { Modal } from "../Modal/Modal";
-import { OrderDetails } from "../ModalOrder/OrderDetails";
+import { OrderDetails } from "../OrderDetails/OrderDetails";
 import styles from "./styles.module.css";
 
 export const BurgerConstructor = React.memo(() => {
@@ -48,7 +50,7 @@ export const BurgerConstructor = React.memo(() => {
   }, [dispatch]);
 
   const filteredBun = React.useMemo(() => {
-    return ingredients.filter((item) => item.types === "bun");
+    return ingredients.filter((item) => item.types === BUN);
   }, [ingredients]);
 
   const calculateTotalOrder = React.useMemo(() => {
@@ -61,7 +63,11 @@ export const BurgerConstructor = React.memo(() => {
     <section className={styles.section}>
       <div
         ref={dropTargetRef}
-        className={classNames(styles.container, {}, ["ml-4"])}
+        className={classNames(
+          styles.container,
+          { [styles.center]: !ingredients.length },
+          ["ml-4"]
+        )}
       >
         {filteredBun[0] && (
           <div className="ml-8">
@@ -75,21 +81,25 @@ export const BurgerConstructor = React.memo(() => {
           </div>
         )}
         <ul className={styles.list}>
-          {ingredients.map((item, index) => {
-            if (item.types !== "bun") {
-              return (
-                <Ingredient
-                  key={uuid()}
-                  price={item.price}
-                  name={item.name}
-                  image={item.image}
-                  id={item._id}
-                  index={index}
-                  elem={item}
-                />
-              );
-            }
-          })}
+          {ingredients.length ? (
+            ingredients.map((item) => {
+              if (item.types !== BUN) {
+                return (
+                  <Ingredient
+                    key={uuid()}
+                    keyId={item.keyId}
+                    price={item.price}
+                    name={item.name}
+                    image={item.image}
+                    elem={item}
+                  />
+                );
+              }
+              return null;
+            })
+          ) : (
+            <li className={styles.text}>Сначала добавьте булочку</li>
+          )}
         </ul>
         {filteredBun[0] && (
           <div className="ml-8">
@@ -131,7 +141,3 @@ export const BurgerConstructor = React.memo(() => {
     </section>
   );
 });
-
-// BurgerConstructor.propTypes = {
-//   dataList: ingredientsArr,
-// };

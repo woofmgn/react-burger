@@ -1,24 +1,49 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import React, { createRef, useState } from "react";
+import { useInView } from "react-intersection-observer";
 import { useDispatch, useSelector } from "react-redux";
+import { v4 as uuid } from "uuid";
+import { classNames } from "../../helpers/classNames";
+
 import { resetDetails, setDetails } from "../../services/actions/details";
 import { getIndredients } from "../../services/actions/getIngredients";
+import { BUN, FILLING, SAUCE } from "../../utils/constants";
 import { Card } from "../Card/Card";
+import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
 import { Modal } from "../Modal/Modal";
-import { IngredientDetails } from "../ModalIngredients/IngredientDetails";
 import styles from "./styles.module.css";
 
 export const BurgerIngredients = React.memo(() => {
   const [isVisible, setIsVisible] = useState(false);
-  const [current, setCurrent] = useState("one");
-  const bunRef = createRef(null);
-  const sauceRef = createRef(null);
-  const fillingRef = createRef(null);
+  const [current, setCurrent] = useState(BUN);
+  // const bunRef = createRef(null);
+  // const sauceRef = createRef(null);
+  // const fillingRef = createRef(null);
+  const containerRef = createRef(null);
 
   const { data, feedRequest } = useSelector(
     (state) => state.ingredientsReducer
   );
+
   const dispatch = useDispatch();
+
+  const [bunRef, inViewBun] = useInView({
+    /* Optional options */
+    root: containerRef.current,
+    threshold: 0,
+  });
+
+  const [sauceRef, inViewSauce] = useInView({
+    /* Optional options */
+    root: containerRef.current,
+    threshold: 0,
+  });
+
+  const [fillingRef, inViewFilling] = useInView({
+    /* Optional options */
+    root: containerRef.current,
+    threshold: 0,
+  });
 
   const handleOpenModal = (card) => {
     dispatch(setDetails(card));
@@ -30,37 +55,60 @@ export const BurgerIngredients = React.memo(() => {
     dispatch(resetDetails());
   };
 
-  const handleScrollToRef = (isRef, str) => {
-    isRef.current.scrollIntoView({ behavior: "smooth" }, true);
-    setCurrent(str);
-  };
+  // const handleScrollToRef = (isRef, str) => {
+  //   isRef.current.scrollIntoView({ behavior: "smooth" }, true);
+  //   setCurrent(str);
+  // };
 
   React.useEffect(() => {
     dispatch(getIndredients());
   }, [dispatch]);
 
+  React.useEffect(() => {
+    if (inViewBun) {
+      setCurrent(BUN);
+      return;
+    }
+
+    if (inViewSauce) {
+      setCurrent(SAUCE);
+      return;
+    }
+
+    if (inViewFilling) {
+      setCurrent(FILLING);
+      return;
+    }
+  }, [inViewBun, inViewSauce, inViewFilling]);
+
   return (
     <section className="pt-10">
       <h1 className="text text_type_main-large">Соберите бургер</h1>
-      <div style={{ display: "flex" }} className="mt-5 mb-10">
+      <div
+        ref={containerRef}
+        className={classNames(styles.tabs, {}, ["mt-5 mb-10"])}
+      >
         <Tab
-          value="one"
-          active={current === "one"}
-          onClick={() => handleScrollToRef(bunRef, "one")}
+          value={BUN}
+          active={current === BUN}
+          // onClick={() => handleScrollToRef(bunRef, "bun")}
+          onClick={() => setCurrent(BUN)}
         >
           Булки
         </Tab>
         <Tab
-          value="two"
-          active={current === "two"}
-          onClick={() => handleScrollToRef(sauceRef, "two")}
+          value={SAUCE}
+          active={current === SAUCE}
+          // onClick={() => handleScrollToRef(sauceRef, "sauce")}
+          onClick={() => setCurrent(SAUCE)}
         >
           Соусы
         </Tab>
         <Tab
-          value="three"
-          active={current === "three"}
-          onClick={() => handleScrollToRef(fillingRef, "three")}
+          value={FILLING}
+          active={current === FILLING}
+          // onClick={() => handleScrollToRef(fillingRef, "filling")}
+          onClick={() => setCurrent(FILLING)}
         >
           Начинки
         </Tab>
@@ -74,11 +122,12 @@ export const BurgerIngredients = React.memo(() => {
           </h2>
           <ul className={styles.grid}>
             {data
-              .filter((item) => item.type === "bun")
+              .filter((item) => item.type === BUN)
               .map((item) => {
                 return (
                   <Card
                     key={item._id}
+                    keyId={uuid()}
                     id={item._id}
                     name={item.name}
                     price={item.price}
@@ -99,11 +148,12 @@ export const BurgerIngredients = React.memo(() => {
           </h2>
           <ul className={styles.grid}>
             {data
-              .filter((item) => item.type === "sauce")
+              .filter((item) => item.type === SAUCE)
               .map((item) => {
                 return (
                   <Card
                     key={item._id}
+                    keyId={uuid()}
                     id={item._id}
                     name={item.name}
                     price={item.price}
@@ -129,6 +179,7 @@ export const BurgerIngredients = React.memo(() => {
                 return (
                   <Card
                     key={item._id}
+                    keyId={uuid()}
                     id={item._id}
                     name={item.name}
                     price={item.price}

@@ -9,20 +9,6 @@ import { classNames } from "../../helpers/classNames";
 import { ingredientItem } from "../../utils/prop-types";
 import styles from "./styles.module.css";
 
-// export const Card = React.memo(
-//   ({
-//     id,
-//     name,
-//     price,
-//     type,
-//     image,
-//     imageLarge,
-//     calories,
-//     proteins,
-//     fat,
-//     carbohydrates,
-//     onOpen,
-//   }) => {
 export const Card = React.memo((props) => {
   const {
     id,
@@ -42,18 +28,6 @@ export const Card = React.memo((props) => {
   const [, dragRef] = useDrag({
     type: "ingredient",
     item: { ...props },
-    // item: {
-    //   id,
-    //   name,
-    //   price,
-    //   type,
-    //   image,
-    //   imageLarge,
-    //   calories,
-    //   proteins,
-    //   fat,
-    //   carbohydrates,
-    // },
   });
 
   const checkCount = () => {

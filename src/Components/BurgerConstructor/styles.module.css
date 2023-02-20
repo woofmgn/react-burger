@@ -18,6 +18,10 @@
   gap: 10px;
 }
 
+.center {
+  justify-content: center;
+}
+
 .list {
   max-height: 42vh;
   /* height: 100%; */
@@ -57,4 +61,12 @@
   display: flex; 
   gap: 8px; 
   align-items: center;
+}
+
+.text {
+  display: block;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin: auto 0;
 }

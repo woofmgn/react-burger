@@ -17,11 +17,12 @@ export const addIngredients = (payload) => ({
   fat: payload.fat,
   carbohydrates: payload.carbohydrates,
   types: payload.type,
+  keyId: payload.keyId,
 });
 
-export const removeIngredients = (index) => ({
+export const removeIngredients = (keyId) => ({
   type: REMOVE_INGREDIENTS,
-  index: index,
+  keyId: keyId,
 });
 
 export const removeAllIngredients = () => ({
@@ -32,7 +33,7 @@ export const removeAllIngredients = () => ({
 export const replaceIngredient = (payload) => {
   return {
     type: REPLASE_INGREDIENT,
-    dragItem: payload.item.index,
-    hoverItem: payload.index,
+    dragItem: payload.item.keyId,
+    hoverItem: payload.keyId,
   };
 };

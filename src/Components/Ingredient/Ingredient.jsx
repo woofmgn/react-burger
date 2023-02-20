@@ -5,6 +5,7 @@ import {
 import React from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
+
 import {
   removeIngredients,
   replaceIngredient,
@@ -12,12 +13,12 @@ import {
 import { ingredientItem } from "../../utils/prop-types";
 import styles from "./styles.module.css";
 
-export const Ingredient = ({ image, name, price, id, index, elem }) => {
+export const Ingredient = ({ image, name, price, elem, keyId }) => {
   const dispatch = useDispatch();
 
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "ingredientConstructor",
-    item: { elem, index },
+    item: { elem, keyId },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -26,15 +27,14 @@ export const Ingredient = ({ image, name, price, id, index, elem }) => {
   const [, drop] = useDrop(() => ({
     accept: "ingredientConstructor",
     hover(item) {
-      if (item.index !== index) {
-        dispatch(replaceIngredient({ item, index }));
-        item.index = index;
+      if (item.keyId !== keyId) {
+        dispatch(replaceIngredient({ item, keyId }));
       }
     },
   }));
 
   const handleRemove = () => {
-    dispatch(removeIngredients(index));
+    dispatch(removeIngredients(keyId));
   };
 
   const opacity = isDragging ? 0 : 1;
