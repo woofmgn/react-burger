@@ -79,16 +79,7 @@ export const BurgerConstructor = React.memo(() => {
           {ingredients.length ? (
             ingredients.map((item) => {
               if (item.types !== BUN) {
-                return (
-                  <Ingredient
-                    key={item.keyId}
-                    keyId={item.keyId}
-                    price={item.price}
-                    name={item.name}
-                    image={item.image}
-                    elem={item}
-                  />
-                );
+                return <Ingredient key={item.keyId} element={item} />;
               }
               return null;
             })

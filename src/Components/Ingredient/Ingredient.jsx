@@ -13,12 +13,15 @@ import {
 import { ingredientItem } from "../../utils/prop-types";
 import styles from "./styles.module.css";
 
-export const Ingredient = ({ image, name, price, elem, keyId }) => {
+// export const Ingredient = ({ image, name, price, elem, keyId }) => {
+export const Ingredient = ({ element }) => {
+  const { image, name, price, keyId } = element;
+
   const dispatch = useDispatch();
 
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "ingredientConstructor",
-    item: { elem, keyId },
+    item: { element, keyId },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
