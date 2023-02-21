@@ -1,3 +1,4 @@
+import { v4 as uuid } from "uuid";
 import {
   ADD_INGREDIENTS,
   REMOVE_ALL_INGREDIENTS,
@@ -17,7 +18,7 @@ export const addIngredients = (payload) => ({
   fat: payload.fat,
   carbohydrates: payload.carbohydrates,
   types: payload.type,
-  keyId: payload.keyId,
+  keyId: uuid(),
 });
 
 export const removeIngredients = (keyId) => ({

@@ -1,8 +1,7 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import React, { createRef, useState } from "react";
+import React, { createRef, useCallback, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { useDispatch, useSelector } from "react-redux";
-import { v4 as uuid } from "uuid";
 import { classNames } from "../../helpers/classNames";
 
 import { resetDetails, setDetails } from "../../services/actions/details";
@@ -45,10 +44,13 @@ export const BurgerIngredients = React.memo(() => {
     threshold: 0,
   });
 
-  const handleOpenModal = (card) => {
-    dispatch(setDetails(card));
-    setIsVisible(true);
-  };
+  const handleOpenModal = useCallback(
+    (card) => {
+      dispatch(setDetails(card));
+      setIsVisible(true);
+    },
+    [dispatch]
+  );
 
   const handleCloseModal = () => {
     setIsVisible(false);
@@ -121,52 +123,52 @@ export const BurgerIngredients = React.memo(() => {
             Булки
           </h2>
           <ul className={styles.grid}>
-            {data
-              .filter((item) => item.type === BUN)
-              .map((item) => {
-                return (
-                  <Card
-                    key={item._id}
-                    keyId={uuid()}
-                    onOpen={handleOpenModal}
-                    props={{ ...item }}
-                  />
-                );
-              })}
+            {data &&
+              data
+                .filter((item) => item.type === BUN)
+                .map((item) => {
+                  return (
+                    <Card
+                      key={item._id}
+                      onOpen={handleOpenModal}
+                      props={{ ...item }}
+                    />
+                  );
+                })}
           </ul>
           <h2 ref={sauceRef} className="mt-10 text text_type_main-medium">
             Соусы
           </h2>
           <ul className={styles.grid}>
-            {data
-              .filter((item) => item.type === SAUCE)
-              .map((item) => {
-                return (
-                  <Card
-                    key={item._id}
-                    keyId={uuid()}
-                    onOpen={handleOpenModal}
-                    props={{ ...item }}
-                  />
-                );
-              })}
+            {data &&
+              data
+                .filter((item) => item.type === SAUCE)
+                .map((item) => {
+                  return (
+                    <Card
+                      key={item._id}
+                      onOpen={handleOpenModal}
+                      props={{ ...item }}
+                    />
+                  );
+                })}
           </ul>
           <h2 ref={fillingRef} className="mt-10 text text_type_main-medium">
             Начинка
           </h2>
           <ul className={styles.grid}>
-            {data
-              .filter((item) => item.type === "main")
-              .map((item) => {
-                return (
-                  <Card
-                    key={item._id}
-                    keyId={uuid()}
-                    onOpen={handleOpenModal}
-                    props={{ ...item }}
-                  />
-                );
-              })}
+            {data &&
+              data
+                .filter((item) => item.type === "main")
+                .map((item) => {
+                  return (
+                    <Card
+                      key={item._id}
+                      onOpen={handleOpenModal}
+                      props={{ ...item }}
+                    />
+                  );
+                })}
           </ul>
         </div>
       )}

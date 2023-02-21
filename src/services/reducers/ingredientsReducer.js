@@ -7,7 +7,7 @@ import {
 const initialState = {
   feedRequest: false,
   feedFailed: false,
-  data: [],
+  data: null,
 };
 
 export const ingredientsReducer = (state = initialState, action) => {

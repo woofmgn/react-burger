@@ -9,7 +9,7 @@ import { classNames } from "../../helpers/classNames";
 import { ingredientItem } from "../../utils/prop-types";
 import styles from "./styles.module.css";
 
-export const Card = React.memo(({ props, onOpen }) => {
+export const Card = React.memo(({ props, onOpen, keyId }) => {
   const {
     _id,
     name,
@@ -50,7 +50,6 @@ export const Card = React.memo(({ props, onOpen }) => {
       {checkCount() !== 0 && (
         <Counter count={checkCount()} size="default" extraClass="m-1" />
       )}
-      {/* <Counter count={checkCount()} size="default" extraClass="m-1" /> */}
       <img className="ml-4 mr-4" src={image} alt="ингредиент" />
       <span
         className={classNames(styles.price, {}, [

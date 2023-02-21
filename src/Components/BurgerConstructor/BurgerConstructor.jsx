@@ -6,7 +6,7 @@ import {
 import React, { useCallback } from "react";
 import { useDrop } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
-import { v4 as uuid } from "uuid";
+// import { v4 as uuid } from "uuid";
 import { classNames } from "../../helpers/classNames";
 
 import {
@@ -86,7 +86,7 @@ export const BurgerConstructor = React.memo(() => {
               if (item.types !== BUN) {
                 return (
                   <Ingredient
-                    key={uuid()}
+                    key={item.keyId}
                     keyId={item.keyId}
                     price={item.price}
                     name={item.name}
@@ -127,6 +127,7 @@ export const BurgerConstructor = React.memo(() => {
           htmlType="button"
           type="primary"
           size="large"
+          disabled={!ingredients.length}
         >
           Оформить заказ
         </Button>
