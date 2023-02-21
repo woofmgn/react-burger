@@ -2,16 +2,61 @@ import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import React from "react";
+import { useDrag, useDrop } from "react-dnd";
+import { useDispatch } from "react-redux";
+
+import {
+  removeIngredients,
+  replaceIngredient,
+} from "../../services/actions/constructor";
 import { ingredientItem } from "../../utils/prop-types";
 import styles from "./styles.module.css";
 
-export const Ingredient = ({ image, name, price }) => {
+// export const Ingredient = ({ image, name, price, elem, keyId }) => {
+export const Ingredient = ({ element }) => {
+  const { image, name, price, keyId } = element;
+
+  const dispatch = useDispatch();
+
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: "ingredientConstructor",
+    item: { element, keyId },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  }));
+
+  const [, drop] = useDrop(() => ({
+    accept: "ingredientConstructor",
+    hover(item) {
+      if (item.keyId !== keyId) {
+        dispatch(replaceIngredient({ item, keyId }));
+      }
+    },
+  }));
+
+  const handleRemove = () => {
+    dispatch(removeIngredients(keyId));
+  };
+
+  const opacity = isDragging ? 0 : 1;
+
   return (
-    <li className={styles.item}>
+    <li
+      ref={(node) => drag(drop(node))}
+      className={styles.item}
+      style={{ opacity: opacity }}
+    >
       <div className="mr-2">
         <DragIcon type="primary" />
       </div>
-      <ConstructorElement text={name} price={price} thumbnail={image} />
+      <ConstructorElement
+        text={name}
+        price={price}
+        thumbnail={image}
+        handleClose={handleRemove}
+      />
     </li>
   );
 };

@@ -1,6 +1,9 @@
 import React from "react";
-import { api } from "../../api/Api";
+// import { useDispatch, useSelector } from "react-redux";
 import { classNames } from "../../helpers/classNames";
+// import { getIndredients } from "../../services/actions/getIngredients";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import { ingredientsArr } from "../../utils/prop-types";
 import { BurgerConstructor } from "../BurgerConstructor/BurgerConstructor";
 import { BurgerIngredients } from "../BurgerIngredients/BurgerIngredients";
@@ -9,27 +12,14 @@ import { Header } from "../Header/Header";
 import styles from "./styles.module.css";
 
 function App() {
-  const [dataList, setDataList] = React.useState([]);
-
-  React.useEffect(() => {
-    const getDataList = async () => {
-      try {
-        const res = await api.getData();
-        setDataList(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    getDataList();
-  }, []);
-
   return (
     <div className={classNames(styles.app, {}, [])}>
       <Header />
       <main className={classNames(styles.main, {}, [])}>
-        <BurgerIngredients dataList={dataList} />
-        <BurgerConstructor dataList={dataList} />
+        <DndProvider backend={HTML5Backend}>
+          <BurgerIngredients />
+          <BurgerConstructor />
+        </DndProvider>
       </main>
       <Footer />
     </div>

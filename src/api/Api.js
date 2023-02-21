@@ -14,7 +14,18 @@ class Api {
   }
 
   async getData() {
-    const res = await fetch(this._url);
+    const res = await fetch(`${this._url}/ingredients`);
+    return this._getResponseData(res);
+  }
+
+  async newOrder(data) {
+    const res = await fetch(`${this._url}/orders`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ingredients: data }),
+    });
     return this._getResponseData(res);
   }
 }

@@ -1,10 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { classNames } from "../../helpers/classNames";
 import { ingredientsObject } from "../../utils/prop-types";
 import styles from "./styles.module.css";
 
-export const IngredientDetails = ({ data }) => {
-  const { name, imageLarge, calories, proteins, fat, carbohydrates } = data;
+export const IngredientDetails = () => {
+  const { name, imageLarge, calories, proteins, fat, carbohydrates } =
+    useSelector((state) => state.detailsReducer.details);
 
   return (
     <>

@@ -26,4 +26,6 @@ export const ingredientItem = PropTypes.shape({
   proteins: PropTypes.number.isRequired,
   fat: PropTypes.number.isRequired,
   carbohydrates: PropTypes.number.isRequired,
+  keyId: PropTypes.string,
+  onOpen: PropTypes.func,
 }).isRequired;
