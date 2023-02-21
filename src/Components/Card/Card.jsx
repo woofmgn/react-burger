@@ -9,7 +9,7 @@ import { classNames } from "../../helpers/classNames";
 import { ingredientItem } from "../../utils/prop-types";
 import styles from "./styles.module.css";
 
-export const Card = React.memo(({ props, onOpen, keyId }) => {
+export const Card = React.memo(({ props, onOpen }) => {
   const {
     _id,
     name,
@@ -29,10 +29,10 @@ export const Card = React.memo(({ props, onOpen, keyId }) => {
     item: { ...props, onOpen },
   });
 
-  const checkCount = () => {
+  const checkCount = React.useMemo(() => {
     const inCart = ingredients.filter((item) => item._id === _id);
     return inCart.length;
-  };
+  }, [_id, ingredients]);
 
   const handlerOpenModal = () => {
     onOpen({
@@ -47,8 +47,8 @@ export const Card = React.memo(({ props, onOpen, keyId }) => {
 
   return (
     <li ref={dragRef} onClick={handlerOpenModal} className={styles.item}>
-      {checkCount() !== 0 && (
-        <Counter count={checkCount()} size="default" extraClass="m-1" />
+      {checkCount !== 0 && (
+        <Counter count={checkCount} size="default" extraClass="m-1" />
       )}
       <img className="ml-4 mr-4" src={image} alt="ингредиент" />
       <span

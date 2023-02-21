@@ -6,7 +6,6 @@ import {
 import React, { useCallback } from "react";
 import { useDrop } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
-// import { v4 as uuid } from "uuid";
 import { classNames } from "../../helpers/classNames";
 
 import {
@@ -63,11 +62,7 @@ export const BurgerConstructor = React.memo(() => {
     <section className={styles.section}>
       <div
         ref={dropTargetRef}
-        className={classNames(
-          styles.container,
-          { [styles.center]: !ingredients.length },
-          ["ml-4"]
-        )}
+        className={classNames(styles.container, {}, ["ml-4"])}
       >
         {filteredBun[0] && (
           <div className="ml-8">
