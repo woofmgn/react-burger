@@ -9,7 +9,7 @@ const initialState = {
   feedReq: false,
   feedFailed: false,
   name: "",
-  order: {},
+  order: null,
   success: false,
 };
 
@@ -37,7 +37,9 @@ export function orderReducer(state = initialState, action) {
       };
     }
     case SET_ORDER_REMOVE: {
-      return action;
+      return {
+        ...state,
+      };
     }
     default: {
       return state;

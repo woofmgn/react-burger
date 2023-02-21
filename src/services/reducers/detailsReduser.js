@@ -3,12 +3,7 @@ import { SET_INGREDIENTS } from "../../utils/constants";
 const initialState = {
   feedReq: false,
   feedRes: false,
-  name: "",
-  imageLarge: "",
-  calories: "",
-  proteins: "",
-  fat: "",
-  carbohydrates: "",
+  details: null,
 };
 
 export function detailsReducer(state = initialState, action) {
@@ -16,16 +11,18 @@ export function detailsReducer(state = initialState, action) {
     case SET_INGREDIENTS: {
       return {
         ...state,
-        name: action.name,
-        imageLarge: action.imageLarge,
-        calories: action.calories,
-        proteins: action.proteins,
-        fat: action.fat,
-        carbohydrates: action.carbohydrates,
+        details: {
+          name: action.name,
+          imageLarge: action.imageLarge,
+          calories: action.calories,
+          proteins: action.proteins,
+          fat: action.fat,
+          carbohydrates: action.carbohydrates,
+        },
       };
     }
     default: {
-      return state;
+      return initialState;
     }
   }
 }

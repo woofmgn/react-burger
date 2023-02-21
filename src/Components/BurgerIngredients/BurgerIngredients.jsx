@@ -128,17 +128,8 @@ export const BurgerIngredients = React.memo(() => {
                   <Card
                     key={item._id}
                     keyId={uuid()}
-                    id={item._id}
-                    name={item.name}
-                    price={item.price}
-                    type={item.type}
-                    image={item.image}
-                    imageLarge={item.image_large}
-                    calories={item.calories}
-                    proteins={item.proteins}
-                    fat={item.fat}
-                    carbohydrates={item.carbohydrates}
                     onOpen={handleOpenModal}
+                    props={{ ...item }}
                   />
                 );
               })}
@@ -154,17 +145,8 @@ export const BurgerIngredients = React.memo(() => {
                   <Card
                     key={item._id}
                     keyId={uuid()}
-                    id={item._id}
-                    name={item.name}
-                    price={item.price}
-                    type={item.type}
-                    image={item.image}
-                    imageLarge={item.image_large}
-                    calories={item.calories}
-                    proteins={item.proteins}
-                    fat={item.fat}
-                    carbohydrates={item.carbohydrates}
                     onOpen={handleOpenModal}
+                    props={{ ...item }}
                   />
                 );
               })}
@@ -180,17 +162,8 @@ export const BurgerIngredients = React.memo(() => {
                   <Card
                     key={item._id}
                     keyId={uuid()}
-                    id={item._id}
-                    name={item.name}
-                    price={item.price}
-                    type={item.type}
-                    image={item.image}
-                    imageLarge={item.image_large}
-                    calories={item.calories}
-                    proteins={item.proteins}
-                    fat={item.fat}
-                    carbohydrates={item.carbohydrates}
                     onOpen={handleOpenModal}
+                    props={{ ...item }}
                   />
                 );
               })}

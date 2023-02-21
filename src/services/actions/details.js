@@ -12,10 +12,4 @@ export const setDetails = (payload) => ({
 
 export const resetDetails = () => ({
   type: RESET,
-  name: "",
-  imageLarge: "",
-  calories: "",
-  proteins: "",
-  fat: "",
-  carbohydrates: "",
 });

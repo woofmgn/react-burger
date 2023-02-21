@@ -9,36 +9,35 @@ import { classNames } from "../../helpers/classNames";
 import { ingredientItem } from "../../utils/prop-types";
 import styles from "./styles.module.css";
 
-export const Card = React.memo((props) => {
+export const Card = React.memo(({ props, onOpen }) => {
   const {
-    id,
+    _id,
     name,
     price,
     image,
-    imageLarge,
+    image_large,
     calories,
     proteins,
     fat,
     carbohydrates,
-    onOpen,
   } = props;
 
   const { ingredients } = useSelector((state) => state.constructorReducer);
 
   const [, dragRef] = useDrag({
     type: "ingredient",
-    item: { ...props },
+    item: { ...props, onOpen },
   });
 
   const checkCount = () => {
-    const inCart = ingredients.filter((item) => item._id === id);
+    const inCart = ingredients.filter((item) => item._id === _id);
     return inCart.length;
   };
 
   const handlerOpenModal = () => {
     onOpen({
       name: name,
-      imageLarge: imageLarge,
+      imageLarge: image_large,
       calories: calories,
       proteins: proteins,
       fat: fat,
@@ -47,12 +46,11 @@ export const Card = React.memo((props) => {
   };
 
   return (
-    <li
-      ref={dragRef}
-      onClick={handlerOpenModal}
-      className={classNames(styles.item, {}, [])}
-    >
-      <Counter count={checkCount()} size="default" extraClass="m-1" />
+    <li ref={dragRef} onClick={handlerOpenModal} className={styles.item}>
+      {checkCount() !== 0 && (
+        <Counter count={checkCount()} size="default" extraClass="m-1" />
+      )}
+      {/* <Counter count={checkCount()} size="default" extraClass="m-1" /> */}
       <img className="ml-4 mr-4" src={image} alt="ингредиент" />
       <span
         className={classNames(styles.price, {}, [
@@ -63,7 +61,6 @@ export const Card = React.memo((props) => {
         <CurrencyIcon type="primary" />
       </span>
       <h3
-        style={{ textAlign: "center" }}
         className={classNames(styles.title, {}, [
           "mt-1 text text_type_main-default",
         ])}

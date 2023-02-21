@@ -6,7 +6,7 @@ import styles from "./styles.module.css";
 
 export const IngredientDetails = () => {
   const { name, imageLarge, calories, proteins, fat, carbohydrates } =
-    useSelector((state) => state.detailsReducer);
+    useSelector((state) => state.detailsReducer.details);
 
   return (
     <>

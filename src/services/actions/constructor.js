@@ -7,7 +7,7 @@ import {
 
 export const addIngredients = (payload) => ({
   type: ADD_INGREDIENTS,
-  _id: payload.id,
+  _id: payload._id,
   name: payload.name,
   price: payload.price,
   image: payload.image,

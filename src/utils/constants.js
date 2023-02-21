@@ -1,7 +1,4 @@
-const API_URL = {
-  urlGetData: "https://norma.nomoreparties.space/api/ingredients",
-  urlNewOrder: "https://norma.nomoreparties.space/api/orders",
-};
+const API_URL = "https://norma.nomoreparties.space/api";
 
 const BUN = "bun";
 const SAUCE = "sauce";

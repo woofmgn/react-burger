@@ -2,8 +2,7 @@ import { API_URL } from "../utils/constants";
 
 class Api {
   constructor(settings) {
-    this._urlData = settings.urlGetData;
-    this._urlOrder = settings.urlNewOrder;
+    this._url = settings;
   }
 
   async _getResponseData(res) {
@@ -15,12 +14,12 @@ class Api {
   }
 
   async getData() {
-    const res = await fetch(this._urlData);
+    const res = await fetch(`${this._url}/ingredients`);
     return this._getResponseData(res);
   }
 
   async newOrder(data) {
-    const res = await fetch(this._urlOrder, {
+    const res = await fetch(`${this._url}/orders`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
