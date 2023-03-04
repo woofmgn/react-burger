@@ -1,0 +1,39 @@
+.block {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  max-width: 480px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button {
+  max-width: 253px;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.link {
+  margin-left: 8px;
+  color: #4C4CFF;
+  text-decoration: none;
+}

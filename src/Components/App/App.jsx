@@ -1,7 +1,9 @@
 import React from "react";
+import { Route, Routes } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
+import { Main } from "../../pages/Main/Main";
+import { Register } from "../../pages/Register/Register";
 import { ingredientsArr } from "../../utils/prop-types";
-import { Main } from '../../pages/Main/Main';
 import { Footer } from "../Footer/Footer";
 import { Header } from "../Header/Header";
 import styles from "./styles.module.css";
@@ -11,7 +13,10 @@ function App() {
     <div className={classNames(styles.app, {}, [])}>
       <Header />
       <main className={classNames(styles.main, {}, [])}>
-        <Main />
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
       </main>
       <Footer />
     </div>
