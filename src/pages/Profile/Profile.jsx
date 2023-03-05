@@ -4,9 +4,12 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { NavMenu } from "../../Components/NavMenu/NavMenu";
+import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import styles from "./styles.module.css";
 
 export const Profile = () => {
+  const { values, handleChange, errors, isValid } = useFormAndValidation();
+
   return (
     <section className={styles.section}>
       <NavMenu />
@@ -16,8 +19,12 @@ export const Profile = () => {
           placeholder={"Имя"}
           name={"name"}
           size={"default"}
-          value={""}
           icon="EditIcon"
+          error={Boolean(errors.name)}
+          errorText={errors.name}
+          onChange={handleChange}
+          value={values.name || ""}
+          required
         />
         <Input
           extraClass="mt-6"
@@ -25,14 +32,22 @@ export const Profile = () => {
           placeholder={"Логин"}
           name={"email"}
           size={"default"}
-          value={""}
           icon="EditIcon"
+          error={Boolean(errors.email)}
+          errorText={errors.email}
+          onChange={handleChange}
+          value={values.email || ""}
+          required
         />
         <PasswordInput
           extraClass="mt-6"
-          value={""}
           name={"password"}
           icon="EditIcon"
+          error={Boolean(errors.password)}
+          errorText={errors.password}
+          onChange={handleChange}
+          value={values.password || ""}
+          required
         />
       </form>
     </section>

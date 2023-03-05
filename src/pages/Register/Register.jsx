@@ -1,13 +1,17 @@
 import {
   Button,
   Input,
+  PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
 import { Link } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
+import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import styles from "./styles.module.css";
 
 export const Register = () => {
+  const { values, handleChange, errors, isValid } = useFormAndValidation();
+
   return (
     <div className={styles.block}>
       <div className={styles.container}>
@@ -24,7 +28,11 @@ export const Register = () => {
             placeholder={"Имя"}
             name={"name"}
             size={"default"}
-            value={""}
+            error={Boolean(errors.name)}
+            errorText={errors.name}
+            onChange={handleChange}
+            value={values.name || ""}
+            required
           />
           <Input
             extraClass="mt-6"
@@ -32,22 +40,31 @@ export const Register = () => {
             placeholder={"E-mail"}
             name={"email"}
             size={"default"}
-            value={""}
+            error={Boolean(errors.email)}
+            errorText={errors.email}
+            onChange={handleChange}
+            value={values.email || ""}
+            required
           />
-          <Input
+          <PasswordInput
             extraClass="mt-6"
             icon={"ShowIcon"}
             type="password"
             placeholder={"Пароль"}
             name={"password"}
             size={"default"}
-            value={""}
+            error={Boolean(errors.password)}
+            errorText={errors.password}
+            onChange={handleChange}
+            value={values.password || ""}
+            required
           />
           <Button
             extraClass={classNames(styles.button, {}, ["mt-6"])}
             htmlType="submit"
             type="primary"
             size="medium"
+            disabled={!isValid}
           >
             Зарегистрироваться
           </Button>
