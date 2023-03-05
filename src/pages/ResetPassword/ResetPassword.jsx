@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
 import styles from "./styles.module.css";
 
-export const ForgotPassword = () => {
+export const ResetPassword = () => {
   return (
     <div className={styles.block}>
       <div className={styles.container}>
@@ -20,9 +20,18 @@ export const ForgotPassword = () => {
         </h1>
         <form className={classNames(styles.form, {}, ["mt-6"])}>
           <Input
-            type="email"
-            placeholder={"Укажите e-mail"}
-            name={"email"}
+            icon={"ShowIcon"}
+            type="password"
+            placeholder={"Введите новый пароль"}
+            name={"password"}
+            size={"default"}
+            value={""}
+          />
+          <Input
+            extraClass="mt-6"
+            type="password"
+            placeholder={"Введите код из письма"}
+            name={"code"}
             size={"default"}
             value={""}
           />

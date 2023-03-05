@@ -1,0 +1,19 @@
+.container {
+  max-width: 320px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.navMenu {
+  display: flex;
+  flex-direction: column;
+}
+
+.navlink {
+  text-decoration: none;
+}
+
+.description {
+  opacity: 0.4;
+}
