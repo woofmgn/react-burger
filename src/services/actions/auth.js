@@ -15,8 +15,33 @@ export const addUser = (data) => (dispatch) => {
       if (res && res.success) {
         dispatch({
           type: ADD_USER_SUCCES,
-          name: res.user.name,
-          email: res.user.email,
+          user: res.user,
+        });
+      } else {
+        dispatch({
+          type: ADD_USER_FAILED,
+        });
+      }
+    })
+    .catch((err) => {
+      dispatch({
+        type: ADD_USER_FAILED,
+      });
+      console.log(err);
+    });
+};
+
+export const loginUser = (data) => (dispatch) => {
+  dispatch({
+    type: ADD_USER,
+  });
+  auth
+    .loginUser(data)
+    .then((res) => {
+      if (res && res.success) {
+        dispatch({
+          type: ADD_USER_SUCCES,
+          user: res.user,
         });
       } else {
         dispatch({

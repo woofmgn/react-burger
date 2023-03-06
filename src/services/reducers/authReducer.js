@@ -7,8 +7,7 @@ import {
 const initialState = {
   feedRequest: false,
   feedFailed: false,
-  name: "",
-  email: "",
+  user: null,
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -23,8 +22,7 @@ export const authReducer = (state = initialState, action) => {
     case ADD_USER_SUCCES: {
       return {
         ...state,
-        name: action.name,
-        email: action.email,
+        user: action.user,
         feedRequest: false,
       };
     }

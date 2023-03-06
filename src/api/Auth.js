@@ -2,6 +2,7 @@ class Auth {
   constructor(settings) {
     this._authUrl = settings.authUrl;
     this._pwdUrl = settings.pwdUrl;
+    this._headers = settings.headers;
   }
 
   async _getResponseData(res) {
@@ -15,10 +16,7 @@ class Auth {
   async registerUser(newUserData) {
     const res = await fetch(`${this._authUrl}/register`, {
       method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
       body: JSON.stringify({
         email: newUserData.email,
         password: newUserData.password,
@@ -28,13 +26,22 @@ class Auth {
     return this._getResponseData(res);
   }
 
+  async loginUser(userData) {
+    const res = await fetch(`${this._authUrl}/login`, {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({
+        email: userData.email,
+        password: userData.password,
+      }),
+    });
+    return this._getResponseData(res);
+  }
+
   async forgotPwd(email) {
     const res = await fetch(this._pwdUrl, {
       method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
       body: JSON.stringify({
         email: email,
       }),
@@ -45,10 +52,7 @@ class Auth {
   async changePwd(newPassword) {
     const res = await fetch(`${this._pwdUrl}/reset`, {
       method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
       body: JSON.stringify({
         password: newPassword,
         token: "",
@@ -61,6 +65,10 @@ class Auth {
 const config = {
   authUrl: "https://norma.nomoreparties.space/api/auth",
   pwdUrl: "https://norma.nomoreparties.space/api/password-reset",
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
 };
 
 export const auth = new Auth(config);
