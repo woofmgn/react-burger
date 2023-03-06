@@ -4,13 +4,22 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
+import { addUser } from "../../services/actions/auth";
 import styles from "./styles.module.css";
 
 export const Register = () => {
   const { values, handleChange, errors, isValid } = useFormAndValidation();
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    dispatch(addUser(values));
+  };
 
   return (
     <div className={styles.block}>
@@ -22,7 +31,10 @@ export const Register = () => {
         >
           Регистрация
         </h1>
-        <form className={classNames(styles.form, {}, ["mt-6"])}>
+        <form
+          onSubmit={handleSubmit}
+          className={classNames(styles.form, {}, ["mt-6"])}
+        >
           <Input
             type="text"
             placeholder={"Имя"}

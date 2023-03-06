@@ -13,7 +13,7 @@ class Auth {
   }
 
   async registerUser(newUserData) {
-    const res = await fetch(`${this._url}/register`, {
+    const res = await fetch(`${this._authUrl}/register`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -63,4 +63,4 @@ const config = {
   pwdUrl: "https://norma.nomoreparties.space/api/password-reset",
 };
 
-const auth = new Auth(config);
+export const auth = new Auth(config);
