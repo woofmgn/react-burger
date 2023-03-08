@@ -20,6 +20,7 @@ const RESET = "RESET";
 const ADD_USER = "ADD_USER";
 const ADD_USER_SUCCES = "ADD_USER_SUCCES";
 const ADD_USER_FAILED = "ADD_USER__FAILED";
+const REMOVE_USER = "REMOVE_USER";
 
 export {
   API_URL,
@@ -42,4 +43,6 @@ export {
   ADD_USER,
   ADD_USER_SUCCES,
   ADD_USER_FAILED,
+  REMOVE_USER,
 };
+

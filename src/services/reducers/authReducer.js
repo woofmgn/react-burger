@@ -2,6 +2,7 @@ import {
   ADD_USER,
   ADD_USER_FAILED,
   ADD_USER_SUCCES,
+  REMOVE_USER
 } from "../../utils/constants";
 
 const initialState = {
@@ -32,6 +33,12 @@ export const authReducer = (state = initialState, action) => {
         feedFailed: true,
         feedRequest: false,
       };
+    }
+    case REMOVE_USER: {
+      return {
+        ...state,
+        user: null
+      }
     }
     default: {
       return state;

@@ -1,15 +1,33 @@
 import {
   Button,
-  Input,
+  Input
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { auth } from '../../api/Auth';
 import { classNames } from "../../helpers/classNames";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import styles from "./styles.module.css";
 
 export const ForgotPassword = () => {
-  const { values, handleChange, errors, isValid } = useFormAndValidation();
+  const { values, handleChange, resetForm, errors, isValid } = useFormAndValidation();
+
+  const navigate = useNavigate();
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    auth.forgotPwd(values.email)
+      .then(res => {
+        if (res.success) {
+          resetForm();
+          navigate('/reset-password');
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
   return (
     <div className={styles.block}>
       <div className={styles.container}>
@@ -20,7 +38,7 @@ export const ForgotPassword = () => {
         >
           Восстановление пароля
         </h1>
-        <form className={classNames(styles.form, {}, ["mt-6"])}>
+        <form onSubmit={handleSubmit} className={classNames(styles.form, {}, ["mt-6"])}>
           <Input
             extraClass="mt-6"
             type="email"
@@ -40,7 +58,7 @@ export const ForgotPassword = () => {
             size="medium"
             disabled={!isValid}
           >
-            Войти
+            Восстановить
           </Button>
         </form>
         <div className={classNames(styles.wrapper, {}, ["mt-20"])}>

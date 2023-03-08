@@ -1,3 +1,5 @@
+import { getCookie } from '../utils/cookies';
+
 class Auth {
   constructor(settings) {
     this._authUrl = settings.authUrl;
@@ -38,6 +40,18 @@ class Auth {
     return this._getResponseData(res);
   }
 
+  async logoutUser() {
+    const refreshToken = getCookie('refreshToken');
+    const res = await fetch(`${this._authUrl}/logout`, {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({
+        token: refreshToken
+      }),
+    });
+    return this._getResponseData(res);
+  }
+
   async forgotPwd(email) {
     const res = await fetch(this._pwdUrl, {
       method: "POST",
@@ -46,19 +60,19 @@ class Auth {
         email: email,
       }),
     });
-    return res._getResponseData(res);
+    return this._getResponseData(res);
   }
 
-  async changePwd(newPassword) {
+  async changePwd({password, code}) {
     const res = await fetch(`${this._pwdUrl}/reset`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
-        password: newPassword,
-        token: "",
+        password: password,
+        token: code,
       }),
     });
-    return res._getResponseData(res);
+    return this._getResponseData(res);
   }
 }
 

@@ -3,7 +3,9 @@ import {
   ADD_USER,
   ADD_USER_FAILED,
   ADD_USER_SUCCES,
+  REMOVE_USER
 } from "../../utils/constants";
+import { setCookie } from '../../utils/cookies';
 
 export const addUser = (data) => (dispatch) => {
   dispatch({
@@ -17,6 +19,9 @@ export const addUser = (data) => (dispatch) => {
           type: ADD_USER_SUCCES,
           user: res.user,
         });
+        const jwt = res.accessToken.replace("Bearer", "");
+        setCookie('token', jwt);
+        setCookie('refreshToken', res.refreshToken);
       } else {
         dispatch({
           type: ADD_USER_FAILED,
@@ -56,3 +61,9 @@ export const loginUser = (data) => (dispatch) => {
       console.log(err);
     });
 };
+
+export const removeUser = () => {
+  return {
+    type: REMOVE_USER,
+  }
+}
