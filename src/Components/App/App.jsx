@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
 import { ForgotPassword } from "../../pages/ForgotPassword/ForgotPassword";
-import { HistoryOrders } from '../../pages/HistoryOrders/HistoryOrders';
+import { HistoryOrders } from "../../pages/HistoryOrders/HistoryOrders";
 import { Login } from "../../pages/Login/Login";
 import { Main } from "../../pages/Main/Main";
 import { Profile } from "../../pages/Profile/Profile";

@@ -3,9 +3,9 @@ import {
   Input,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import React from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import { loginUser } from "../../services/actions/auth";
@@ -13,13 +13,21 @@ import styles from "./styles.module.css";
 
 export const Login = () => {
   const { values, handleChange, errors, isValid } = useFormAndValidation();
+  const { success } = useSelector((state) => state.authReducer);
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     dispatch(loginUser(values));
   };
+
+  useEffect(() => {
+    if (success) {
+      navigate("/");
+    }
+  }, [success]);
 
   return (
     <div className={styles.block}>

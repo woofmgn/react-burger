@@ -10,6 +10,7 @@ import { constructorReducer } from "./reducers/constructorReducer";
 import { detailsReducer } from "./reducers/detailsReduser";
 import { ingredientsReducer } from "./reducers/ingredientsReducer";
 import { orderReducer } from "./reducers/orderReducer";
+import { userReducer } from "./reducers/userReducer";
 
 const composeEnhancers =
   typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   constructorReducer,
   orderReducer,
   authReducer,
+  userReducer,
 });
 
 const store = createStore(

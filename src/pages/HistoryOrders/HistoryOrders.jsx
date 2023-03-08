@@ -1,4 +1,4 @@
-import { NavMenu } from '../../Components/NavMenu/NavMenu';
+import { NavMenu } from "../../Components/NavMenu/NavMenu";
 import styles from "./styles.module.css";
 
 export const HistoryOrders = () => {
@@ -6,5 +6,5 @@ export const HistoryOrders = () => {
     <section className={styles.section}>
       <NavMenu />
     </section>
-  )
+  );
 };
