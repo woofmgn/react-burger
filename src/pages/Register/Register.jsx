@@ -14,19 +14,12 @@ export const Register = () => {
   const { values, handleChange, errors, isValid } = useFormAndValidation();
   const { logged } = useSelector((state) => state.userReducer);
 
-  // const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     dispatch(addUser(values));
   };
-
-  // useEffect(() => {
-  //   if (logged) {
-  //     navigate("/");
-  //   }
-  // }, [navigate, logged]);
 
   if (logged) {
     return <Navigate to={"/"} replace />;
