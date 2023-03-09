@@ -1,32 +1,34 @@
 import {
   Button,
-  Input
+  Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from '../../api/Auth';
+import { auth } from "../../api/Auth";
 import { classNames } from "../../helpers/classNames";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import styles from "./styles.module.css";
 
 export const ForgotPassword = () => {
-  const { values, handleChange, resetForm, errors, isValid } = useFormAndValidation();
+  const { values, handleChange, resetForm, errors, isValid } =
+    useFormAndValidation();
 
   const navigate = useNavigate();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    auth.forgotPwd(values.email)
-      .then(res => {
+    auth
+      .forgotPwd(values.email)
+      .then((res) => {
         if (res.success) {
           resetForm();
-          navigate('/reset-password');
+          navigate("/reset-password", { state: "/forgot-password" });
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
-      })
-  }
+      });
+  };
 
   return (
     <div className={styles.block}>
@@ -38,7 +40,10 @@ export const ForgotPassword = () => {
         >
           Восстановление пароля
         </h1>
-        <form onSubmit={handleSubmit} className={classNames(styles.form, {}, ["mt-6"])}>
+        <form
+          onSubmit={handleSubmit}
+          className={classNames(styles.form, {}, ["mt-6"])}
+        >
           <Input
             extraClass="mt-6"
             type="email"

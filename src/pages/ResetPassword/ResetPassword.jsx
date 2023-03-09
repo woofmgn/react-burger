@@ -1,34 +1,43 @@
 import {
   Button,
   Input,
-  PasswordInput
+  PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { auth } from '../../api/Auth';
+import { useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { auth } from "../../api/Auth";
 import { classNames } from "../../helpers/classNames";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import styles from "./styles.module.css";
 
 export const ResetPassword = () => {
-  const { values, handleChange, resetForm, errors, isValid } = useFormAndValidation();
+  const { values, handleChange, resetForm, errors, isValid } =
+    useFormAndValidation();
 
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   const handleSumbit = (evt) => {
     evt.preventDefault();
-    auth.changePwd(values)
-      .then(res => {
+    auth
+      .changePwd(values)
+      .then((res) => {
         if (res.success) {
-          console.log(res.message)
+          console.log(res.message);
           resetForm();
-          navigate('/login');
+          navigate("/login");
         }
       })
-      .catch(err => {
-        console.log(err)
-      })
-  }
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    if (state !== "/forgot-password") {
+      navigate("/");
+    }
+  }, [navigate, state]);
 
   return (
     <div className={styles.block}>
@@ -40,7 +49,10 @@ export const ResetPassword = () => {
         >
           Восстановление пароля
         </h1>
-        <form onSubmit={handleSumbit} className={classNames(styles.form, {}, ["mt-6"])}>
+        <form
+          onSubmit={handleSumbit}
+          className={classNames(styles.form, {}, ["mt-6"])}
+        >
           <PasswordInput
             icon={"ShowIcon"}
             type="password"
