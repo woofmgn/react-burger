@@ -17,7 +17,7 @@ export const getUser = () => (dispatch) => {
   userApi
     .getUserData()
     .then((res) => {
-      if (res.success) {
+      if (res && res.success) {
         dispatch({
           type: GET_USER_SUCCESS,
           success: res.success,
@@ -40,7 +40,7 @@ export const getUser = () => (dispatch) => {
           })
           .then(() => {
             userApi.getUserData().then((res) => {
-              if (res.success) {
+              if (res && res.success) {
                 dispatch({
                   type: GET_USER_SUCCESS,
                   success: res.success,
@@ -52,6 +52,9 @@ export const getUser = () => (dispatch) => {
                 });
               }
             });
+          })
+          .catch((err) => {
+            console.log(err);
           });
       }
       dispatch({
