@@ -5,7 +5,6 @@ import {
   legacy_createStore as createStore,
 } from "redux";
 import thunk from "redux-thunk";
-// import { authReducer } from "./reducers/authReducer";
 import { constructorReducer } from "./reducers/constructorReducer";
 import { detailsReducer } from "./reducers/detailsReduser";
 import { ingredientsReducer } from "./reducers/ingredientsReducer";
@@ -22,7 +21,6 @@ const rootReducer = combineReducers({
   detailsReducer,
   constructorReducer,
   orderReducer,
-  // authReducer,
   userReducer,
 });
 

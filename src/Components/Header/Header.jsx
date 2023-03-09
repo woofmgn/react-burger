@@ -10,6 +10,7 @@ import styles from "./styles.module.css";
 
 export const Header = () => {
   const { pathname } = useLocation();
+  const location = useLocation();
 
   return (
     <header className={classNames(styles.container, {}, ["pt-4 pb-4"])}>
@@ -48,6 +49,7 @@ export const Header = () => {
         <Logo />
       </div>
       <Link
+        state={{ redirectTo: location }}
         to={"/profile"}
         className={classNames(styles.link, {}, ["pt-4 pb-4 pl-5"])}
       >

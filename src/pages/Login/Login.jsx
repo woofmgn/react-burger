@@ -5,7 +5,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import { loginUser } from "../../services/actions/user";
@@ -14,6 +14,7 @@ import styles from "./styles.module.css";
 export const Login = () => {
   const { values, handleChange, errors, isValid } = useFormAndValidation();
   const { logged } = useSelector((state) => state.userReducer);
+  const { state: locationState } = useLocation();
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -25,9 +26,12 @@ export const Login = () => {
 
   useEffect(() => {
     if (logged) {
-      navigate(-1);
+      if (locationState) {
+        const { redirectTo } = locationState;
+        navigate(`${redirectTo.pathname}${redirectTo.search}`);
+      }
     }
-  }, [navigate, logged]);
+  }, [navigate, logged, locationState]);
 
   if (logged) {
     return <Navigate to={"/"} replace />;

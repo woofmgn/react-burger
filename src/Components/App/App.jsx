@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
 import { ProtectedRoute } from "../../HOC/ProtectedRoute/ProtectedRoute";
 import { ForgotPassword } from "../../pages/ForgotPassword/ForgotPassword";
@@ -19,8 +19,6 @@ import styles from "./styles.module.css";
 
 function App() {
   const dispatch = useDispatch();
-
-  const { pathname } = useLocation();
 
   useEffect(() => {
     const jwtToken = getCookie("token");

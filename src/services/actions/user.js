@@ -14,87 +14,6 @@ import {
 } from "../../utils/constants";
 import { setCookie } from "../../utils/cookies";
 
-// export const getUser = () => (dispatch) => {
-//   dispatch({
-//     type: GET_USER,
-//   });
-//   userApi
-//     .getUserData()
-//     .then((res) => {
-//       if (res && res.success) {
-//         dispatch({
-//           type: GET_USER_SUCCESS,
-//           success: res.success,
-//           user: res.user,
-//         });
-//       } else {
-//         dispatch({
-//           type: GET_USER_FAILED,
-//         });
-//       }
-//     })
-//     .catch((err) => {
-//       if (!err.success && err.message === "jwt expired") {
-//         auth
-//           .updateToken()
-//           .then((res) => {
-//             const jwt = res.accessToken.replace("Bearer", "");
-//             setCookie("token", jwt);
-//             setCookie("refreshToken", res.refreshToken);
-//           })
-//           .then(() => {
-//             userApi.getUserData().then((res) => {
-//               if (res && res.success) {
-//                 dispatch({
-//                   type: GET_USER_SUCCESS,
-//                   success: res.success,
-//                   user: res.user,
-//                 });
-//               } else {
-//                 dispatch({
-//                   type: GET_USER_FAILED,
-//                 });
-//               }
-//             });
-//           })
-//           .catch((err) => {
-//             console.log(err);
-//           });
-//       }
-//       dispatch({
-//         type: GET_USER_FAILED,
-//       });
-//       console.log(err);
-//     });
-// };
-
-// export const setUser = (newData) => (dispatch) => {
-//   dispatch({
-//     type: SET_USER,
-//   });
-//   userApi
-//     .setUserData(newData)
-//     .then((res) => {
-//       if (res.success) {
-//         dispatch({
-//           type: SET_USER_SUCCESS,
-//           success: res.success,
-//           user: res.user,
-//         });
-//       } else {
-//         dispatch({
-//           type: SET_USER_FAILED,
-//         });
-//       }
-//     })
-//     .catch((err) => {
-//       dispatch({
-//         type: SET_USER_FAILED,
-//       });
-//       console.log(err);
-//     });
-// };
-
 export const addUser = (data) => (dispatch) => {
   dispatch({
     type: ADD_USER,
@@ -105,7 +24,6 @@ export const addUser = (data) => (dispatch) => {
       if (res && res.success) {
         dispatch({
           type: ADD_USER_SUCCES,
-          // success: res.success,
           user: res.user,
         });
         const jwt = res.accessToken.replace("Bearer", "");
@@ -135,7 +53,6 @@ export const loginUser = (data) => (dispatch) => {
       if (res && res.success) {
         dispatch({
           type: ADD_USER_SUCCES,
-          // success: res.success,
           user: res.user,
         });
         const jwt = res.accessToken.replace("Bearer", "");
@@ -171,7 +88,6 @@ export const getUser = () => (dispatch) => {
       if (res && res.success) {
         dispatch({
           type: GET_USER_SUCCESS,
-          // success: res.success,
           user: res.user,
         });
       } else {
@@ -194,7 +110,6 @@ export const getUser = () => (dispatch) => {
               if (res && res.success) {
                 dispatch({
                   type: GET_USER_SUCCESS,
-                  // success: res.success,
                   user: res.user,
                 });
               } else {
@@ -225,7 +140,6 @@ export const setUser = (newData) => (dispatch) => {
       if (res.success) {
         dispatch({
           type: SET_USER_SUCCESS,
-          // success: res.success,
           user: res.user,
         });
       } else {

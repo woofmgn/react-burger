@@ -3,9 +3,8 @@ import {
   Input,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import { addUser } from "../../services/actions/user";
@@ -15,7 +14,7 @@ export const Register = () => {
   const { values, handleChange, errors, isValid } = useFormAndValidation();
   const { logged } = useSelector((state) => state.userReducer);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleSubmit = (evt) => {
@@ -23,11 +22,11 @@ export const Register = () => {
     dispatch(addUser(values));
   };
 
-  useEffect(() => {
-    if (logged) {
-      navigate("/");
-    }
-  }, [navigate, logged]);
+  // useEffect(() => {
+  //   if (logged) {
+  //     navigate("/");
+  //   }
+  // }, [navigate, logged]);
 
   if (logged) {
     return <Navigate to={"/"} replace />;
