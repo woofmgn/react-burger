@@ -48,7 +48,7 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         feedRequest: false,
-        success: action.succes,
+        success: action.success,
         user: action.user,
       };
     }

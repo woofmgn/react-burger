@@ -1,34 +1,60 @@
 import {
+  Button,
   Input,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavMenu } from "../../Components/NavMenu/NavMenu";
+import { classNames } from "../../helpers/classNames";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
-import { getUser } from "../../services/actions/user";
+import { setUser } from "../../services/actions/user";
 import styles from "./styles.module.css";
 
 export const Profile = () => {
-  const { values, handleChange, setValues, errors, isValid } =
-    useFormAndValidation();
+  const [isVisible, setIsVisible] = useState(false);
+
+  const { values, handleChange, setValues, errors } = useFormAndValidation();
 
   const { user, success } = useSelector((state) => state.userReducer);
 
   const dispatch = useDispatch();
 
+  const handleCheckNewValue = () => {
+    if (values.name !== user.name || values.email !== user.email) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  };
+
+  const handleSumbit = (evt) => {
+    evt.preventDefault();
+    dispatch(setUser(values));
+  };
+
   useEffect(() => {
-    dispatch(getUser());
+    if (user) {
+      handleCheckNewValue();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [values]);
+
+  useEffect(() => {
     if (success) {
       setValues({ name: user.name, email: user.email, password: "******" });
     }
-  }, [success, dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [success]);
 
   return (
     <section className={styles.section}>
       <NavMenu />
       {user && (
-        <form className="ml-15">
+        <form
+          onSubmit={handleSumbit}
+          className={classNames(styles.form, {}, ["ml-15"])}
+        >
           <Input
             type="text"
             placeholder={"Имя"}
@@ -64,6 +90,16 @@ export const Profile = () => {
             value={values.password || ""}
             required
           />
+          {isVisible && (
+            <Button
+              htmlType="submit"
+              type="primary"
+              size="medium"
+              extraClass="mt-6"
+            >
+              Сохранить
+            </Button>
+          )}
         </form>
       )}
     </section>

@@ -40,13 +40,26 @@ class Auth {
     return this._getResponseData(res);
   }
 
+  async updateToken() {
+    this._refreshToken = getCookie("refreshToken");
+    console.log(this._refreshToken);
+    const res = await fetch(`${this._authUrl}/token`, {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({
+        token: this._refreshToken,
+      }),
+    });
+    return this._getResponseData(res);
+  }
+
   async logoutUser() {
-    const refreshToken = getCookie("refreshToken");
+    this._refreshToken = getCookie("refreshToken");
     const res = await fetch(`${this._authUrl}/logout`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
-        token: refreshToken,
+        token: this._refreshToken,
       }),
     });
     return this._getResponseData(res);

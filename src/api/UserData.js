@@ -29,6 +29,24 @@ class UserData {
     });
     return this._getResponseData(res);
   }
+
+  async setUserData(newData) {
+    this._token = getCookie("token");
+    const res = await fetch(this._url, {
+      method: "PATCH",
+      credentials: "same-origin",
+      mode: "cors",
+      cache: "no-cache",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer${this._token}`,
+      },
+      body: JSON.stringify(newData),
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+    });
+    return this._getResponseData(res);
+  }
 }
 
 const options = "https://norma.nomoreparties.space/api/auth/user";
