@@ -4,12 +4,12 @@ import { Navigate } from "react-router-dom";
 import { getUser } from "../../services/actions/user";
 
 export const ProtectedRoute = ({ element }) => {
-  const { user, success } = useSelector((state) => state.userReducer);
+  const { logged } = useSelector((state) => state.userReducer);
 
   const dispatch = useDispatch();
 
   const handleInit = useCallback(() => {
-    if (!user) {
+    if (!logged) {
       dispatch(getUser());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -23,5 +23,5 @@ export const ProtectedRoute = ({ element }) => {
   //   return null;
   // }
 
-  return user ? element : <Navigate to="/login" replace />;
+  return logged ? element : <Navigate to="/login" replace />;
 };

@@ -8,13 +8,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
-import { addUser } from "../../services/actions/auth";
+import { addUser } from "../../services/actions/user";
 import styles from "./styles.module.css";
 
 export const Register = () => {
   const { values, handleChange, errors, isValid } = useFormAndValidation();
-  const { success } = useSelector((state) => state.authReducer);
-  const { user } = useSelector((state) => state.userReducer);
+  const { logged } = useSelector((state) => state.userReducer);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -25,12 +24,12 @@ export const Register = () => {
   };
 
   useEffect(() => {
-    if (success) {
+    if (logged) {
       navigate("/");
     }
-  }, [navigate, success]);
+  }, [navigate, logged]);
 
-  if (user) {
+  if (logged) {
     return <Navigate to={"/"} replace />;
   }
 

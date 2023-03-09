@@ -16,7 +16,7 @@ export const Profile = () => {
 
   const { values, handleChange, setValues, errors } = useFormAndValidation();
 
-  const { user, success } = useSelector((state) => state.userReducer);
+  const { user, logged } = useSelector((state) => state.userReducer);
 
   const dispatch = useDispatch();
 
@@ -41,11 +41,11 @@ export const Profile = () => {
   }, [values]);
 
   useEffect(() => {
-    if (success) {
+    if (logged) {
       setValues({ name: user.name, email: user.email, password: "******" });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [success]);
+  }, [logged]);
 
   return (
     <section className={styles.section}>

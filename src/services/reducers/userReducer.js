@@ -1,7 +1,11 @@
 import {
+  ADD_USER,
+  ADD_USER_FAILED,
+  ADD_USER_SUCCES,
   GET_USER,
   GET_USER_FAILED,
   GET_USER_SUCCESS,
+  REMOVE_USER,
   SET_USER,
   SET_USER_FAILED,
   SET_USER_SUCCESS,
@@ -10,12 +14,42 @@ import {
 const initialState = {
   feedRequest: false,
   feedFailed: false,
-  success: false,
+  logged: false,
   user: null,
 };
 
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ADD_USER: {
+      return {
+        ...state,
+        feedRequest: true,
+        feedFailed: false,
+      };
+    }
+    case ADD_USER_SUCCES: {
+      return {
+        ...state,
+        logged: true,
+        user: action.user,
+        feedRequest: false,
+      };
+    }
+    case ADD_USER_FAILED: {
+      return {
+        ...state,
+        logged: false,
+        feedFailed: true,
+        feedRequest: false,
+      };
+    }
+    case REMOVE_USER: {
+      return {
+        ...state,
+        logged: false,
+        user: null,
+      };
+    }
     case GET_USER: {
       return {
         ...state,
@@ -26,7 +60,7 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         feedRequest: false,
-        success: action.success,
+        logged: true,
         user: action.user,
       };
     }
@@ -35,7 +69,7 @@ export const userReducer = (state = initialState, action) => {
         ...state,
         feedRequest: false,
         feedFailed: true,
-        succes: action.success,
+        logged: false,
       };
     }
     case SET_USER: {
@@ -48,7 +82,6 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         feedRequest: false,
-        success: action.success,
         user: action.user,
       };
     }
@@ -57,7 +90,6 @@ export const userReducer = (state = initialState, action) => {
         ...state,
         feedRequest: false,
         feedFailed: true,
-        success: action.success,
       };
     }
     default: {

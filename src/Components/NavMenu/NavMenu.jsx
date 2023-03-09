@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../../api/Auth";
 import { classNames } from "../../helpers/classNames";
-import { removeUser } from "../../services/actions/auth";
+import { removeUser } from "../../services/actions/user";
 import { ORDER_PAGE_TEXT, PROFILE_PAGE_TEXT } from "../../utils/constants";
 import { setCookie } from "../../utils/cookies";
 import styles from "./styles.module.css";
