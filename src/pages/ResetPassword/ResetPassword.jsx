@@ -40,7 +40,7 @@ export const ResetPassword = () => {
   }, [navigate, state]);
 
   return (
-    <div className={styles.block}>
+    <section className={styles.block}>
       <div className={styles.container}>
         <h1
           className={classNames(styles.title, {}, [
@@ -94,6 +94,6 @@ export const ResetPassword = () => {
           </Link>
         </div>
       </div>
-    </div>
+    </section>
   );
 };

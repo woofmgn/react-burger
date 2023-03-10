@@ -51,7 +51,7 @@ export const Card = React.memo(({ props, onOpen }) => {
   return (
     <Link
       key={_id}
-      to={{ pathname: `/ingredients/${_id}` }}
+      to={`/ingredients/${_id}`}
       state={{ background: location }}
       className={classNames(styles.link, {}, [
         "mt-1 text text_type_digits-default",

@@ -5,6 +5,7 @@ import { classNames } from "../../helpers/classNames";
 import { ProtectedRoute } from "../../HOC/ProtectedRoute/ProtectedRoute";
 import { ForgotPassword } from "../../pages/ForgotPassword/ForgotPassword";
 import { HistoryOrders } from "../../pages/HistoryOrders/HistoryOrders";
+import { IngredientPage } from "../../pages/IngredientPage/IngredientPage";
 import { Login } from "../../pages/Login/Login";
 import { Main } from "../../pages/Main/Main";
 import { Profile } from "../../pages/Profile/Profile";
@@ -64,11 +65,18 @@ function App() {
             element={<ForgotPassword logged={logged} />}
           />
           <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/ingredients/:id" element={<IngredientDetails />} />
+          <Route
+            path="/ingredients/:id"
+            element={
+              <IngredientPage>
+                <IngredientDetails />
+              </IngredientPage>
+            }
+          />
         </Routes>
       </main>
-      <Routes>
-        {background && (
+      {background && (
+        <Routes>
           <Route
             path="/ingredients/:id"
             element={
@@ -77,8 +85,8 @@ function App() {
               </Modal>
             }
           />
-        )}
-      </Routes>
+        </Routes>
+      )}
       <Footer />
     </div>
   );

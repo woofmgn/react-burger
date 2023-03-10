@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
 import { setDetails } from "../../services/actions/details";
 import { getIndredients } from "../../services/actions/getIngredients";
@@ -13,7 +13,6 @@ export const IngredientDetails = () => {
   const dispatch = useDispatch();
 
   const { id } = useParams();
-  const location = useLocation();
 
   const handleSearchIngredient = useCallback(() => {
     if (data) {
@@ -41,11 +40,6 @@ export const IngredientDetails = () => {
     <>
       {details ? (
         <div className={styles.wrapper}>
-          {location.pathname === `/ingredients/:id` ? (
-            <h1 className="text text_type_main-large">
-              {"Детали ингредиента"}
-            </h1>
-          ) : null}
           <img src={details.imageLarge} alt="" className="ml-5 mr-5" />
           <p
             className={classNames(styles.title, {}, [

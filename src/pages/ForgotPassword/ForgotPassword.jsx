@@ -35,7 +35,7 @@ export const ForgotPassword = ({ logged }) => {
   }
 
   return (
-    <div className={styles.block}>
+    <section className={styles.block}>
       <div className={styles.container}>
         <h1
           className={classNames(styles.title, {}, [
@@ -79,6 +79,6 @@ export const ForgotPassword = ({ logged }) => {
           </Link>
         </div>
       </div>
-    </div>
+    </section>
   );
 };

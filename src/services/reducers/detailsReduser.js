@@ -14,7 +14,6 @@ export function detailsReducer(state = initialState, action) {
         details: {
           name: action.name,
           imageLarge: action.imageLarge,
-          // imageLarge: action.image_large,
           calories: action.calories,
           proteins: action.proteins,
           fat: action.fat,
