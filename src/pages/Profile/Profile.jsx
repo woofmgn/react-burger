@@ -14,7 +14,8 @@ import styles from "./styles.module.css";
 export const Profile = () => {
   const [isVisible, setIsVisible] = useState(false);
 
-  const { values, handleChange, setValues, errors } = useFormAndValidation();
+  const { values, handleChange, setValues, errors, isValid } =
+    useFormAndValidation();
 
   const { user, logged } = useSelector((state) => state.userReducer);
 
@@ -96,6 +97,7 @@ export const Profile = () => {
               type="primary"
               size="medium"
               extraClass="mt-6"
+              disabled={!isValid}
             >
               Сохранить
             </Button>
