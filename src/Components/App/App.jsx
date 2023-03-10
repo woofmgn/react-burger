@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
 import { ProtectedRoute } from "../../HOC/ProtectedRoute/ProtectedRoute";
@@ -18,6 +18,7 @@ import { Header } from "../Header/Header";
 import styles from "./styles.module.css";
 
 function App() {
+  const { logged } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,15 +36,20 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route
             path="/profile"
-            element={<ProtectedRoute element={<Profile />} />}
+            element={<ProtectedRoute logged={logged} element={<Profile />} />}
           />
           <Route
             path="/profile/orders"
-            element={<ProtectedRoute element={<HistoryOrders />} />}
+            element={
+              <ProtectedRoute logged={logged} element={<HistoryOrders />} />
+            }
           />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/register" element={<Register logged={logged} />} />
+          <Route path="/login" element={<Login logged={logged} />} />
+          <Route
+            path="/forgot-password"
+            element={<ForgotPassword logged={logged} />}
+          />
           <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>
       </main>

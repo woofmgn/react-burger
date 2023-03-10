@@ -3,16 +3,15 @@ import {
   Input,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import { addUser } from "../../services/actions/user";
 import styles from "./styles.module.css";
 
-export const Register = () => {
+export const Register = ({ logged }) => {
   const { values, handleChange, errors, isValid } = useFormAndValidation();
-  const { logged } = useSelector((state) => state.userReducer);
 
   const dispatch = useDispatch();
 

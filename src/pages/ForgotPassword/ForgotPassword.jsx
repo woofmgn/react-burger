@@ -3,13 +3,13 @@ import {
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { auth } from "../../api/Auth";
 import { classNames } from "../../helpers/classNames";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import styles from "./styles.module.css";
 
-export const ForgotPassword = () => {
+export const ForgotPassword = ({ logged }) => {
   const { values, handleChange, resetForm, errors, isValid } =
     useFormAndValidation();
 
@@ -29,6 +29,10 @@ export const ForgotPassword = () => {
         console.log(err);
       });
   };
+
+  if (logged) {
+    return <Navigate to={"/"} replace />;
+  }
 
   return (
     <div className={styles.block}>

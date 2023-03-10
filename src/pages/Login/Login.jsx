@@ -4,16 +4,15 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import { loginUser } from "../../services/actions/user";
 import styles from "./styles.module.css";
 
-export const Login = () => {
+export const Login = ({ logged }) => {
   const { values, handleChange, errors, isValid } = useFormAndValidation();
-  const { logged } = useSelector((state) => state.userReducer);
   const { state: locationState } = useLocation();
 
   const navigate = useNavigate();
