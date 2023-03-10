@@ -126,7 +126,7 @@ export const getUser = () => (dispatch) => {
       dispatch({
         type: GET_USER_FAILED,
       });
-      console.log(err);
+      console.log(err.message);
     });
 };
 

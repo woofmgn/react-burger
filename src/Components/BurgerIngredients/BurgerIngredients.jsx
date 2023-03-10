@@ -8,8 +8,6 @@ import { resetDetails, setDetails } from "../../services/actions/details";
 import { getIndredients } from "../../services/actions/getIngredients";
 import { BUN, FILLING, SAUCE } from "../../utils/constants";
 import { Card } from "../Card/Card";
-import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
-import { Modal } from "../Modal/Modal";
 import styles from "./styles.module.css";
 
 export const BurgerIngredients = React.memo(() => {
@@ -172,12 +170,12 @@ export const BurgerIngredients = React.memo(() => {
           </ul>
         </div>
       )}
-      <Modal
+      {/* <Modal
         children={<IngredientDetails />}
         isOpen={isVisible}
         onClose={handleCloseModal}
         title={"Детали ингредиента"}
-      />
+      /> */}
     </section>
   );
 });

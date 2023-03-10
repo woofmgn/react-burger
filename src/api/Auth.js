@@ -42,7 +42,6 @@ class Auth {
 
   async updateToken() {
     this._refreshToken = getCookie("refreshToken");
-    console.log(this._refreshToken);
     const res = await fetch(`${this._authUrl}/token`, {
       method: "POST",
       headers: this._headers,

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
 import { ProtectedRoute } from "../../HOC/ProtectedRoute/ProtectedRoute";
 import { ForgotPassword } from "../../pages/ForgotPassword/ForgotPassword";
@@ -15,13 +15,25 @@ import { getCookie } from "../../utils/cookies";
 import { ingredientsArr } from "../../utils/prop-types";
 import { Footer } from "../Footer/Footer";
 import { Header } from "../Header/Header";
+import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
+import { Modal } from "../Modal/Modal";
 import styles from "./styles.module.css";
 
 function App() {
   const { logged } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  let background = location.state && location.state.background;
+
+  const handleModalClose = () => {
+    navigate(-1);
+  };
+
   useEffect(() => {
+    console.log(background);
     const jwtToken = getCookie("token");
     if (jwtToken) {
       dispatch(getUser());
@@ -32,7 +44,7 @@ function App() {
     <div className={classNames(styles.app, {}, [])}>
       <Header />
       <main className={classNames(styles.main, {}, [])}>
-        <Routes>
+        <Routes location={background || location}>
           <Route path="/" element={<Main />} />
           <Route
             path="/profile"
@@ -51,10 +63,64 @@ function App() {
             element={<ForgotPassword logged={logged} />}
           />
           <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/ingredients/:id" element={<IngredientDetails />} />
         </Routes>
       </main>
+      <Routes>
+        {background && (
+          <Route
+            path="/ingredients/:id"
+            element={
+              <Modal onClose={handleModalClose} title={"Детали ингредиента"}>
+                <IngredientDetails />
+              </Modal>
+            }
+          />
+        )}
+      </Routes>
       <Footer />
     </div>
+    // <div className={classNames(styles.app, {}, [])}>
+    //   <Header />
+    //   <main className={classNames(styles.main, {}, [])}>
+    //     <Routes>
+    //       <Route path="/" element={<Main />} />
+    //       <Route
+    //         path="/profile"
+    //         element={<ProtectedRoute logged={logged} element={<Profile />} />}
+    //       />
+    //       <Route
+    //         path="/profile/orders"
+    //         element={
+    //           <ProtectedRoute logged={logged} element={<HistoryOrders />} />
+    //         }
+    //       />
+    //       <Route path="/register" element={<Register logged={logged} />} />
+    //       <Route path="/login" element={<Login logged={logged} />} />
+    //       <Route
+    //         path="/forgot-password"
+    //         element={<ForgotPassword logged={logged} />}
+    //       />
+    //       <Route path="/reset-password" element={<ResetPassword />} />
+    //       <Route path="/ingredients/:id" element={<IngredientDetails />} />
+    //     </Routes>
+    //   </main>
+    //   <Routes>
+    //     <Route
+    //       path="/ingredients/:id"
+    //       element={
+    //         <Modal
+    //           // isOpen={isVisible}
+    //           onClose={handleModalClose}
+    //           title={"Детали ингредиента"}
+    //         >
+    //           <IngredientDetails />
+    //         </Modal>
+    //       }
+    //     />
+    //   </Routes>
+    //   <Footer />
+    // </div>
   );
 }
 
