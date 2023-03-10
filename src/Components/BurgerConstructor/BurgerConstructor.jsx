@@ -118,12 +118,8 @@ export const BurgerConstructor = React.memo(() => {
           Оформить заказ
         </Button>
       </div>
-      {success && (
-        <Modal
-          children={<OrderDetails />}
-          isOpen={isVisible}
-          onClose={handleCloseModal}
-        />
+      {success && isVisible && (
+        <Modal children={<OrderDetails />} onClose={handleCloseModal} />
       )}
     </section>
   );

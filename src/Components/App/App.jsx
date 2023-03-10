@@ -10,6 +10,7 @@ import { Main } from "../../pages/Main/Main";
 import { Profile } from "../../pages/Profile/Profile";
 import { Register } from "../../pages/Register/Register";
 import { ResetPassword } from "../../pages/ResetPassword/ResetPassword";
+import { resetDetails } from "../../services/actions/details";
 import { getUser } from "../../services/actions/user";
 import { getCookie } from "../../utils/cookies";
 import { ingredientsArr } from "../../utils/prop-types";
@@ -29,11 +30,11 @@ function App() {
   let background = location.state && location.state.background;
 
   const handleModalClose = () => {
+    dispatch(resetDetails());
     navigate(-1);
   };
 
   useEffect(() => {
-    console.log(background);
     const jwtToken = getCookie("token");
     if (jwtToken) {
       dispatch(getUser());
@@ -80,47 +81,6 @@ function App() {
       </Routes>
       <Footer />
     </div>
-    // <div className={classNames(styles.app, {}, [])}>
-    //   <Header />
-    //   <main className={classNames(styles.main, {}, [])}>
-    //     <Routes>
-    //       <Route path="/" element={<Main />} />
-    //       <Route
-    //         path="/profile"
-    //         element={<ProtectedRoute logged={logged} element={<Profile />} />}
-    //       />
-    //       <Route
-    //         path="/profile/orders"
-    //         element={
-    //           <ProtectedRoute logged={logged} element={<HistoryOrders />} />
-    //         }
-    //       />
-    //       <Route path="/register" element={<Register logged={logged} />} />
-    //       <Route path="/login" element={<Login logged={logged} />} />
-    //       <Route
-    //         path="/forgot-password"
-    //         element={<ForgotPassword logged={logged} />}
-    //       />
-    //       <Route path="/reset-password" element={<ResetPassword />} />
-    //       <Route path="/ingredients/:id" element={<IngredientDetails />} />
-    //     </Routes>
-    //   </main>
-    //   <Routes>
-    //     <Route
-    //       path="/ingredients/:id"
-    //       element={
-    //         <Modal
-    //           // isOpen={isVisible}
-    //           onClose={handleModalClose}
-    //           title={"Детали ингредиента"}
-    //         >
-    //           <IngredientDetails />
-    //         </Modal>
-    //       }
-    //     />
-    //   </Routes>
-    //   <Footer />
-    // </div>
   );
 }
 

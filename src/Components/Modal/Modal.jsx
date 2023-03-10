@@ -7,7 +7,7 @@ import styles from "./styles.module.css";
 
 const portal = document.getElementById("portal");
 
-export const Modal = ({ children, isOpen, onClose, title }) => {
+export const Modal = ({ children, onClose, title }) => {
   React.useEffect(() => {
     const closeModal = (evt) => {
       if (evt.key === "Escape") {
@@ -20,7 +20,6 @@ export const Modal = ({ children, isOpen, onClose, title }) => {
     return () => window.removeEventListener("keydown", closeModal);
   }, [onClose]);
 
-  // if (isOpen) {
   return ReactDOM.createPortal(
     <div className={styles.block}>
       <ModalOverlay onClose={onClose} />
@@ -35,10 +34,8 @@ export const Modal = ({ children, isOpen, onClose, title }) => {
     portal
   );
 };
-// };
 
 Modal.propTypes = {
-  // isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   children: PropTypes.element.isRequired,
   title: PropTypes.string,
