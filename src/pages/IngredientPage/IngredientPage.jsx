@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import styles from "./styles.module.css";
 
 export const IngredientPage = ({ children }) => {
@@ -7,4 +8,8 @@ export const IngredientPage = ({ children }) => {
       {children}
     </section>
   );
+};
+
+IngredientPage.propTypes = {
+  children: PropTypes.element.isRequired,
 };

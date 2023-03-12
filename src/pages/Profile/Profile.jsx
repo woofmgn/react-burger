@@ -14,7 +14,7 @@ import styles from "./styles.module.css";
 export const Profile = () => {
   const [isVisible, setIsVisible] = useState(false);
 
-  const { values, handleChange, setValues, errors, isValid } =
+  const { values, errors, isValid, handleChange, setValues, setErrors } =
     useFormAndValidation();
 
   const { user, logged } = useSelector((state) => state.userReducer);
@@ -32,6 +32,17 @@ export const Profile = () => {
   const handleSumbit = (evt) => {
     evt.preventDefault();
     dispatch(setUser(values));
+    setIsVisible((prev) => !prev);
+  };
+
+  const handleResetChange = (evt) => {
+    evt.preventDefault();
+    setValues({
+      name: user.name,
+      email: user.email,
+      password: "******",
+    });
+    setErrors({});
   };
 
   useEffect(() => {
@@ -92,15 +103,26 @@ export const Profile = () => {
             required
           />
           {isVisible && (
-            <Button
-              htmlType="submit"
-              type="primary"
-              size="medium"
-              extraClass="mt-6"
-              disabled={!isValid}
-            >
-              Сохранить
-            </Button>
+            <div className={styles.btnWrapper}>
+              <Button
+                onClick={handleResetChange}
+                htmlType="button"
+                type="primary"
+                size="medium"
+                extraClass="mt-6"
+              >
+                Отменить
+              </Button>
+              <Button
+                htmlType="submit"
+                type="primary"
+                size="medium"
+                extraClass="mt-6"
+                disabled={!isValid}
+              >
+                Сохранить
+              </Button>
+            </div>
           )}
         </form>
       )}

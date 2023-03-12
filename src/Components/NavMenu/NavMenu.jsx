@@ -36,7 +36,6 @@ export const NavMenu = () => {
 
   return (
     <div className={styles.container}>
-      {/* <div className={styles.wrapper}></div> */}
       <nav className={styles.navMenu}>
         <NavLink
           to="/profile"

@@ -23,7 +23,6 @@ export const ResetPassword = () => {
       .changePwd(values)
       .then((res) => {
         if (res.success) {
-          console.log(res.message);
           resetForm();
           navigate("/login");
         }

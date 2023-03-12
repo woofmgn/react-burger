@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { classNames } from "../../helpers/classNames";
 import { ProtectedRoute } from "../../HOC/ProtectedRoute/ProtectedRoute";
 import { ForgotPassword } from "../../pages/ForgotPassword/ForgotPassword";
 import { HistoryOrders } from "../../pages/HistoryOrders/HistoryOrders";
@@ -12,8 +11,7 @@ import { Profile } from "../../pages/Profile/Profile";
 import { Register } from "../../pages/Register/Register";
 import { ResetPassword } from "../../pages/ResetPassword/ResetPassword";
 import { resetDetails } from "../../services/actions/details";
-import { getUser } from "../../services/actions/user";
-import { getCookie } from "../../utils/cookies";
+import { checkAuthUser } from "../../services/actions/user";
 import { ingredientsArr } from "../../utils/prop-types";
 import { Footer } from "../Footer/Footer";
 import { Header } from "../Header/Header";
@@ -22,13 +20,12 @@ import { Modal } from "../Modal/Modal";
 import styles from "./styles.module.css";
 
 function App() {
-  const { logged } = useSelector((state) => state.userReducer);
-  const dispatch = useDispatch();
-
   const navigate = useNavigate();
   const location = useLocation();
 
   let background = location.state && location.state.background;
+
+  const dispatch = useDispatch();
 
   const handleModalClose = () => {
     dispatch(resetDetails());
@@ -36,34 +33,26 @@ function App() {
   };
 
   useEffect(() => {
-    const jwtToken = getCookie("token");
-    if (jwtToken) {
-      dispatch(getUser());
-    }
+    dispatch(checkAuthUser());
   }, [dispatch]);
 
   return (
-    <div className={classNames(styles.app, {}, [])}>
+    <div className={styles.app}>
       <Header />
-      <main className={classNames(styles.main, {}, [])}>
+      <main className={styles.main}>
         <Routes location={background || location}>
           <Route path="/" element={<Main />} />
           <Route
             path="/profile"
-            element={<ProtectedRoute logged={logged} element={<Profile />} />}
+            element={<ProtectedRoute element={<Profile />} />}
           />
           <Route
             path="/profile/orders"
-            element={
-              <ProtectedRoute logged={logged} element={<HistoryOrders />} />
-            }
+            element={<ProtectedRoute element={<HistoryOrders />} />}
           />
-          <Route path="/register" element={<Register logged={logged} />} />
-          <Route path="/login" element={<Login logged={logged} />} />
-          <Route
-            path="/forgot-password"
-            element={<ForgotPassword logged={logged} />}
-          />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route
             path="/ingredients/:id"

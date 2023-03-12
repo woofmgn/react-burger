@@ -4,6 +4,7 @@ import {
   ADD_USER,
   ADD_USER_FAILED,
   ADD_USER_SUCCES,
+  AUTH_CHECKED,
   GET_USER,
   GET_USER_FAILED,
   GET_USER_SUCCESS,
@@ -12,7 +13,7 @@ import {
   SET_USER_FAILED,
   SET_USER_SUCCESS,
 } from "../../utils/constants";
-import { setCookie } from "../../utils/cookies";
+import { getCookie, setCookie } from "../../utils/cookies";
 
 export const addUser = (data) => (dispatch) => {
   dispatch({
@@ -154,4 +155,18 @@ export const setUser = (newData) => (dispatch) => {
       });
       console.log(err);
     });
+};
+
+export const checkAuthUser = () => async (dispatch) => {
+  const jwtToken = getCookie("token");
+  if (jwtToken) {
+    dispatch(getUser());
+    dispatch({
+      type: AUTH_CHECKED,
+    });
+  } else {
+    dispatch({
+      type: AUTH_CHECKED,
+    });
+  }
 };

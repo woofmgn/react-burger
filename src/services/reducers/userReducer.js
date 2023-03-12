@@ -2,13 +2,14 @@ import {
   ADD_USER,
   ADD_USER_FAILED,
   ADD_USER_SUCCES,
+  AUTH_CHECKED,
   GET_USER,
   GET_USER_FAILED,
   GET_USER_SUCCESS,
   REMOVE_USER,
   SET_USER,
   SET_USER_FAILED,
-  SET_USER_SUCCESS,
+  SET_USER_SUCCESS
 } from "../../utils/constants";
 
 const initialState = {
@@ -42,6 +43,9 @@ export const userReducer = (state = initialState, action) => {
         feedFailed: true,
         feedRequest: false,
       };
+    }
+    case AUTH_CHECKED: {
+      return state
     }
     case REMOVE_USER: {
       return {
