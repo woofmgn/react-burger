@@ -4,6 +4,11 @@ const BUN = "bun";
 const SAUCE = "sauce";
 const FILLING = "filling";
 
+export const PROFILE_PAGE_TEXT =
+  "В этом разделе вы можете изменить свои персональные данные";
+export const ORDER_PAGE_TEXT =
+  "В этом разделе содержится информация о ваших заказах";
+
 const GET_INGREDIENTS = "GET_INGREDIENTS";
 const GET_INGREDIENTS_SUCCES = "GET_INGREDIENTS_SUCCES";
 const GET_INGREDIENTS_FAILED = "GET_INGREDIENTS_FAILED";
@@ -17,6 +22,17 @@ const SET_ORDER_SUCCES = "SET_ORDER_SUCCES";
 const SET_ORDER_FAILED = "SET_ORDER_SUCCES";
 const SET_ORDER_REMOVE = "SET_ORDER_REMOVE";
 const RESET = "RESET";
+const ADD_USER = "ADD_USER";
+const ADD_USER_SUCCES = "ADD_USER_SUCCES";
+const ADD_USER_FAILED = "ADD_USER__FAILED";
+const AUTH_CHECKED = 'AUTH_CHECKED';
+const REMOVE_USER = "REMOVE_USER";
+const GET_USER = "GET_USER";
+const GET_USER_SUCCESS = "GET_USER_SUCCESS";
+const GET_USER_FAILED = "GET_USER_FAILED";
+const SET_USER = "SET_USER";
+const SET_USER_SUCCESS = "SET_USER_SUCCESS";
+const SET_USER_FAILED = "SET_USER_FAILED";
 
 export {
   API_URL,
@@ -36,4 +52,16 @@ export {
   REPLASE_INGREDIENT,
   SET_ORDER,
   RESET,
+  ADD_USER,
+  ADD_USER_SUCCES,
+  ADD_USER_FAILED,
+  AUTH_CHECKED,
+  REMOVE_USER,
+  GET_USER,
+  GET_USER_SUCCESS,
+  GET_USER_FAILED,
+  SET_USER,
+  SET_USER_SUCCESS,
+  SET_USER_FAILED,
 };
+

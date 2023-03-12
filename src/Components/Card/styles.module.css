@@ -1,3 +1,7 @@
+.link {
+  all: unset;
+}
+
 .item {
   display: flex;
   flex-direction: column;
