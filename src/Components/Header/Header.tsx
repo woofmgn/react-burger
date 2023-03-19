@@ -35,7 +35,7 @@ export const Header = () => {
           >
             <ListIcon
               type={pathname === "/profile/orders" ? "primary" : "secondary"}
-              ex
+              // ex
             />
             <p
               className={`pl-2 text text_type_main-default ${

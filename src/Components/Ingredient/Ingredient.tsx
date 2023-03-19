@@ -2,7 +2,7 @@ import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import React from "react";
+import { FC } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
 
@@ -10,10 +10,18 @@ import {
   removeIngredients,
   replaceIngredient,
 } from "../../services/actions/constructor";
-import { ingredientItem } from "../../utils/prop-types";
 import styles from "./styles.module.css";
 
-export const Ingredient = ({ element }) => {
+type TIngredientProps = {
+  element: {
+    image: string;
+    name: string;
+    price: number;
+    keyId: string;
+  };
+};
+
+export const Ingredient: FC<TIngredientProps> = ({ element }) => {
   const { image, name, price, keyId } = element;
 
   const dispatch = useDispatch();
@@ -28,7 +36,7 @@ export const Ingredient = ({ element }) => {
 
   const [, drop] = useDrop(() => ({
     accept: "ingredientConstructor",
-    hover(item) {
+    hover(item: any) {
       if (item.keyId !== keyId) {
         dispatch(replaceIngredient({ item, keyId }));
       }
@@ -59,5 +67,3 @@ export const Ingredient = ({ element }) => {
     </li>
   );
 };
-
-Ingredient.propTypes = ingredientItem.PropTypes;
