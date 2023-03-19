@@ -3,17 +3,13 @@ import React, { createRef, useCallback, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { useDispatch, useSelector } from "react-redux";
 import { classNames } from "../../helpers/classNames";
-
-import { resetDetails, setDetails } from "../../services/actions/details";
+import { setDetails } from "../../services/actions/details";
 import { getIndredients } from "../../services/actions/getIngredients";
 import { BUN, FILLING, SAUCE } from "../../utils/constants";
 import { Card } from "../Card/Card";
-import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
-import { Modal } from "../Modal/Modal";
 import styles from "./styles.module.css";
 
 export const BurgerIngredients = React.memo(() => {
-  const [isVisible, setIsVisible] = useState(false);
   const [current, setCurrent] = useState(BUN);
   // const bunRef = createRef(null);
   // const sauceRef = createRef(null);
@@ -27,19 +23,16 @@ export const BurgerIngredients = React.memo(() => {
   const dispatch = useDispatch();
 
   const [bunRef, inViewBun] = useInView({
-    /* Optional options */
     root: containerRef.current,
     threshold: 0,
   });
 
   const [sauceRef, inViewSauce] = useInView({
-    /* Optional options */
     root: containerRef.current,
     threshold: 0,
   });
 
   const [fillingRef, inViewFilling] = useInView({
-    /* Optional options */
     root: containerRef.current,
     threshold: 0,
   });
@@ -47,15 +40,11 @@ export const BurgerIngredients = React.memo(() => {
   const handleOpenModal = useCallback(
     (card) => {
       dispatch(setDetails(card));
-      setIsVisible(true);
     },
     [dispatch]
   );
 
-  const handleCloseModal = () => {
-    setIsVisible(false);
-    dispatch(resetDetails());
-  };
+  // код закомментирован для себя, планирую переделать реализацию intersection observer
 
   // const handleScrollToRef = (isRef, str) => {
   //   isRef.current.scrollIntoView({ behavior: "smooth" }, true);
@@ -172,12 +161,6 @@ export const BurgerIngredients = React.memo(() => {
           </ul>
         </div>
       )}
-      <Modal
-        children={<IngredientDetails />}
-        isOpen={isVisible}
-        onClose={handleCloseModal}
-        title={"Детали ингредиента"}
-      />
     </section>
   );
 });

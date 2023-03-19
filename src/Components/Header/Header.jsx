@@ -4,44 +4,64 @@ import {
   Logo,
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Link, useLocation } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
 import styles from "./styles.module.css";
 
 export const Header = () => {
+  const { pathname } = useLocation();
+  const location = useLocation();
+
   return (
     <header className={classNames(styles.container, {}, ["pt-4 pb-4"])}>
       <div className={styles.wrapper}>
         <nav className={styles.nav}>
-          <a
-            href={"/constructor"}
-            className={classNames(styles.link, {}, ["pt-4 pr-5 pb-4 "])}
+          <Link
+            to={"/"}
+            className={classNames(styles.link, {}, ["pt-4 pr-5 pb-4"])}
           >
-            <BurgerIcon type="secondary" />
-            <p className="pl-2 text text_type_main-default text_color_inactive">
+            <BurgerIcon type={pathname === "/" ? "primary" : "secondary"} />
+            <p
+              className={`pl-2 text text_type_main-default ${
+                pathname === "/" ? "" : "text_color_inactive"
+              }`}
+            >
               Конструктор
             </p>
-          </a>
-          <a
-            href={"/orders"}
+          </Link>
+          <Link
+            to={"/profile/orders"}
             className={classNames(styles.link, {}, ["pt-4 pr-5 pb-4 pl-5"])}
           >
-            <ListIcon type="secondary" />
-            <p className="pl-2 text text_type_main-default text_color_inactive">
+            <ListIcon
+              type={pathname === "/profile/orders" ? "primary" : "secondary"}
+              ex
+            />
+            <p
+              className={`pl-2 text text_type_main-default ${
+                pathname === "/profile/orders" ? "" : "text_color_inactive"
+              }`}
+            >
               Лента заказов
             </p>
-          </a>
+          </Link>
         </nav>
         <Logo />
       </div>
-      <a
-        href={"/acoount"}
+      <Link
+        state={{ redirectTo: location }}
+        to={"/profile"}
         className={classNames(styles.link, {}, ["pt-4 pb-4 pl-5"])}
       >
-        <ProfileIcon type="secondary" />
-        <p className="pl-2 text text_type_main-default text_color_inactive">
+        <ProfileIcon type={pathname === "/profile" ? "primary" : "secondary"} />
+        <p
+          className={`pl-2 text text_type_main-default ${
+            pathname === "/profile" ? "" : "text_color_inactive"
+          }`}
+        >
           Личный кабинет
         </p>
-      </a>
+      </Link>
     </header>
   );
 };

@@ -1,16 +1,17 @@
 import {
   Button,
   ConstructorElement,
-  CurrencyIcon,
+  CurrencyIcon
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React, { useCallback } from "react";
 import { useDrop } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 import { classNames } from "../../helpers/classNames";
 
 import {
   addIngredients,
-  removeAllIngredients,
+  removeAllIngredients
 } from "../../services/actions/constructor";
 import { removeOrder, setOrder } from "../../services/actions/order";
 import { BUN } from "../../utils/constants";
@@ -26,7 +27,10 @@ export const BurgerConstructor = React.memo(() => {
     (state) => state.constructorReducer.ingredients
   );
   const { success } = useSelector((state) => state.orderReducer);
+  const { logged } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const [, dropTargetRef] = useDrop({
     accept: "ingredient",
@@ -36,11 +40,15 @@ export const BurgerConstructor = React.memo(() => {
   });
 
   const handleToggleOpenModal = useCallback(() => {
-    let newOrder = [];
-    ingredients.forEach((item) => newOrder.push(item._id));
-    dispatch(setOrder(newOrder));
-    setIsVisible((prev) => !prev);
-  }, [dispatch, ingredients]);
+    if (logged) {
+      let newOrder = [];
+      ingredients.forEach((item) => newOrder.push(item._id));
+      dispatch(setOrder(newOrder));
+      setIsVisible((prev) => !prev);
+    } else {
+      navigate('/login')
+    }
+  }, [dispatch, ingredients, logged, navigate]);
 
   const handleCloseModal = useCallback(() => {
     dispatch(removeAllIngredients());
@@ -118,12 +126,8 @@ export const BurgerConstructor = React.memo(() => {
           Оформить заказ
         </Button>
       </div>
-      {success && (
-        <Modal
-          children={<OrderDetails />}
-          isOpen={isVisible}
-          onClose={handleCloseModal}
-        />
+      {success && isVisible && (
+        <Modal children={<OrderDetails />} onClose={handleCloseModal} />
       )}
     </section>
   );
