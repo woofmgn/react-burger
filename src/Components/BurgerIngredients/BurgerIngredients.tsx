@@ -1,5 +1,5 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import React, { createRef, useCallback, useState } from "react";
+import React, { createRef, FC, useCallback, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { useDispatch, useSelector } from "react-redux";
 import { classNames } from "../../helpers/classNames";
@@ -9,15 +9,15 @@ import { BUN, FILLING, SAUCE } from "../../utils/constants";
 import { Card } from "../Card/Card";
 import styles from "./styles.module.css";
 
-export const BurgerIngredients = React.memo(() => {
+export const BurgerIngredients: FC = React.memo(() => {
   const [current, setCurrent] = useState(BUN);
   // const bunRef = createRef(null);
   // const sauceRef = createRef(null);
   // const fillingRef = createRef(null);
-  const containerRef = createRef(null);
+  const containerRef = createRef<HTMLDivElement>();
 
   const { data, feedRequest } = useSelector(
-    (state) => state.ingredientsReducer
+    (state: any) => state.ingredientsReducer
   );
 
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ export const BurgerIngredients = React.memo(() => {
   });
 
   const handleOpenModal = useCallback(
-    (card) => {
+    (card: any) => {
       dispatch(setDetails(card));
     },
     [dispatch]
@@ -52,6 +52,7 @@ export const BurgerIngredients = React.memo(() => {
   // };
 
   React.useEffect(() => {
+    // @ts-ignore
     dispatch(getIndredients());
   }, [dispatch]);
 
@@ -114,7 +115,7 @@ export const BurgerIngredients = React.memo(() => {
           <ul className={styles.grid}>
             {data &&
               data
-                .filter((item) => item.type === BUN)
+                .filter((item: { type: string }) => item.type === BUN)
                 .map((item) => {
                   return (
                     <Card

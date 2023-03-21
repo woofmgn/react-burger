@@ -1,22 +1,22 @@
-import React, { useCallback, useEffect } from "react";
+import { FC, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
 import { setDetails } from "../../services/actions/details";
 import { getIndredients } from "../../services/actions/getIngredients";
-import { ingredientsObject } from "../../utils/prop-types";
+// import { ingredientsObject } from "../../utils/prop-types";
 import styles from "./styles.module.css";
 
-export const IngredientDetails = () => {
-  const { details } = useSelector((state) => state.detailsReducer);
-  const data = useSelector((state) => state.ingredientsReducer.data);
+export const IngredientDetails: FC = () => {
+  const { details } = useSelector((state: any) => state.detailsReducer);
+  const data = useSelector((state: any) => state.ingredientsReducer.data);
   const dispatch = useDispatch();
 
   const { id } = useParams();
 
   const handleSearchIngredient = useCallback(() => {
     if (data) {
-      const obj = data.find((item) => item._id === id);
+      const obj = data.find((item: { _id: string }) => item._id === id);
       dispatch(
         setDetails({
           ...obj,
@@ -28,6 +28,7 @@ export const IngredientDetails = () => {
 
   useEffect(() => {
     if (!details) {
+      // @ts-ignore
       dispatch(getIndredients());
     }
   }, [details, dispatch]);
@@ -90,4 +91,4 @@ export const IngredientDetails = () => {
   );
 };
 
-IngredientDetails.propTypes = ingredientsObject.propTypes;
+// IngredientDetails.propTypes = ingredientsObject.propTypes;

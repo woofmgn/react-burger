@@ -1,13 +1,34 @@
 import { getCookie } from "../utils/cookies";
 
-class Auth {
-  constructor(settings) {
+type THeaders = {
+  Accept: string;
+  ["Content-Type"]: string;
+};
+
+type TSettings = {
+  authUrl: string;
+  pwdUrl: string;
+  headers: THeaders;
+};
+
+interface IAuth {
+  readonly settings: TSettings;
+}
+
+class Auth implements IAuth {
+  public readonly settings!: TSettings;
+  private _authUrl: string;
+  private _pwdUrl: string;
+  private _headers: THeaders;
+  private _refreshToken: string | undefined;
+
+  constructor(settings: TSettings) {
     this._authUrl = settings.authUrl;
     this._pwdUrl = settings.pwdUrl;
     this._headers = settings.headers;
   }
 
-  async _getResponseData(res) {
+  async _getResponseData(res: Response) {
     if (!res.ok) {
       const err = await res.json();
       return Promise.reject(err);
@@ -15,7 +36,7 @@ class Auth {
     return res.json();
   }
 
-  async registerUser(newUserData) {
+  async registerUser(newUserData: { email: string; password: string; name: string; }): Promise<any> {
     const res = await fetch(`${this._authUrl}/register`, {
       method: "POST",
       headers: this._headers,
@@ -28,7 +49,7 @@ class Auth {
     return this._getResponseData(res);
   }
 
-  async loginUser(userData) {
+  async loginUser(userData: { email: string; password: string; }): Promise<any> {
     const res = await fetch(`${this._authUrl}/login`, {
       method: "POST",
       headers: this._headers,
@@ -40,7 +61,7 @@ class Auth {
     return this._getResponseData(res);
   }
 
-  async updateToken() {
+  async updateToken(): Promise<any> {
     this._refreshToken = getCookie("refreshToken");
     const res = await fetch(`${this._authUrl}/token`, {
       method: "POST",
@@ -52,7 +73,7 @@ class Auth {
     return this._getResponseData(res);
   }
 
-  async logoutUser() {
+  async logoutUser(): Promise<any> {
     this._refreshToken = getCookie("refreshToken");
     const res = await fetch(`${this._authUrl}/logout`, {
       method: "POST",
@@ -64,7 +85,7 @@ class Auth {
     return this._getResponseData(res);
   }
 
-  async forgotPwd(email) {
+  async forgotPwd(email: string): Promise<any> {
     const res = await fetch(this._pwdUrl, {
       method: "POST",
       headers: this._headers,
@@ -75,7 +96,7 @@ class Auth {
     return this._getResponseData(res);
   }
 
-  async changePwd({ password, code }) {
+  async changePwd({ password, code }: { password: string; code: string; }): Promise<any> {
     const res = await fetch(`${this._pwdUrl}/reset`, {
       method: "POST",
       headers: this._headers,

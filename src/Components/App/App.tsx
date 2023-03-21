@@ -12,7 +12,6 @@ import { Register } from "../../pages/Register/Register";
 import { ResetPassword } from "../../pages/ResetPassword/ResetPassword";
 import { resetDetails } from "../../services/actions/details";
 import { checkAuthUser } from "../../services/actions/user";
-import { ingredientsArr } from "../../utils/prop-types";
 import { Footer } from "../Footer/Footer";
 import { Header } from "../Header/Header";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
@@ -33,6 +32,7 @@ function App() {
   };
 
   useEffect(() => {
+    // @ts-ignore
     dispatch(checkAuthUser());
   }, [dispatch]);
 
@@ -82,5 +82,3 @@ function App() {
 }
 
 export default App;
-
-App.propTypes = ingredientsArr.PropTypes;

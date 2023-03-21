@@ -1,11 +1,18 @@
 import { API_URL } from "../utils/constants";
 
-class Api {
-  constructor(settings) {
+interface IApi {
+  readonly settings: string;
+}
+
+class Api implements IApi {
+  public readonly settings!: string;
+  private _url: string;
+
+  constructor(settings: string) {
     this._url = settings;
   }
 
-  async _getResponseData(res) {
+  async _getResponseData(res: Response) {
     if (!res.ok) {
       const err = await res.json();
       return Promise.reject(err);
@@ -18,7 +25,7 @@ class Api {
     return this._getResponseData(res);
   }
 
-  async newOrder(data) {
+  async newOrder(data: string[]) {
     const res = await fetch(`${this._url}/orders`, {
       method: "POST",
       headers: {

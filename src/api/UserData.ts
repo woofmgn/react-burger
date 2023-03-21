@@ -1,11 +1,25 @@
 import { getCookie } from "../utils/cookies";
 
-class UserData {
-  constructor(settings) {
+interface IUserData {
+  readonly settings: string;
+}
+
+type TNewUserData = {
+  name: string;
+  email: string;
+  password: string;
+};
+
+class UserData implements IUserData {
+  public readonly settings!: string;
+  private _url: string;
+  private _token: string | undefined;
+
+  constructor(settings: string) {
     this._url = settings;
   }
 
-  async _getResponseData(res) {
+  async _getResponseData(res: Response) {
     if (!res.ok) {
       const err = await res.json();
       return Promise.reject(err);
@@ -13,7 +27,7 @@ class UserData {
     return res.json();
   }
 
-  async getUserData() {
+  async getUserData(): Promise<any> {
     this._token = getCookie("token");
     const res = await fetch(this._url, {
       method: "GET",
@@ -30,7 +44,7 @@ class UserData {
     return this._getResponseData(res);
   }
 
-  async setUserData(newData) {
+  async setUserData(newData: TNewUserData): Promise<any> {
     this._token = getCookie("token");
     const res = await fetch(this._url, {
       method: "PATCH",
