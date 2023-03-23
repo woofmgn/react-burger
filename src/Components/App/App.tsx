@@ -11,10 +11,12 @@ import { Profile } from "../../pages/Profile/Profile";
 import { Register } from "../../pages/Register/Register";
 import { ResetPassword } from "../../pages/ResetPassword/ResetPassword";
 import { resetDetails } from "../../services/actions/details";
+import { getIndredients } from "../../services/actions/getIngredients";
 import { checkAuthUser } from "../../services/actions/user";
 import { Footer } from "../Footer/Footer";
 import { Header } from "../Header/Header";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
+// import { getIndredients } from "../../services/actions/getIngredients";
 import { Modal } from "../Modal/Modal";
 import styles from "./styles.module.css";
 
@@ -34,6 +36,8 @@ function App() {
   useEffect(() => {
     // @ts-ignore
     dispatch(checkAuthUser());
+    // @ts-ignore
+    dispatch(getIndredients());
   }, [dispatch]);
 
   return (

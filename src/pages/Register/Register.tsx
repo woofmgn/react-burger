@@ -3,7 +3,7 @@ import {
   Input,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { FC, SyntheticEvent } from "react";
+import { FC, FormEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
@@ -18,7 +18,7 @@ export const Register: FC = () => {
 
   const dispatch = useDispatch();
 
-  const handleSubmit = (evt: SyntheticEvent) => {
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     // @ts-ignore
     dispatch(addUser(values));

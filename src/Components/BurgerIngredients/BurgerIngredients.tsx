@@ -4,7 +4,7 @@ import { useInView } from "react-intersection-observer";
 import { useDispatch, useSelector } from "react-redux";
 import { classNames } from "../../helpers/classNames";
 import { setDetails } from "../../services/actions/details";
-import { getIndredients } from "../../services/actions/getIngredients";
+// import { getIndredients } from "../../services/actions/getIngredients";
 import { BUN, FILLING, SAUCE } from "../../utils/constants";
 import { Card } from "../Card/Card";
 import styles from "./styles.module.css";
@@ -65,10 +65,10 @@ export const BurgerIngredients: FC = React.memo(() => {
   //   setCurrent(str);
   // };
 
-  React.useEffect(() => {
-    // @ts-ignore
-    dispatch(getIndredients());
-  }, [dispatch]);
+  // React.useEffect(() => {
+  //   // @ts-ignore
+  //   dispatch(getIndredients());
+  // }, [dispatch]);
 
   React.useEffect(() => {
     if (inViewBun) {

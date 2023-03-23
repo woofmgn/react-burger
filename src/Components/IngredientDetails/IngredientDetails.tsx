@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
 import { setDetails } from "../../services/actions/details";
-import { getIndredients } from "../../services/actions/getIngredients";
-// import { ingredientsObject } from "../../utils/prop-types";
 import styles from "./styles.module.css";
 
 export const IngredientDetails: FC = () => {
@@ -27,11 +25,10 @@ export const IngredientDetails: FC = () => {
   }, [data, dispatch, id]);
 
   useEffect(() => {
-    if (!details) {
-      // @ts-ignore
-      dispatch(getIndredients());
+    if (!details && data) {
+      handleSearchIngredient();
     }
-  }, [details, dispatch]);
+  }, [dispatch, details, data, handleSearchIngredient]);
 
   useEffect(() => {
     handleSearchIngredient();
@@ -90,5 +87,3 @@ export const IngredientDetails: FC = () => {
     </>
   );
 };
-
-// IngredientDetails.propTypes = ingredientsObject.propTypes;
