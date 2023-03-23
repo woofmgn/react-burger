@@ -2,6 +2,7 @@ import {
   Button,
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { FC, SyntheticEvent } from "react";
 import { useSelector } from "react-redux";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { auth } from "../../api/Auth";
@@ -9,17 +10,17 @@ import { classNames } from "../../helpers/classNames";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import styles from "./styles.module.css";
 
-export const ForgotPassword = () => {
-  const { logged } = useSelector((state) => state.userReducer);
+export const ForgotPassword: FC = () => {
+  const { logged } = useSelector((state: any) => state.userReducer);
   const { values, handleChange, resetForm, errors, isValid } =
     useFormAndValidation();
 
   const navigate = useNavigate();
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = (evt: SyntheticEvent) => {
     evt.preventDefault();
     auth
-      .forgotPwd(values.email)
+      .forgotPwd(values.email!)
       .then((res) => {
         if (res.success) {
           resetForm();

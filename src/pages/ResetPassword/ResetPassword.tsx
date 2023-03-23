@@ -3,28 +3,40 @@ import {
   Input,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, Navigate } from "react-router-dom";
+import { SyntheticEvent, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { auth } from "../../api/Auth";
 import { classNames } from "../../helpers/classNames";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
-import { addUser } from "../../services/actions/user";
 import styles from "./styles.module.css";
 
-export const Register = () => {
-  const { logged } = useSelector((state) => state.userReducer);
+export const ResetPassword = () => {
+  const { values, handleChange, resetForm, errors, isValid } =
+    useFormAndValidation();
 
-  const { values, handleChange, errors, isValid } = useFormAndValidation();
+  const navigate = useNavigate();
+  const { state } = useLocation();
 
-  const dispatch = useDispatch();
-
-  const handleSubmit = (evt) => {
+  const handleSumbit = (evt: SyntheticEvent) => {
     evt.preventDefault();
-    dispatch(addUser(values));
+    auth
+      .changePwd(values as { password: string; code: string })
+      .then((res) => {
+        if (res.success) {
+          resetForm();
+          navigate("/login");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
-  if (logged) {
-    return <Navigate to={"/"} replace />;
-  }
+  useEffect(() => {
+    if (state !== "/forgot-password") {
+      navigate("/");
+    }
+  }, [navigate, state]);
 
   return (
     <section className={styles.block}>
@@ -34,46 +46,33 @@ export const Register = () => {
             "text text_type_main-medium",
           ])}
         >
-          Регистрация
+          Восстановление пароля
         </h1>
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleSumbit}
           className={classNames(styles.form, {}, ["mt-6"])}
         >
-          <Input
-            type="text"
-            placeholder={"Имя"}
-            name={"name"}
-            size={"default"}
-            error={Boolean(errors.name)}
-            errorText={errors.name}
-            onChange={handleChange}
-            value={values.name || ""}
-            required
-          />
-          <Input
-            extraClass="mt-6"
-            type="email"
-            placeholder={"E-mail"}
-            name={"email"}
-            size={"default"}
-            error={Boolean(errors.email)}
-            errorText={errors.email}
-            onChange={handleChange}
-            value={values.email || ""}
-            required
-          />
           <PasswordInput
-            extraClass="mt-6"
             icon={"ShowIcon"}
+            // @ts-ignore
             type="password"
-            placeholder={"Пароль"}
+            placeholder={"Введите новый пароль"}
             name={"password"}
             size={"default"}
             error={Boolean(errors.password)}
             errorText={errors.password}
             onChange={handleChange}
             value={values.password || ""}
+            required
+          />
+          <Input
+            extraClass="mt-6"
+            type="text"
+            placeholder={"Введите код из письма"}
+            name={"code"}
+            size={"default"}
+            onChange={handleChange}
+            value={values.code || ""}
             required
           />
           <Button
@@ -83,12 +82,12 @@ export const Register = () => {
             size="medium"
             disabled={!isValid}
           >
-            Зарегистрироваться
+            Сохранить
           </Button>
         </form>
         <div className={classNames(styles.wrapper, {}, ["mt-20"])}>
           <p className="text text_type_main-default text_color_inactive">
-            Уже зарегистрированы?
+            Вспомнили пароль?
           </p>
           <Link className={styles.link} to="/login">
             Войти

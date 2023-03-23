@@ -9,6 +9,21 @@ import { BUN, FILLING, SAUCE } from "../../utils/constants";
 import { Card } from "../Card/Card";
 import styles from "./styles.module.css";
 
+type TData = {
+  _id: string;
+  name: string;
+  type: string;
+  proteins: number;
+  fat: number;
+  carbohydrates: number;
+  calories: number;
+  price: number;
+  image: string;
+  image_mobile: string;
+  image_large: string;
+  __v: number;
+};
+
 export const BurgerIngredients: FC = React.memo(() => {
   const [current, setCurrent] = useState(BUN);
   // const bunRef = createRef(null);
@@ -16,9 +31,8 @@ export const BurgerIngredients: FC = React.memo(() => {
   // const fillingRef = createRef(null);
   const containerRef = createRef<HTMLDivElement>();
 
-  const { data, feedRequest } = useSelector(
-    (state: any) => state.ingredientsReducer
-  );
+  const { data, feedRequest }: { data: TData[]; feedRequest: boolean } =
+    useSelector((state: any) => state.ingredientsReducer);
 
   const dispatch = useDispatch();
 
@@ -115,7 +129,7 @@ export const BurgerIngredients: FC = React.memo(() => {
           <ul className={styles.grid}>
             {data &&
               data
-                .filter((item: { type: string }) => item.type === BUN)
+                .filter((item) => item.type === BUN)
                 .map((item) => {
                   return (
                     <Card

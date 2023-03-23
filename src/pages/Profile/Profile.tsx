@@ -3,7 +3,7 @@ import {
   Input,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useEffect, useState } from "react";
+import { FC, SyntheticEvent, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavMenu } from "../../Components/NavMenu/NavMenu";
 import { classNames } from "../../helpers/classNames";
@@ -11,13 +11,13 @@ import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import { setUser } from "../../services/actions/user";
 import styles from "./styles.module.css";
 
-export const Profile = () => {
-  const [isVisible, setIsVisible] = useState(false);
+export const Profile: FC = () => {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
 
   const { values, errors, isValid, handleChange, setValues, setErrors } =
     useFormAndValidation();
 
-  const { user, logged } = useSelector((state) => state.userReducer);
+  const { user, logged } = useSelector((state: any) => state.userReducer);
 
   const dispatch = useDispatch();
 
@@ -29,13 +29,14 @@ export const Profile = () => {
     }
   };
 
-  const handleSumbit = (evt) => {
+  const handleSumbit = (evt: SyntheticEvent) => {
     evt.preventDefault();
+    // @ts-ignore
     dispatch(setUser(values));
     setIsVisible((prev) => !prev);
   };
 
-  const handleResetChange = (evt) => {
+  const handleResetChange = (evt: SyntheticEvent) => {
     evt.preventDefault();
     setValues({
       name: user.name,
@@ -96,6 +97,8 @@ export const Profile = () => {
             extraClass="mt-6"
             name={"password"}
             icon="EditIcon"
+            // @ts-ignore
+            type={"password"}
             error={Boolean(errors.password)}
             errorText={errors.password}
             onChange={handleChange}
