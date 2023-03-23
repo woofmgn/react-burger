@@ -3,7 +3,7 @@ import {
   Input,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { FC, SyntheticEvent, useEffect, useState } from "react";
+import { FC, FormEvent, SyntheticEvent, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavMenu } from "../../Components/NavMenu/NavMenu";
 import { classNames } from "../../helpers/classNames";
@@ -29,7 +29,7 @@ export const Profile: FC = () => {
     }
   };
 
-  const handleSumbit = (evt: SyntheticEvent) => {
+  const handleSumbit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     // @ts-ignore
     dispatch(setUser(values));

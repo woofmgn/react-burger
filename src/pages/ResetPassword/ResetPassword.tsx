@@ -3,7 +3,7 @@ import {
   Input,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { SyntheticEvent, useEffect } from "react";
+import { FormEvent, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../../api/Auth";
 import { classNames } from "../../helpers/classNames";
@@ -17,7 +17,7 @@ export const ResetPassword = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  const handleSumbit = (evt: SyntheticEvent) => {
+  const handleSumbit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     auth
       .changePwd(values as { password: string; code: string })

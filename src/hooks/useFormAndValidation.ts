@@ -14,7 +14,7 @@ type TErrors<T> = {
 export function useFormAndValidation() {
   const [values, setValues] = useState<TValues>({});
   const [errors, setErrors] = useState<TErrors<string>>({});
-  const [isValid, setIsValid] = useState(false);
+  const [isValid, setIsValid] = useState<boolean>(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

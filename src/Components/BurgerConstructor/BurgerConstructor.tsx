@@ -56,7 +56,7 @@ export const BurgerConstructor: FC = React.memo(() => {
 
   const handleToggleOpenModal = useCallback(() => {
     if (logged) {
-      let newOrder: string[] = [];
+      const newOrder: string[] = [];
       ingredients.forEach((item: TIngredietsData) => newOrder.push(item._id));
       // @ts-ignore
       dispatch(setOrder(newOrder));
