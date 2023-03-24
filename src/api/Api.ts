@@ -1,31 +1,25 @@
-import { API_URL } from "../utils/constants";
+import { BASE_URL } from "../utils/constants";
+import { BaseApi } from './BaseApi';
 
 interface IApi {
   readonly settings: string;
 }
 
-class Api implements IApi {
+class Api extends BaseApi implements IApi {
   public readonly settings!: string;
   private _url: string;
 
-  constructor(settings: string) {
-    this._url = settings;
+  constructor(baseUrl: string) {
+    super();
+    this._url = baseUrl;
   }
 
-  async _getResponseData(res: Response) {
-    if (!res.ok) {
-      const err = await res.json();
-      return Promise.reject(err);
-    }
-    return res.json();
-  }
-
-  async getData() {
+  public async getData() {
     const res = await fetch(`${this._url}/ingredients`);
-    return this._getResponseData(res);
+    return this.getResponseData(res);
   }
 
-  async newOrder(data: string[]) {
+  public async newOrder(data: string[]) {
     const res = await fetch(`${this._url}/orders`, {
       method: "POST",
       headers: {
@@ -33,8 +27,8 @@ class Api implements IApi {
       },
       body: JSON.stringify({ ingredients: data }),
     });
-    return this._getResponseData(res);
+    return this.getResponseData(res);
   }
 }
 
-export const api = new Api(API_URL);
+export const api = new Api(BASE_URL);

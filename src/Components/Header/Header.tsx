@@ -46,7 +46,9 @@ export const Header = () => {
             </p>
           </Link>
         </nav>
-        <Logo />
+        <Link to="/">
+          <Logo />
+        </Link>
       </div>
       <Link
         state={{ redirectTo: location }}

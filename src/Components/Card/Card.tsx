@@ -7,6 +7,7 @@ import { useDrag } from "react-dnd";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
+import { TCard } from "../../utils/@types";
 import styles from "./styles.module.css";
 
 type TCardData = {
@@ -19,17 +20,7 @@ type TCardData = {
 };
 
 interface TCardProps {
-  props: {
-    _id: string;
-    name: string;
-    price: number;
-    image: string;
-    image_large: string;
-    calories: number;
-    proteins: number;
-    fat: number;
-    carbohydrates: number;
-  };
+  props: TCard;
   onOpen: (data: TCardData) => void;
 }
 

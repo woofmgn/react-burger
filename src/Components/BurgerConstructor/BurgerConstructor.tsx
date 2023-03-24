@@ -14,6 +14,7 @@ import {
   removeAllIngredients,
 } from "../../services/actions/constructor";
 import { removeOrder, setOrder } from "../../services/actions/order";
+import { TCard } from "../../utils/@types";
 import { BUN } from "../../utils/constants";
 import { Ingredient } from "../Ingredient/Ingredient";
 import { Modal } from "../Modal/Modal";
@@ -21,19 +22,10 @@ import { OrderDetails } from "../OrderDetails/OrderDetails";
 import styles from "./styles.module.css";
 
 type TIngredietsData = {
-  name: string;
-  price: number;
-  image: string;
-  imageLarge: string;
-  calories: number;
-  proteins: number;
-  fat: number;
-  carbohydrates: number;
   keyId: string;
-  _id: string;
   types: string;
   onOpen: () => void;
-};
+} & TCard;
 
 export const BurgerConstructor: FC = React.memo(() => {
   const [isVisible, setIsVisible] = React.useState(false);
