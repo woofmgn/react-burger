@@ -1,4 +1,8 @@
-export function setCookie(name, value, props) {
+export function setCookie(
+  name: string, 
+  value?: string | number | boolean, 
+  props?: { [x: string]: any; expires?: any; } | undefined
+  ) {
   props = props || {};
   let exp = props.expires;
   if (typeof exp == "number" && exp) {
@@ -9,7 +13,7 @@ export function setCookie(name, value, props) {
   if (exp && exp.toUTCString) {
     props.expires = exp.toUTCString();
   }
-  value = encodeURIComponent(value);
+  value = encodeURIComponent(value!);
   let updatedCookie = name + "=" + value;
   for (const propName in props) {
     updatedCookie += "; " + propName;
@@ -21,7 +25,7 @@ export function setCookie(name, value, props) {
   document.cookie = updatedCookie;
 }
 
-export function getCookie(name) {
+export function getCookie(name: string) {
   const matches = document.cookie.match(
     // eslint-disable-next-line no-useless-escape
     new RegExp(

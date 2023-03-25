@@ -32,7 +32,9 @@ export const NavMenu = () => {
     });
   };
 
-  const activeLink = ({ isActive }) => ({ color: isActive ? "#F5F6F7" : "" });
+  const activeLink = ({ isActive }: { isActive: boolean }) => ({
+    color: isActive ? "#F5F6F7" : "",
+  });
 
   return (
     <div className={styles.container}>

@@ -1,4 +1,4 @@
-const API_URL = "https://norma.nomoreparties.space/api";
+const BASE_URL = "https://norma.nomoreparties.space/api";
 
 const BUN = "bun";
 const SAUCE = "sauce";
@@ -35,7 +35,7 @@ const SET_USER_SUCCESS = "SET_USER_SUCCESS";
 const SET_USER_FAILED = "SET_USER_FAILED";
 
 export {
-  API_URL,
+  BASE_URL,
   BUN,
   SAUCE,
   FILLING,

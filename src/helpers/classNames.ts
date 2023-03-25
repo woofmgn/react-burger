@@ -1,4 +1,4 @@
-export function classNames(cls, mods, additional) {
+export function classNames(cls: string, mods: { [s: string]: unknown; } | ArrayLike<unknown>, additional: any[]) {
   return [
     cls,
     ...additional.filter(Boolean),

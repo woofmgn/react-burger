@@ -2,15 +2,29 @@ import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import React from "react";
+import React, { FC } from "react";
 import { useDrag } from "react-dnd";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
-import { ingredientItem } from "../../utils/prop-types";
+import { TCard } from "../../utils/@types";
 import styles from "./styles.module.css";
 
-export const Card = React.memo(({ props, onOpen }) => {
+type TCardData = {
+  name: string;
+  imageLarge: string;
+  calories: number;
+  proteins: number;
+  fat: number;
+  carbohydrates: number;
+};
+
+interface TCardProps {
+  props: TCard;
+  onOpen: (data: TCardData) => void;
+}
+
+export const Card: FC<TCardProps> = React.memo(({ props, onOpen }) => {
   const {
     _id,
     name,
@@ -25,7 +39,7 @@ export const Card = React.memo(({ props, onOpen }) => {
 
   const location = useLocation();
 
-  const { ingredients } = useSelector((state) => state.constructorReducer);
+  const { ingredients } = useSelector((state: any) => state.constructorReducer);
 
   const [, dragRef] = useDrag({
     type: "ingredient",
@@ -33,7 +47,9 @@ export const Card = React.memo(({ props, onOpen }) => {
   });
 
   const checkCount = React.useMemo(() => {
-    const inCart = ingredients.filter((item) => item._id === _id);
+    const inCart = ingredients.filter(
+      (item: { _id: string }) => item._id === _id
+    );
     return inCart.length;
   }, [_id, ingredients]);
 
@@ -81,5 +97,3 @@ export const Card = React.memo(({ props, onOpen }) => {
     </Link>
   );
 });
-
-Card.propTypes = ingredientItem.PropTypes;

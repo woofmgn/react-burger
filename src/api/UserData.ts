@@ -1,19 +1,28 @@
+import { BASE_URL } from '../utils/constants';
 import { getCookie } from "../utils/cookies";
+import { BaseApi } from './BaseApi';
 
-class UserData {
-  constructor(settings) {
-    this._url = settings;
+interface IUserData {
+  readonly settings: string;
+}
+
+type TNewUserData = {
+  name: string;
+  email: string;
+  password: string;
+};
+
+class UserData extends BaseApi implements IUserData {
+  public readonly settings!: string;
+  private _url: string;
+  private _token: string | undefined;
+
+  constructor(baseUrl: string) {
+    super()
+    this._url = `${baseUrl}/auth/user`;
   }
 
-  async _getResponseData(res) {
-    if (!res.ok) {
-      const err = await res.json();
-      return Promise.reject(err);
-    }
-    return res.json();
-  }
-
-  async getUserData() {
+  public async getUserData(): Promise<any> {
     this._token = getCookie("token");
     const res = await fetch(this._url, {
       method: "GET",
@@ -27,10 +36,10 @@ class UserData {
       redirect: "follow",
       referrerPolicy: "no-referrer",
     });
-    return this._getResponseData(res);
+    return this.getResponseData(res);
   }
 
-  async setUserData(newData) {
+  public async setUserData(newData: TNewUserData): Promise<any> {
     this._token = getCookie("token");
     const res = await fetch(this._url, {
       method: "PATCH",
@@ -45,10 +54,8 @@ class UserData {
       redirect: "follow",
       referrerPolicy: "no-referrer",
     });
-    return this._getResponseData(res);
+    return this.getResponseData(res);
   }
 }
 
-const options = "https://norma.nomoreparties.space/api/auth/user";
-
-export const userApi = new UserData(options);
+export const userApi = new UserData(BASE_URL);

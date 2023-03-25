@@ -1,10 +1,10 @@
-import React from "react";
+import { FC } from "react";
 import { useSelector } from "react-redux";
 import { classNames } from "../../helpers/classNames";
 import styles from "./styles.module.css";
 
-export const OrderDetails = () => {
-  const { order } = useSelector((state) => state.orderReducer);
+export const OrderDetails: FC = () => {
+  const { order } = useSelector((state: any) => state.orderReducer);
 
   return (
     <div className={styles.wrapper} style={{ textAlign: "center" }}>

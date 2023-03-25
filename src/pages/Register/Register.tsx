@@ -3,6 +3,7 @@ import {
   Input,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { FC, FormEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
@@ -10,15 +11,16 @@ import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import { addUser } from "../../services/actions/user";
 import styles from "./styles.module.css";
 
-export const Register = () => {
-  const { logged } = useSelector((state) => state.userReducer);
+export const Register: FC = () => {
+  const { logged } = useSelector((state: any) => state.userReducer);
 
   const { values, handleChange, errors, isValid } = useFormAndValidation();
 
   const dispatch = useDispatch();
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+    // @ts-ignore
     dispatch(addUser(values));
   };
 
@@ -66,6 +68,7 @@ export const Register = () => {
           <PasswordInput
             extraClass="mt-6"
             icon={"ShowIcon"}
+            // @ts-ignore
             type="password"
             placeholder={"Пароль"}
             name={"password"}
