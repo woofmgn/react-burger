@@ -4,26 +4,26 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FormEvent, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { useAppSelector } from "../../hooks/useAppSelector";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import { loginUser } from "../../services/actions/user";
 import styles from "./styles.module.css";
 
 export const Login = () => {
-  const { logged, feedRequest } = useSelector(
-    (state: any) => state.userReducer
-  );
+  const { logged, feedRequest } = useAppSelector((state) => state.userReducer);
+
   const { values, handleChange, errors, isValid } = useFormAndValidation();
   const { state: locationState } = useLocation();
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
+  const dispatch = useAppDispatch();
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    // @ts-ignore
     dispatch(loginUser(values));
   };
 

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { ProtectedRoute } from "../../HOC/ProtectedRoute/ProtectedRoute";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { ForgotPassword } from "../../pages/ForgotPassword/ForgotPassword";
 import { HistoryOrders } from "../../pages/HistoryOrders/HistoryOrders";
 import { IngredientPage } from "../../pages/IngredientPage/IngredientPage";
@@ -16,7 +16,6 @@ import { checkAuthUser } from "../../services/actions/user";
 import { Footer } from "../Footer/Footer";
 import { Header } from "../Header/Header";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
-// import { getIndredients } from "../../services/actions/getIngredients";
 import { Modal } from "../Modal/Modal";
 import styles from "./styles.module.css";
 
@@ -26,7 +25,7 @@ function App() {
 
   let background = location.state && location.state.background;
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleModalClose = () => {
     dispatch(resetDetails());
@@ -34,9 +33,7 @@ function App() {
   };
 
   useEffect(() => {
-    // @ts-ignore
     dispatch(checkAuthUser());
-    // @ts-ignore
     dispatch(getIndredients());
   }, [dispatch]);
 

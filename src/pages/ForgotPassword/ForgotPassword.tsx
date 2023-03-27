@@ -3,15 +3,15 @@ import {
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FC, FormEvent } from "react";
-import { useSelector } from "react-redux";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { auth } from "../../api/Auth";
 import { classNames } from "../../helpers/classNames";
+import { useAppSelector } from "../../hooks/useAppSelector";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import styles from "./styles.module.css";
 
 export const ForgotPassword: FC = () => {
-  const { logged } = useSelector((state: any) => state.userReducer);
+  const { logged } = useAppSelector((state) => state.userReducer);
   const { values, handleChange, resetForm, errors, isValid } =
     useFormAndValidation();
 

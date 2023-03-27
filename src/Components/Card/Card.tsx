@@ -4,9 +4,9 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React, { FC } from "react";
 import { useDrag } from "react-dnd";
-import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
+import { useAppSelector } from "../../hooks/useAppSelector";
 import { TCard } from "../../utils/@types";
 import styles from "./styles.module.css";
 
@@ -39,7 +39,7 @@ export const Card: FC<TCardProps> = React.memo(({ props, onOpen }) => {
 
   const location = useLocation();
 
-  const { ingredients } = useSelector((state: any) => state.constructorReducer);
+  const { ingredients } = useAppSelector((state) => state.constructorReducer);
 
   const [, dragRef] = useDrag({
     type: "ingredient",

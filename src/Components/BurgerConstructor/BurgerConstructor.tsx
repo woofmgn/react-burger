@@ -5,9 +5,10 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React, { FC, useCallback } from "react";
 import { useDrop } from "react-dnd";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { useAppSelector } from "../../hooks/useAppSelector";
 
 import {
   addIngredients,
@@ -30,12 +31,13 @@ type TIngredietsData = {
 export const BurgerConstructor: FC = React.memo(() => {
   const [isVisible, setIsVisible] = React.useState(false);
 
-  const ingredients = useSelector(
-    (state: any) => state.constructorReducer.ingredients
+  const ingredients = useAppSelector(
+    (state) => state.constructorReducer.ingredients
   );
-  const { success } = useSelector((state: any) => state.orderReducer);
-  const { logged } = useSelector((state: any) => state.userReducer);
-  const dispatch = useDispatch();
+  const { success } = useAppSelector((state) => state.orderReducer);
+  const { logged } = useAppSelector((state) => state.userReducer);
+
+  const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
 
@@ -50,7 +52,6 @@ export const BurgerConstructor: FC = React.memo(() => {
     if (logged) {
       const newOrder: string[] = [];
       ingredients.forEach((item: TIngredietsData) => newOrder.push(item._id));
-      // @ts-ignore
       dispatch(setOrder(newOrder));
       setIsVisible((prev) => !prev);
     } else {

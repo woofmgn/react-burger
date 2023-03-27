@@ -1,14 +1,16 @@
 import { FC, useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { useAppSelector } from "../../hooks/useAppSelector";
 import { setDetails } from "../../services/actions/details";
 import styles from "./styles.module.css";
 
 export const IngredientDetails: FC = () => {
-  const { details } = useSelector((state: any) => state.detailsReducer);
-  const data = useSelector((state: any) => state.ingredientsReducer.data);
-  const dispatch = useDispatch();
+  const { details } = useAppSelector((state: any) => state.detailsReducer);
+  const data = useAppSelector((state) => state.ingredientsReducer.data);
+
+  const dispatch = useAppDispatch();
 
   const { id } = useParams();
 

@@ -4,23 +4,23 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FC, FormEvent } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { useAppSelector } from "../../hooks/useAppSelector";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import { addUser } from "../../services/actions/user";
 import styles from "./styles.module.css";
 
 export const Register: FC = () => {
-  const { logged } = useSelector((state: any) => state.userReducer);
+  const { logged } = useAppSelector((state) => state.userReducer);
 
   const { values, handleChange, errors, isValid } = useFormAndValidation();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    // @ts-ignore
     dispatch(addUser(values));
   };
 

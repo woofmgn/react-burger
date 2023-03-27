@@ -4,9 +4,10 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FC, FormEvent, SyntheticEvent, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { NavMenu } from "../../Components/NavMenu/NavMenu";
 import { classNames } from "../../helpers/classNames";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { useAppSelector } from "../../hooks/useAppSelector";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import { setUser } from "../../services/actions/user";
 import styles from "./styles.module.css";
@@ -17,9 +18,9 @@ export const Profile: FC = () => {
   const { values, errors, isValid, handleChange, setValues, setErrors } =
     useFormAndValidation();
 
-  const { user, logged } = useSelector((state: any) => state.userReducer);
+  const { user, logged } = useAppSelector((state) => state.userReducer);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleCheckNewValue = () => {
     if (values.name !== user.name || values.email !== user.email) {
@@ -31,7 +32,6 @@ export const Profile: FC = () => {
 
   const handleSumbit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    // @ts-ignore
     dispatch(setUser(values));
     setIsVisible((prev) => !prev);
   };

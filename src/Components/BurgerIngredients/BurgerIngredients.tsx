@@ -1,8 +1,9 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import React, { createRef, FC, useCallback, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import { useDispatch, useSelector } from "react-redux";
 import { classNames } from "../../helpers/classNames";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { useAppSelector } from "../../hooks/useAppSelector";
 import { setDetails } from "../../services/actions/details";
 import { TCard } from "../../utils/@types";
 import { BUN, FILLING, SAUCE } from "../../utils/constants";
@@ -17,9 +18,9 @@ export const BurgerIngredients: FC = React.memo(() => {
   const containerRef = createRef<HTMLDivElement>();
 
   const { data, feedRequest }: { data: TCard[]; feedRequest: boolean } =
-    useSelector((state: any) => state.ingredientsReducer);
+    useAppSelector((state) => state.ingredientsReducer);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [bunRef, inViewBun] = useInView({
     root: containerRef.current,
