@@ -4,14 +4,21 @@ import {
   REMOVE_INGREDIENTS,
   REPLASE_INGREDIENT,
 } from "../../utils/constants";
+import { TConstructorActions, TIngredients } from '../actions/constructor';
 
-const initialState = {
+type TCounstructorState = {
+  feedRequest: boolean;
+  feedFailed: boolean;
+  ingredients: TIngredients[] | [];
+}
+
+const initialState: TCounstructorState = {
   feedRequest: false,
   feedFailed: false,
   ingredients: [],
 };
 
-export function constructorReducer(state = initialState, action) {
+export function constructorReducer(state = initialState, action: TConstructorActions): TCounstructorState {
   switch (action.type) {
     case ADD_INGREDIENTS: {
       if (action.types === "bun") {
@@ -48,7 +55,10 @@ export function constructorReducer(state = initialState, action) {
       };
     }
     case REMOVE_ALL_INGREDIENTS: {
-      return action;
+      return {
+        ...state,
+        ingredients: []
+      };
     }
     case REPLASE_INGREDIENT: {
       const newState = [...state.ingredients];

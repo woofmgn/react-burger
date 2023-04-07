@@ -7,7 +7,7 @@ import { setDetails } from "../../services/actions/details";
 import styles from "./styles.module.css";
 
 export const IngredientDetails: FC = () => {
-  const { details } = useAppSelector((state: any) => state.detailsReducer);
+  const { details } = useAppSelector((state) => state.detailsReducer);
   const data = useAppSelector((state) => state.ingredientsReducer.data);
 
   const dispatch = useAppDispatch();
@@ -17,12 +17,14 @@ export const IngredientDetails: FC = () => {
   const handleSearchIngredient = useCallback(() => {
     if (data) {
       const obj = data.find((item: { _id: string }) => item._id === id);
-      dispatch(
-        setDetails({
-          ...obj,
-          imageLarge: obj.image_large,
-        })
-      );
+      if (obj) {
+        dispatch(
+          setDetails({
+            ...obj,
+            imageLarge: obj.image_large!,
+          })
+        );
+      }
     }
   }, [data, dispatch, id]);
 

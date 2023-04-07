@@ -1,10 +1,16 @@
 import {
+  Dispatch,
   applyMiddleware,
   combineReducers,
   compose,
   legacy_createStore as createStore
 } from "redux";
 import thunk from "redux-thunk";
+import { TConstructorActions } from './actions/constructor';
+import { TDetailsAction } from './actions/details';
+import { IGetIngredientsActions } from './actions/getIngredients';
+import { ISetOrderActions } from './actions/order';
+import { IUserActions } from './actions/user';
 import { constructorReducer } from "./reducers/constructorReducer";
 import { detailsReducer } from "./reducers/detailsReduser";
 import { ingredientsReducer } from "./reducers/ingredientsReducer";
@@ -33,7 +39,13 @@ const store = createStore(
 
 export default store;
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
+export type TAppActions = 
+  | TConstructorActions
+  | TDetailsAction
+  | IGetIngredientsActions
+  | ISetOrderActions
+  | IUserActions;
+ 
+export type AppThunk = Dispatch<TAppActions>;
 export type RootState = ReturnType<typeof store.getState>
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch

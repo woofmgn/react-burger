@@ -4,8 +4,20 @@ import {
   SET_ORDER_REMOVE,
   SET_ORDER_SUCCES,
 } from "../../utils/constants";
+import { ISetOrderActions } from '../actions/order';
+// import { ISetOrderActions } from '../actions/order';
 
-const initialState = {
+type TOrderState = {
+  feedReq: boolean;
+  feedFailed: boolean;
+  name: string;
+  order: {
+    number: number
+  } | null;
+  success: boolean;
+}
+
+const initialState:TOrderState = {
   feedReq: false,
   feedFailed: false,
   name: "",
@@ -13,7 +25,7 @@ const initialState = {
   success: false,
 };
 
-export function orderReducer(state = initialState, action) {
+export function orderReducer(state = initialState, action: ISetOrderActions): TOrderState {
   switch (action.type) {
     case SET_ORDER: {
       return {
@@ -25,7 +37,8 @@ export function orderReducer(state = initialState, action) {
     case SET_ORDER_SUCCES: {
       return {
         ...state,
-        ...action,
+        // @ts-ignore
+        ...action.order,
         feedReq: false,
       };
     }
@@ -39,6 +52,11 @@ export function orderReducer(state = initialState, action) {
     case SET_ORDER_REMOVE: {
       return {
         ...state,
+        feedReq: false,
+        feedFailed: false,
+        name: "",
+        order: null,
+        success: false,
       };
     }
     default: {

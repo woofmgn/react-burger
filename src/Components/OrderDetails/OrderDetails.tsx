@@ -13,7 +13,7 @@ export const OrderDetails: FC = () => {
           "text text_type_digits-large",
         ])}
       >
-        {order.number}
+        {order!.number}
       </h2>
       <p className="text text_type_main-medium mt-8">индентификатор заказа</p>
       <div className={styles.icon}></div>

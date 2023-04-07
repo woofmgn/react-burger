@@ -5,6 +5,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FC, FormEvent } from "react";
 import { Link, Navigate } from "react-router-dom";
+import { TNewUser } from "../../api/Auth";
 import { classNames } from "../../helpers/classNames";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useAppSelector } from "../../hooks/useAppSelector";
@@ -21,7 +22,7 @@ export const Register: FC = () => {
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    dispatch(addUser(values));
+    dispatch(addUser(values as TNewUser));
   };
 
   if (logged) {

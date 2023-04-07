@@ -6,11 +6,16 @@ interface IUserData {
   readonly settings: string;
 }
 
-type TNewUserData = {
+export type TNewUserData = {
   name: string;
   email: string;
   password: string;
 };
+
+type TCurrentUs = {
+  name: string;
+  email: string;
+}
 
 class UserData extends BaseApi implements IUserData {
   public readonly settings!: string;

@@ -12,6 +12,14 @@ type TSettings = {
   headers: THeaders;
 };
 
+export type TNewUser = {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export type TLoginUser = Omit<TNewUser, 'name'>;
+
 interface IAuth {
   readonly settings: TSettings;
 }
@@ -30,12 +38,7 @@ class Auth extends BaseApi implements IAuth {
     this._headers = settings.headers;
   }
 
-  public async registerUser(
-    newUserData: { 
-      email: string; 
-      password: string; 
-      name: string; 
-    }): Promise<any> {
+  public async registerUser(newUserData: TNewUser): Promise<any> {
     const res = await fetch(`${this._authUrl}/register`, {
       method: "POST",
       headers: this._headers,
@@ -48,11 +51,7 @@ class Auth extends BaseApi implements IAuth {
     return this.getResponseData(res);
   }
 
-  public async loginUser(
-    userData: { 
-      email: string; 
-      password: string; 
-    }): Promise<any> {
+  public async loginUser(userData: TLoginUser): Promise<any> {
     const res = await fetch(`${this._authUrl}/login`, {
       method: "POST",
       headers: this._headers,

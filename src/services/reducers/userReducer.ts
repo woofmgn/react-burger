@@ -11,15 +11,23 @@ import {
   SET_USER_FAILED,
   SET_USER_SUCCESS
 } from "../../utils/constants";
+import { IUserActions, TCurrentUser } from '../actions/user';
 
-const initialState = {
+type TUserState = {
+  feedRequest: boolean;
+  feedFailed: boolean;
+  logged: boolean;
+  user: TCurrentUser | null;
+}
+
+const initialState: TUserState = {
   feedRequest: false,
   feedFailed: false,
   logged: false,
   user: null,
 };
 
-export const userReducer = (state = initialState, action) => {
+export const userReducer = (state = initialState, action: IUserActions): TUserState => {
   switch (action.type) {
     case ADD_USER: {
       return {
@@ -50,6 +58,8 @@ export const userReducer = (state = initialState, action) => {
     case REMOVE_USER: {
       return {
         ...state,
+        feedRequest: false,
+        feedFailed: false,
         logged: false,
         user: null,
       };

@@ -11,22 +11,21 @@ import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useAppSelector } from "../../hooks/useAppSelector";
 
 import {
+  TIngredients,
   addIngredients,
   removeAllIngredients,
 } from "../../services/actions/constructor";
 import { removeOrder, setOrder } from "../../services/actions/order";
-import { TCard } from "../../utils/@types";
+// import { TCard } from "../../utils/@types";
 import { BUN } from "../../utils/constants";
 import { Ingredient } from "../Ingredient/Ingredient";
 import { Modal } from "../Modal/Modal";
 import { OrderDetails } from "../OrderDetails/OrderDetails";
 import styles from "./styles.module.css";
 
-type TIngredietsData = {
-  keyId: string;
-  types: string;
-  onOpen: () => void;
-} & TCard;
+// type TIngredientsData = {
+//   onOpen: () => void;
+// } & TIngredients;
 
 export const BurgerConstructor: FC = React.memo(() => {
   const [isVisible, setIsVisible] = React.useState(false);
@@ -43,7 +42,7 @@ export const BurgerConstructor: FC = React.memo(() => {
 
   const [, dropTargetRef] = useDrop({
     accept: "ingredient",
-    drop(item) {
+    drop(item: any) {
       dispatch(addIngredients(item));
     },
   });
@@ -51,7 +50,8 @@ export const BurgerConstructor: FC = React.memo(() => {
   const handleToggleOpenModal = useCallback(() => {
     if (logged) {
       const newOrder: string[] = [];
-      ingredients.forEach((item: TIngredietsData) => newOrder.push(item._id));
+      ingredients.forEach((item: TIngredients) => newOrder.push(item._id));
+      // @ts-ignore
       dispatch(setOrder(newOrder));
       setIsVisible((prev) => !prev);
     } else {
@@ -66,11 +66,12 @@ export const BurgerConstructor: FC = React.memo(() => {
   }, [dispatch]);
 
   const filteredBun = React.useMemo(() => {
-    return ingredients.filter((item: TIngredietsData) => item.types === BUN);
+    return ingredients.filter((item: TIngredients) => item.types === BUN);
   }, [ingredients]);
 
   const calculateTotalOrder = React.useMemo(() => {
-    return ingredients.reduce((acc: number, item: { price: number }) => {
+    // @ts-ignore
+    return ingredients.reduce((acc: number, item: TIngredients) => {
       return acc + item.price;
     }, 0);
   }, [ingredients]);
@@ -94,7 +95,7 @@ export const BurgerConstructor: FC = React.memo(() => {
         )}
         <ul className={styles.list}>
           {ingredients.length ? (
-            ingredients.map((item: TIngredietsData) => {
+            ingredients.map((item: TIngredients) => {
               if (item.types !== BUN) {
                 return <Ingredient key={item.keyId} element={item} />;
               }

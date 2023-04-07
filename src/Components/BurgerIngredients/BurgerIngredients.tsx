@@ -4,8 +4,7 @@ import { useInView } from "react-intersection-observer";
 import { classNames } from "../../helpers/classNames";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useAppSelector } from "../../hooks/useAppSelector";
-import { setDetails } from "../../services/actions/details";
-import { TCard } from "../../utils/@types";
+import { setDetails, TDetails } from "../../services/actions/details";
 import { BUN, FILLING, SAUCE } from "../../utils/constants";
 import { Card } from "../Card/Card";
 import styles from "./styles.module.css";
@@ -17,8 +16,9 @@ export const BurgerIngredients: FC = React.memo(() => {
   // const fillingRef = createRef(null);
   const containerRef = createRef<HTMLDivElement>();
 
-  const { data, feedRequest }: { data: TCard[]; feedRequest: boolean } =
-    useAppSelector((state) => state.ingredientsReducer);
+  const { data, feedRequest } = useAppSelector(
+    (state) => state.ingredientsReducer
+  );
 
   const dispatch = useAppDispatch();
 
@@ -38,13 +38,13 @@ export const BurgerIngredients: FC = React.memo(() => {
   });
 
   const handleOpenModal = useCallback(
-    (card: any) => {
-      dispatch(setDetails(card));
+    (card: TDetails) => {
+      return dispatch(setDetails(card));
     },
     [dispatch]
   );
 
-  // код закомментирован для себя, планирую переделать реализацию intersection observer
+  // переделать реализацию intersection observer
 
   // const handleScrollToRef = (isRef, str) => {
   //   isRef.current.scrollIntoView({ behavior: "smooth" }, true);

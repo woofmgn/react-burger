@@ -5,6 +5,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FC, FormEvent, SyntheticEvent, useEffect, useState } from "react";
 import { NavMenu } from "../../Components/NavMenu/NavMenu";
+import { TNewUserData } from "../../api/UserData";
 import { classNames } from "../../helpers/classNames";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useAppSelector } from "../../hooks/useAppSelector";
@@ -23,7 +24,7 @@ export const Profile: FC = () => {
   const dispatch = useAppDispatch();
 
   const handleCheckNewValue = () => {
-    if (values.name !== user.name || values.email !== user.email) {
+    if (values.name !== user!.name || values.email !== user!.email) {
       setIsVisible(true);
     } else {
       setIsVisible(false);
@@ -32,15 +33,15 @@ export const Profile: FC = () => {
 
   const handleSumbit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    dispatch(setUser(values));
+    dispatch(setUser(values as TNewUserData));
     setIsVisible((prev) => !prev);
   };
 
   const handleResetChange = (evt: SyntheticEvent) => {
     evt.preventDefault();
     setValues({
-      name: user.name,
-      email: user.email,
+      name: user!.name,
+      email: user!.email,
       password: "******",
     });
     setErrors({});
@@ -55,7 +56,7 @@ export const Profile: FC = () => {
 
   useEffect(() => {
     if (logged) {
-      setValues({ name: user.name, email: user.email, password: "******" });
+      setValues({ name: user!.name, email: user!.email, password: "******" });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [logged]);

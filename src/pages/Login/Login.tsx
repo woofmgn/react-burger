@@ -5,6 +5,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FormEvent, useEffect } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { TLoginUser } from "../../api/Auth";
 import { classNames } from "../../helpers/classNames";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useAppSelector } from "../../hooks/useAppSelector";
@@ -24,7 +25,7 @@ export const Login = () => {
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    dispatch(loginUser(values));
+    dispatch(loginUser(values as TLoginUser));
   };
 
   useEffect(() => {
