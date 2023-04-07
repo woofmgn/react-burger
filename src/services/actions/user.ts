@@ -253,7 +253,9 @@ export type IUserActions =
   export const checkAuthUser = () => async (dispatch: AppDispatch) => {
     const jwtToken = getCookie("token");
     if (jwtToken) {
-      getUser();
+      // getUser();
+      // @ts-ignore
+      dispatch(getUser());
       dispatch(authUserAction());
     } else {
       dispatch(authUserAction());

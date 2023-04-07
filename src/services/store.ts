@@ -48,4 +48,4 @@ export type TAppActions =
  
 export type AppThunk = Dispatch<TAppActions>;
 export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
+export type AppDispatch = typeof store.dispatch;

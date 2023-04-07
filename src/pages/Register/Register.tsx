@@ -22,7 +22,7 @@ export const Register: FC = () => {
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    dispatch(addUser(values as TNewUser));
+    dispatch<any>(addUser(values as TNewUser));
   };
 
   if (logged) {

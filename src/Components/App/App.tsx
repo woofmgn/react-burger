@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { ProtectedRoute } from "../../HOC/ProtectedRoute/ProtectedRoute";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { Feed } from "../../pages/Feed/Feed";
 import { ForgotPassword } from "../../pages/ForgotPassword/ForgotPassword";
 import { HistoryOrders } from "../../pages/HistoryOrders/HistoryOrders";
 import { IngredientPage } from "../../pages/IngredientPage/IngredientPage";
@@ -33,8 +34,8 @@ function App() {
   };
 
   useEffect(() => {
-    dispatch(checkAuthUser());
-    dispatch(getIndredients());
+    dispatch<any>(checkAuthUser());
+    dispatch<any>(getIndredients());
   }, [dispatch]);
 
   return (
@@ -51,6 +52,7 @@ function App() {
             path="/profile/orders"
             element={<ProtectedRoute element={<HistoryOrders />} />}
           />
+          <Route path="/feed" element={<Feed />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />

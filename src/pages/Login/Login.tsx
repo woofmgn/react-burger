@@ -25,7 +25,7 @@ export const Login = () => {
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    dispatch(loginUser(values as TLoginUser));
+    dispatch<any>(loginUser(values as TLoginUser));
   };
 
   useEffect(() => {
