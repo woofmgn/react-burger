@@ -1,10 +1,5 @@
 import { RESET, SET_INGREDIENTS } from "../../utils/constants";
 
-// type TPayload = {
-//   name: string;
-//   calories:
-// }
-
 export type TDetails = {
   name: string;
   imageLarge: string;

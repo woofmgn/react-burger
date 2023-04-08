@@ -5,7 +5,6 @@ import {
   SET_ORDER_SUCCES,
 } from "../../utils/constants";
 import { ISetOrderActions } from '../actions/order';
-// import { ISetOrderActions } from '../actions/order';
 
 type TOrderState = {
   feedReq: boolean;

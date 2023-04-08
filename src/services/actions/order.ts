@@ -60,7 +60,7 @@ export const setOrder = (payload: string[]) => (dispatch: AppDispatch) => {
   dispatch(setOrderAction());
   api
     .newOrder(payload)
-    .then((res) => {
+    .then((res: TOrderRes) => {
       if (res) {
         dispatch(setOrderSuccessAction(res));
       } else {
@@ -71,44 +71,3 @@ export const setOrder = (payload: string[]) => (dispatch: AppDispatch) => {
       dispatch(setOrderFailedAction());
     });
 };
-
-// export type ISetOrderActions = {
-//   readonly type: 
-//     | typeof SET_ORDER
-//     | typeof SET_ORDER_FAILED
-//     | typeof SET_ORDER_REMOVE
-//     | typeof SET_ORDER_SUCCES
-// }
-
-// export const removeOrder = () => ({
-//   type: SET_ORDER_REMOVE,
-// });
-
-// export const setOrder = (payload: string[]) => (dispatch: AppDispatch) => {
-//   dispatch({
-//     type: SET_ORDER,
-//   });
-//   api
-//     .newOrder(payload)
-//     .then((res) => {
-//       if (res) {
-//         dispatch({
-//           type: SET_ORDER_SUCCES,
-//           ...res,
-//         });
-//       } else {
-//         dispatch({
-//           type: SET_ORDER_FAILED,
-//         });
-//       }
-//     })
-//     .catch((err) => {
-//       dispatch({
-//         type: SET_ORDER_FAILED,
-//       });
-//     });
-// };
-
-// export const removeOrder = () => ({
-//   type: SET_ORDER_REMOVE,
-// });

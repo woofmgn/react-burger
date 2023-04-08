@@ -47,5 +47,3 @@ export type TAppActions =
 
 export type AppDispatch = ThunkDispatch<RootState, never, TAppActions>;
 export type RootState = ReturnType<typeof store.getState>
-// export type AppThunk = Dispatch<TAppActions>;
-// export type AppDispatch = typeof store.dispatch;

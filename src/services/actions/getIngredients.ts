@@ -54,28 +54,3 @@ export const getIngredientsFailedAction = (): IGetIngredientsFailedAction => ({
         dispatch(getIngredientsFailedAction());
       });
   };
-
-  // export const getIndredients = () => (dispatch: AppDispatch) => {
-  //     dispatch({
-  //       type: GET_INGREDIENTS,
-  //     });
-  //     api
-  //       .getData()
-  //       .then((res) => {
-  //         if (res && res.success) {
-  //           dispatch({
-  //             type: GET_INGREDIENTS_SUCCES,
-  //             data: res.data,
-  //           });
-  //         } else {
-  //           dispatch({
-  //             type: GET_INGREDIENTS_FAILED,
-  //           });
-  //         }
-  //       })
-  //       .catch((err) => {
-  //         dispatch({
-  //           type: GET_INGREDIENTS_FAILED,
-  //         });
-  //       });
-  //   };
