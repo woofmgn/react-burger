@@ -1,5 +1,15 @@
 @import url('./vendor/fonts/styles.css');
 
+:root {
+  --shadow-box-color_modal: rgba(0, 0, 0, 0.04);
+  --border-color_modal: rgba(76, 76, 255, 0.2);
+  --bg-color_overlay: rgba(0, 0, 0, 0.6);
+  --bg-color_element: #1c1c21;
+  --text-color_ready: #00cccc;
+  --gradient-color_1: #4c4cff;
+  --gradient-color_2: #801ab2;
+}
+
 body {
   margin: 0;
   font-family: 'JetBrains Mono', sans-serif;

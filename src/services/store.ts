@@ -1,11 +1,10 @@
 import {
-  Dispatch,
   applyMiddleware,
   combineReducers,
   compose,
   legacy_createStore as createStore
 } from "redux";
-import thunk from "redux-thunk";
+import thunk, { ThunkDispatch } from "redux-thunk";
 import { TConstructorActions } from './actions/constructor';
 import { TDetailsAction } from './actions/details';
 import { IGetIngredientsActions } from './actions/getIngredients';
@@ -45,7 +44,8 @@ export type TAppActions =
   | IGetIngredientsActions
   | ISetOrderActions
   | IUserActions;
- 
-export type AppThunk = Dispatch<TAppActions>;
+
+export type AppDispatch = ThunkDispatch<RootState, never, TAppActions>;
 export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch;
+// export type AppThunk = Dispatch<TAppActions>;
+// export type AppDispatch = typeof store.dispatch;

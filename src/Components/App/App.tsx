@@ -34,8 +34,8 @@ function App() {
   };
 
   useEffect(() => {
-    dispatch<any>(checkAuthUser());
-    dispatch<any>(getIndredients());
+    dispatch(checkAuthUser());
+    dispatch(getIndredients());
   }, [dispatch]);
 
   return (

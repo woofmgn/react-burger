@@ -33,7 +33,7 @@ export const Profile: FC = () => {
 
   const handleSumbit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    dispatch<any>(setUser(values as TNewUserData));
+    dispatch(setUser(values as TNewUserData));
     setIsVisible((prev) => !prev);
   };
 
