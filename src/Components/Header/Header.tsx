@@ -30,15 +30,13 @@ export const Header = () => {
             </p>
           </Link>
           <Link
-            to={"/profile/orders"}
+            to={"/feed"}
             className={classNames(styles.link, {}, ["pt-4 pr-5 pb-4 pl-5"])}
           >
-            <ListIcon
-              type={pathname === "/profile/orders" ? "primary" : "secondary"}
-            />
+            <ListIcon type={pathname === "/feed" ? "primary" : "secondary"} />
             <p
               className={`pl-2 text text_type_main-default ${
-                pathname === "/profile/orders" ? "" : "text_color_inactive"
+                pathname === "/feed" ? "" : "text_color_inactive"
               }`}
             >
               Лента заказов

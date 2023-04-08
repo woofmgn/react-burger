@@ -4,8 +4,16 @@ import styles from "./styles.module.css";
 
 export const OrderList: FC = () => {
   return (
-    <div className={styles.container}>
+    <ul className={styles.container}>
       <OrderCard />
-    </div>
+      <OrderCard />
+      <OrderCard />
+      <OrderCard />
+      <OrderCard />
+      <OrderCard />
+      <OrderCard />
+      <OrderCard />
+      <OrderCard />
+    </ul>
   );
 };

@@ -1,5 +1,9 @@
 .section {
   margin-top: 40px;
   width: 100%;
+}
+
+.wrapper {
+  margin-top: 20px;
   display: flex;
 }

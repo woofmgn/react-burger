@@ -1,0 +1,32 @@
+.item {
+  margin-left: -16px;
+  width: 64px;
+  height: 64px;
+  position: relative;
+  border-radius: 100px;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+  background: linear-gradient(#1c1c21, #1c1c21) content-box,
+    linear-gradient(#4c4cff, #801ab2) border-box;
+}
+
+.item:first-child {
+  margin-left: 0;
+}
+
+.image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.items_picture {
+  margin-left: -16px;
+}
+
+
+
+.overflow {
+  background: rgba(0, 0, 0, 0.6) content-box;
+}
