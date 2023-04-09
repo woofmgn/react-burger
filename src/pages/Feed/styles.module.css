@@ -8,3 +8,31 @@
   display: flex;
   justify-content: space-between;
 }
+
+.container {
+  max-width: 600px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 80vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.container::-webkit-scrollbar {
+  height: 464px;
+  width: 8px;
+  background-color: #2F2F37;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background: #8585AD;
+}
+.wrapper::-webkit-scrollbar-track-piece:end {
+  background: transparent;
+  margin-bottom: 10px; 
+}

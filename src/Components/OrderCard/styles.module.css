@@ -1,5 +1,10 @@
+.link {
+  all: unset;
+  cursor: pointer;
+}
+
 .container {
-  max-width: 584px;
+  /* max-width: 584px; */
   width: 100%;
   padding: 24px 24px;
   border-radius: 40px;

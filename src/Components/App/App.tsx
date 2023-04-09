@@ -8,6 +8,7 @@ import { HistoryOrders } from "../../pages/HistoryOrders/HistoryOrders";
 import { IngredientPage } from "../../pages/IngredientPage/IngredientPage";
 import { Login } from "../../pages/Login/Login";
 import { Main } from "../../pages/Main/Main";
+import { OrderPage } from "../../pages/OrderPage/OrderPage";
 import { Profile } from "../../pages/Profile/Profile";
 import { Register } from "../../pages/Register/Register";
 import { ResetPassword } from "../../pages/ResetPassword/ResetPassword";
@@ -53,6 +54,7 @@ function App() {
             element={<ProtectedRoute element={<HistoryOrders />} />}
           />
           <Route path="/feed" element={<Feed />} />
+          <Route path="/feed/:id" element={<OrderPage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
