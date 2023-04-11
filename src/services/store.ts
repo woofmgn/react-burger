@@ -10,11 +10,13 @@ import { TDetailsAction } from './actions/details';
 import { IGetIngredientsActions } from './actions/getIngredients';
 import { ISetOrderActions } from './actions/order';
 import { IUserActions } from './actions/user';
+import { socketMiddleware } from './middleware/socketMiddleware';
 import { constructorReducer } from "./reducers/constructorReducer";
 import { detailsReducer } from "./reducers/detailsReduser";
 import { ingredientsReducer } from "./reducers/ingredientsReducer";
 import { orderReducer } from "./reducers/orderReducer";
 import { userReducer } from "./reducers/userReducer";
+import { TWSActions, wsReducer } from './reducers/wsReducer';
 
 const composeEnhancers =
   // @ts-ignore
@@ -29,11 +31,15 @@ const rootReducer = combineReducers({
   constructorReducer,
   orderReducer,
   userReducer,
+  wsReducer,
 });
 
 const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(thunk))
+  composeEnhancers(applyMiddleware(
+    thunk, 
+    socketMiddleware('wss://norma.nomoreparties.space/orders/all')
+  ))
 );
 
 export default store;
@@ -43,7 +49,8 @@ export type TAppActions =
   | TDetailsAction
   | IGetIngredientsActions
   | ISetOrderActions
-  | IUserActions;
+  | IUserActions
+  | TWSActions;
 
 export type AppDispatch = ThunkDispatch<RootState, never, TAppActions>;
 export type RootState = ReturnType<typeof store.getState>

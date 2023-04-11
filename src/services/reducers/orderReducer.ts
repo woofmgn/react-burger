@@ -16,7 +16,7 @@ type TOrderState = {
   success: boolean;
 }
 
-const initialState:TOrderState = {
+const initialState: TOrderState = {
   feedReq: false,
   feedFailed: false,
   name: "",
