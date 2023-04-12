@@ -39,7 +39,7 @@ interface IWSGetMessageAction {
   payload: {
     totalToday: number;
     total: number;
-    orders: WSOrders;
+    orders: WSOrders[];
   };
 }
 
@@ -99,7 +99,7 @@ export const wsReducer = (state = initialState, action: TWSActions) => {
         wsConnection: false,
       };
     case WS_GET_MESSAGE:
-      console.log(action.payload.total, 'total')
+      // console.log(action.payload.total, 'total')
       return {
         ...state,
         error: undefined,

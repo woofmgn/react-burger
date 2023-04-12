@@ -28,8 +28,20 @@ export const OrderCard: FC<TOrderCardType> = ({
       return data.filter((card) => ingredients.includes(card._id));
     }
   }, [data, ingredients]);
+
+  const price = useMemo(() => {
+    if (ingredient) {
+      return ingredient.reduce((acc, item) => {
+        if (item.type === "bun") {
+          return (acc += item.price * 2);
+        }
+        return (acc += item.price);
+      }, 0);
+    }
+  }, [ingredient]);
+
   return (
-    <Link to={"/feed/:id"} className={styles.link}>
+    <Link key={_id} to={`/feed/${_id}`} className={styles.link}>
       <li className={styles.container}>
         <div className={styles.wrapper}>
           <p className="text text_type_digits-default">{`#${number}`}</p>
@@ -57,7 +69,7 @@ export const OrderCard: FC<TOrderCardType> = ({
               "text text_type_digits-default",
             ])}
           >
-            {1234}
+            {price}
             <CurrencyIcon type="primary" />
           </span>
         </div>

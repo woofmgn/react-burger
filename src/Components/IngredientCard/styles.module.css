@@ -23,6 +23,8 @@
 }
 
 .image {
+  width: 112px;
+  height: 56px;
   position: absolute;
   top: 50%;
   left: 50%;
