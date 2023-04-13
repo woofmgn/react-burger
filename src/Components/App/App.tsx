@@ -15,7 +15,7 @@ import { ResetPassword } from "../../pages/ResetPassword/ResetPassword";
 import { resetDetails } from "../../services/actions/details";
 import { getIndredients } from "../../services/actions/getIngredients";
 import { checkAuthUser } from "../../services/actions/user";
-import { WS_CONNECTION_START } from "../../utils/constants";
+// import { WS_CONNECTION_START } from "../../utils/constants";
 import { Footer } from "../Footer/Footer";
 import { Header } from "../Header/Header";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
@@ -38,7 +38,7 @@ function App() {
   useEffect(() => {
     dispatch(checkAuthUser());
     dispatch(getIndredients());
-    dispatch({ type: WS_CONNECTION_START });
+    // dispatch({ type: WS_CONNECTION_START });
   }, [dispatch]);
 
   return (

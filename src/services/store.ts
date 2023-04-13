@@ -5,6 +5,7 @@ import {
   legacy_createStore as createStore
 } from "redux";
 import thunk, { ThunkDispatch } from "redux-thunk";
+import { WS_BASE_URL } from '../utils/constants';
 import { TConstructorActions } from './actions/constructor';
 import { TDetailsAction } from './actions/details';
 import { IGetIngredientsActions } from './actions/getIngredients';
@@ -38,7 +39,7 @@ const store = createStore(
   rootReducer,
   composeEnhancers(applyMiddleware(
     thunk, 
-    socketMiddleware('wss://norma.nomoreparties.space/orders/all')
+    socketMiddleware(`${WS_BASE_URL}/all`)
   ))
 );
 

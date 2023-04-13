@@ -1,9 +1,9 @@
-import { FC, useMemo } from "react";
+import React, { FC, useMemo } from "react";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { TWSState } from "../../services/reducers/wsReducer";
 import styles from "./styles.module.css";
 
-export const WaitingFeedStatus: FC = () => {
+export const WaitingFeedStatus: FC = React.memo(() => {
   const { orders }: TWSState = useAppSelector((state) => state.wsReducer);
 
   const waitingList = useMemo(() => {
@@ -13,14 +13,6 @@ export const WaitingFeedStatus: FC = () => {
         .slice(orders.length - 4);
     }
   }, [orders]);
-
-  // const waitingList  => {
-  //   if (orders) {
-  //     return orders
-  //       .filter((order) => order.status !== "done")
-  //       .slice(orders.length - 4);
-  //   }
-  // }, [orders]);
 
   return (
     <div className={styles.container}>
@@ -37,4 +29,4 @@ export const WaitingFeedStatus: FC = () => {
       </ul>
     </div>
   );
-};
+});

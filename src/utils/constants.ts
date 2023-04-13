@@ -1,4 +1,5 @@
 const BASE_URL = "https://norma.nomoreparties.space/api";
+const WS_BASE_URL = "wss://norma.nomoreparties.space/orders";
 
 const BUN = "bun";
 const SAUCE = "sauce";
@@ -42,6 +43,7 @@ const WS_SEND_MESSAGE: 'WS_SEND_MESSAGE' = 'WS_SEND_MESSAGE';
 
 export {
   BASE_URL,
+  WS_BASE_URL,
   BUN,
   SAUCE,
   FILLING,

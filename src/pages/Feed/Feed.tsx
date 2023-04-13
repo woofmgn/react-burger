@@ -1,12 +1,26 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { OrderCard } from "../../Components/OrderCard/OrderCard";
 import { OrderFeedList } from "../../Components/OrderFeedList/OrderFeedList";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { TWSState, WSOrders } from "../../services/reducers/wsReducer";
+import {
+  WS_CONNECTION_CLOSED,
+  WS_CONNECTION_START,
+} from "../../utils/constants";
 import styles from "./styles.module.css";
 
 export const Feed: FC = () => {
   const { orders }: TWSState = useAppSelector((state) => state.wsReducer);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch({ type: WS_CONNECTION_START });
+
+    return () => {
+      dispatch({ type: WS_CONNECTION_CLOSED });
+    };
+  }, [dispatch]);
 
   return (
     <section className={styles.section}>
