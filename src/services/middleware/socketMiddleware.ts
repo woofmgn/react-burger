@@ -38,7 +38,6 @@ export const socketMiddleware = (wsUrl: string): Middleware => {
       }
 
       if (socket) {
-
         socket.onopen = event => {
           dispatch({ type: WS_CONNECTION_SUCCESS, payload: event });
         };

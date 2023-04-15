@@ -20,6 +20,7 @@ import { Footer } from "../Footer/Footer";
 import { Header } from "../Header/Header";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
 import { Modal } from "../Modal/Modal";
+import { OrderInfo } from "../OrderInfo/OrderInfo";
 import styles from "./styles.module.css";
 
 function App() {
@@ -38,7 +39,6 @@ function App() {
   useEffect(() => {
     dispatch(checkAuthUser());
     dispatch(getIndredients());
-    // dispatch({ type: WS_CONNECTION_START });
   }, [dispatch]);
 
   return (
@@ -56,7 +56,6 @@ function App() {
             element={<ProtectedRoute element={<HistoryOrders />} />}
           />
           <Route path="/feed" element={<Feed />} />
-          <Route path="/feed/:id" element={<OrderPage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -69,6 +68,14 @@ function App() {
               </IngredientPage>
             }
           />
+          <Route
+            path="/feed/:id"
+            element={
+              <OrderPage>
+                <OrderInfo />
+              </OrderPage>
+            }
+          />
         </Routes>
       </main>
       {background && (
@@ -78,6 +85,22 @@ function App() {
             element={
               <Modal onClose={handleModalClose} title={"Детали ингредиента"}>
                 <IngredientDetails />
+              </Modal>
+            }
+          />
+          <Route
+            path="/feed/:id"
+            element={
+              <Modal onClose={handleModalClose}>
+                <OrderInfo />
+              </Modal>
+            }
+          />
+          <Route
+            path="/profile/orders/:id"
+            element={
+              <Modal onClose={handleModalClose}>
+                <OrderInfo />
               </Modal>
             }
           />

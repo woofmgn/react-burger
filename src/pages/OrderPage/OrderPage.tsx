@@ -1,11 +1,10 @@
-import { FC, memo } from "react";
-import { OrderInfo } from "../../Components/OrderInfo/OrderInfo";
+import { FC, ReactNode, memo } from "react";
 import styles from "./styles.module.css";
 
-export const OrderPage: FC = memo(() => {
-  return (
-    <section className={styles.section}>
-      <OrderInfo />
-    </section>
-  );
+type TOrderProps = {
+  children: ReactNode;
+};
+
+export const OrderPage: FC<TOrderProps> = memo(({ children }) => {
+  return <section className={styles.section}>{children}</section>;
 });

@@ -3,7 +3,7 @@ import {
   FormattedDate,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React, { FC, ReactNode, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { IngredientIcon } from "../IngredientIcon/IngredientIcon";
@@ -22,8 +22,10 @@ export const OrderCard: FC<TOrderCardType> = React.memo(
   ({ name, number, _id, ingredients, date, children }) => {
     const { data } = useAppSelector((state) => state.ingredientsReducer);
 
+    const location = useLocation();
+
     const ingredient = useMemo(() => {
-      if (data && ingredients) {
+      if (data) {
         return data.filter((card) => ingredients.includes(card._id));
       }
     }, [data, ingredients]);
@@ -60,8 +62,21 @@ export const OrderCard: FC<TOrderCardType> = React.memo(
       );
     };
 
+    const checkLocation = () => {
+      if (location.pathname === "/profile/orders") {
+        return `/profile/orders/${_id}`;
+      } else {
+        return `/feed/${_id}`;
+      }
+    };
+
     return (
-      <Link key={_id} to={`/feed/${_id}`} className={styles.link}>
+      <Link
+        key={_id}
+        to={checkLocation()}
+        state={{ background: location }}
+        className={styles.link}
+      >
         <li className={styles.container}>
           <div className={styles.wrapper}>
             <p className="text text_type_digits-default">{`#${number}`}</p>
