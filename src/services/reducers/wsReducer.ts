@@ -111,12 +111,14 @@ export const wsReducer = (state = initialState, action: TWSActions) => {
       };
     case WS_CONNECTION_CLOSED:
       return {
-        ...state,
+        success: false,
+        orders: null,
+        total: 0,
+        totalToday: 0,
         error: undefined,
         wsConnection: false,
       };
     case WS_GET_MESSAGE:
-      // console.log(action.payload.total, 'total')
       return {
         ...state,
         error: undefined,

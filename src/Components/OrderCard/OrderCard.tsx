@@ -1,4 +1,7 @@
-import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import {
+  CurrencyIcon,
+  FormattedDate,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 import React, { FC, ReactNode, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
@@ -7,15 +10,16 @@ import { IngredientIcon } from "../IngredientIcon/IngredientIcon";
 import styles from "./styles.module.css";
 
 type TOrderCardType = {
-  name?: string;
-  number?: number;
-  _id?: string;
-  ingredients?: string[];
+  name: string;
+  number: number;
+  _id: string;
+  ingredients: string[];
+  date: string;
   children?: ReactNode;
 };
 
 export const OrderCard: FC<TOrderCardType> = React.memo(
-  ({ name, number, _id, ingredients, children }) => {
+  ({ name, number, _id, ingredients, date, children }) => {
     const { data } = useAppSelector((state) => state.ingredientsReducer);
 
     const ingredient = useMemo(() => {
@@ -35,14 +39,33 @@ export const OrderCard: FC<TOrderCardType> = React.memo(
       }
     }, [ingredient]);
 
+    const orderDate = () => {
+      const today = new Date();
+      const orderDate = new Date(date);
+      const dayBefore = today.getDate() - orderDate.getDate();
+
+      return (
+        <FormattedDate
+          date={
+            new Date(
+              orderDate.getFullYear(),
+              orderDate.getMonth(),
+              orderDate.getDate() - dayBefore,
+              orderDate.getHours(),
+              orderDate.getMinutes() - 1,
+              0
+            )
+          }
+        />
+      );
+    };
+
     return (
       <Link key={_id} to={`/feed/${_id}`} className={styles.link}>
         <li className={styles.container}>
           <div className={styles.wrapper}>
             <p className="text text_type_digits-default">{`#${number}`}</p>
-            <p className="text text_type_main-default text_color_inactive">
-              Сегодня, 14.24
-            </p>
+            {orderDate()}
           </div>
           <p className="text text_type_main-medium">{name}</p>
           {children}

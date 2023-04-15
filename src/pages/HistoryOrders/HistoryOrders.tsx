@@ -36,6 +36,7 @@ export const HistoryOrders: FC = () => {
                 _id={order._id}
                 name={order.name}
                 ingredients={order.ingredients}
+                date={order.createdAt}
                 children={<OrderStatus status={order.status} />}
               />
             );

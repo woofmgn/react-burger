@@ -36,6 +36,7 @@ export const Feed: FC = () => {
                   number={order.number}
                   _id={order._id}
                   ingredients={order.ingredients}
+                  date={order.createdAt}
                 />
               );
             })}

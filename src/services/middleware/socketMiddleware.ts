@@ -23,15 +23,22 @@ export const socketMiddleware = (wsUrl: string): Middleware => {
       const { type, payload } = action;
  
       if (type === WS_CONNECTION_START_ALL_ORDERS) {
+        if (socket) {
+          socket.close();
+        }
         socket = new WebSocket(`${wsUrl}/all`);
       }
 
       if (type === WS_CONNECTION_START_USER_ORDERS) {
+        if (socket) {
+          socket.close();
+        }
         const token = getCookie('token')?.replaceAll(' ', '');
         socket = new WebSocket(`${wsUrl}?token=${token}`);
       }
 
       if (socket) {
+
         socket.onopen = event => {
           dispatch({ type: WS_CONNECTION_SUCCESS, payload: event });
         };
@@ -53,6 +60,10 @@ export const socketMiddleware = (wsUrl: string): Middleware => {
           const message = payload;
           socket.send(JSON.stringify(message));
         }
+
+        // if (type === WS_CONNECTION_CLOSED) {
+        //   socket.close();
+        // }
       }
 
       next(action);
