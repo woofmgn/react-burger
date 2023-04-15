@@ -1,7 +1,8 @@
 import {
   WS_CONNECTION_CLOSED,
   WS_CONNECTION_ERROR,
-  WS_CONNECTION_START,
+  WS_CONNECTION_START_ALL_ORDERS,
+  WS_CONNECTION_START_USER_ORDERS,
   WS_CONNECTION_SUCCESS,
   WS_GET_MESSAGE,
   WS_SEND_MESSAGE
@@ -17,8 +18,12 @@ export type WSOrders = {
   updatedAt: string;
 }
 
-interface IWSConnectionStartAction {
-  readonly type: typeof WS_CONNECTION_START;
+interface IWSConnectionStartAllOrdersAction {
+  readonly type: typeof WS_CONNECTION_START_ALL_ORDERS;
+}
+
+interface IWSConnectionStartUserOrdersAction {
+  readonly type: typeof WS_CONNECTION_START_USER_ORDERS;
 }
 
 interface IWSConnetionSuccessAction {
@@ -49,7 +54,8 @@ interface IWSSendMessageAction {
 }
 
 export type TWSActions =
-  | IWSConnectionStartAction
+  | IWSConnectionStartUserOrdersAction
+  | IWSConnectionStartAllOrdersAction
   | IWSConnetionSuccessAction
   | IWSConnectionErrorAction
   | IWSConnectionClosedAction
@@ -75,9 +81,20 @@ const initialState: TWSState = {
 
 export const wsReducer = (state = initialState, action: TWSActions) => {
   switch (action.type) {
-    case WS_CONNECTION_START:
+    case WS_CONNECTION_START_ALL_ORDERS:
       return {
         ...state,
+        orders: null,
+        total: 0,
+        totalToday: 0,
+        error: undefined
+      };
+    case WS_CONNECTION_START_USER_ORDERS:
+      return {
+        ...state,
+        orders: null,
+        total: 0,
+        totalToday: 0,
         error: undefined
       };
     case WS_CONNECTION_SUCCESS:

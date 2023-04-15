@@ -12,10 +12,10 @@ export type TNewUserData = {
   password: string;
 };
 
-type TCurrentUs = {
-  name: string;
-  email: string;
-}
+// type TCurrentUs = {
+//   name: string;
+//   email: string;
+// }
 
 class UserData extends BaseApi implements IUserData {
   public readonly settings!: string;

@@ -6,7 +6,7 @@ import { useAppSelector } from "../../hooks/useAppSelector";
 import { TWSState, WSOrders } from "../../services/reducers/wsReducer";
 import {
   WS_CONNECTION_CLOSED,
-  WS_CONNECTION_START,
+  WS_CONNECTION_START_ALL_ORDERS,
 } from "../../utils/constants";
 import styles from "./styles.module.css";
 
@@ -15,7 +15,7 @@ export const Feed: FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch({ type: WS_CONNECTION_START });
+    dispatch({ type: WS_CONNECTION_START_ALL_ORDERS });
 
     return () => {
       dispatch({ type: WS_CONNECTION_CLOSED });

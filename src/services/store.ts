@@ -39,7 +39,7 @@ const store = createStore(
   rootReducer,
   composeEnhancers(applyMiddleware(
     thunk, 
-    socketMiddleware(`${WS_BASE_URL}/all`)
+    socketMiddleware(WS_BASE_URL)
   ))
 );
 
