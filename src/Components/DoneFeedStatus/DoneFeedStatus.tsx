@@ -8,7 +8,7 @@ export const DoneFeedStatus: FC = React.memo(() => {
 
   const doneList = useMemo(() => {
     if (orders) {
-      return orders.filter((order) => order.status === "done").slice(0, 4);
+      return orders.filter((order) => order.status === "done").slice(0, 10);
     }
   }, [orders]);
 

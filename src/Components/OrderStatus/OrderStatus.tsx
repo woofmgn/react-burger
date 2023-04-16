@@ -11,9 +11,16 @@ export const OrderStatus: FC<TOrderStatusProps> = ({ status }) => {
     } else if (status === "pending") {
       return "Готовится";
     } else {
-      return "Готов";
+      return "Выполнен";
     }
   };
 
-  return <p className={`text text_type_main-default`}>{checkStatus()}</p>;
+  return (
+    <p
+      className={"text text_type_main-default"}
+      style={{ color: `${checkStatus() === "Выполнен" ? "#00CCCC" : ""}` }}
+    >
+      {checkStatus()}
+    </p>
+  );
 };

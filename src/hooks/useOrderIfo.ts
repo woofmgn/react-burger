@@ -1,12 +1,7 @@
 import { useMemo } from 'react';
 import { useAppSelector } from './useAppSelector';
 
-// type TUseOrderInfoProps = {
-//   order: string[];
-// }
-
 export const useOrderInfo = (order: string[]) => {
-  // const { orders } = useAppSelector((state) => state.wsReducer);
   const { data } = useAppSelector((state) => state.ingredientsReducer);
 
     const ingredients = useMemo(() => {

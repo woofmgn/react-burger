@@ -1,9 +1,8 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import React, { FC, ReactNode, useMemo } from "react";
+import React, { FC, ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
-// import { useOrderInfo } from "../../hooks/useOrderIfo";
-import { useAppSelector } from "../../hooks/useAppSelector";
+import { useOrderInfo } from "../../hooks/useOrderIfo";
 import { IngredientIcon } from "../IngredientIcon/IngredientIcon";
 import { OrderDate } from "../OrderDate/OrderDate";
 import styles from "./styles.module.css";
@@ -19,27 +18,9 @@ type TOrderCardType = {
 
 export const OrderCard: FC<TOrderCardType> = React.memo(
   ({ name, number, _id, ingredientsList, date, children }) => {
-    const { data } = useAppSelector((state) => state.ingredientsReducer);
-    // const { ingredients, totalPrice } = useOrderInfo(ingredientsList);
+    const { ingredients, totalPrice } = useOrderInfo(ingredientsList);
 
     const location = useLocation();
-
-    const ingredients = useMemo(() => {
-      if (data) {
-        return data.filter((card) => ingredientsList.includes(card._id));
-      }
-    }, [data, ingredientsList]);
-
-    const totalPrice = useMemo(() => {
-      if (ingredients) {
-        return ingredients.reduce((acc, item) => {
-          if (item.type === "bun") {
-            return (acc += item.price * 2);
-          }
-          return (acc += item.price);
-        }, 0);
-      }
-    }, [ingredients]);
 
     const checkLocation = () => {
       if (location.pathname === "/profile/orders") {

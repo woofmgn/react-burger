@@ -3,7 +3,6 @@ import { FC, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
 import { useAppSelector } from "../../hooks/useAppSelector";
-// import { useOrderInfo } from "../../hooks/useOrderIfo";
 import { IngredientCard } from "../IngredientCard/IngredientCard";
 import { OrderDate } from "../OrderDate/OrderDate";
 import { OrderStatus } from "../OrderStatus/OrderStatus";
@@ -37,8 +36,6 @@ export const OrderInfo: FC = () => {
     }
   }, [ingredients]);
 
-  // const { ingredients, totalPrice } = useOrderInfo(order!.ingredients);
-
   return (
     <>
       {ingredients && (
@@ -48,16 +45,12 @@ export const OrderInfo: FC = () => {
               "text text_type_digits-default",
             ])}
           >
-            {`#${order && order.number}`}
+            {`#${order && order!.number}`}
           </span>
           <h1 className="text text_type_main-medium mt-10 mb-3">
             {order && order.name}
           </h1>
-          {order && (
-            <OrderStatus
-              status={order && order!.status === "done" ? "Выполнен" : "Создан"}
-            />
-          )}
+          {order && <OrderStatus status={order.status} />}
           <p className="text text_type_main-medium mt-15">Состав:</p>
           <ul className={styles.list}>
             {ingredients &&
@@ -77,7 +70,6 @@ export const OrderInfo: FC = () => {
             <OrderDate createdDate={order?.createdAt} />
             <div className={styles.price}>
               <span className="text text_type_digits-default mr-2">
-                {/* {totalPrice()} */}
                 {totalPrice}
               </span>
               <CurrencyIcon type="primary" />

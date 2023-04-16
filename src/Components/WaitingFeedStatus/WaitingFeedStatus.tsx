@@ -10,7 +10,7 @@ export const WaitingFeedStatus: FC = React.memo(() => {
     if (orders) {
       return orders
         .filter((order) => order.status !== "done")
-        .slice(orders.length - 4);
+        .slice(orders.length - 10);
     }
   }, [orders]);
 
@@ -19,7 +19,7 @@ export const WaitingFeedStatus: FC = React.memo(() => {
       <p className="text text_type_main-medium pb-6">В работе:</p>
       <ul className={styles.list}>
         {waitingList &&
-          waitingList.slice(0, 3).map((order) => {
+          waitingList.slice(0, 10).map((order) => {
             return (
               <li key={order._id}>
                 <p className="text text_type_digits-default">{order.number}</p>
