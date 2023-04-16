@@ -1,66 +1,45 @@
-import {
-  CurrencyIcon,
-  FormattedDate,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import React, { FC, ReactNode, useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
+// import { useOrderInfo } from "../../hooks/useOrderIfo";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { IngredientIcon } from "../IngredientIcon/IngredientIcon";
+import { OrderDate } from "../OrderDate/OrderDate";
 import styles from "./styles.module.css";
 
 type TOrderCardType = {
   name: string;
   number: number;
   _id: string;
-  ingredients: string[];
+  ingredientsList: string[];
   date: string;
   children?: ReactNode;
 };
 
 export const OrderCard: FC<TOrderCardType> = React.memo(
-  ({ name, number, _id, ingredients, date, children }) => {
+  ({ name, number, _id, ingredientsList, date, children }) => {
     const { data } = useAppSelector((state) => state.ingredientsReducer);
+    // const { ingredients, totalPrice } = useOrderInfo(ingredientsList);
 
     const location = useLocation();
 
-    const ingredient = useMemo(() => {
+    const ingredients = useMemo(() => {
       if (data) {
-        return data.filter((card) => ingredients.includes(card._id));
+        return data.filter((card) => ingredientsList.includes(card._id));
       }
-    }, [data, ingredients]);
+    }, [data, ingredientsList]);
 
-    const price = useMemo(() => {
-      if (ingredient) {
-        return ingredient.reduce((acc, item) => {
+    const totalPrice = useMemo(() => {
+      if (ingredients) {
+        return ingredients.reduce((acc, item) => {
           if (item.type === "bun") {
             return (acc += item.price * 2);
           }
           return (acc += item.price);
         }, 0);
       }
-    }, [ingredient]);
-
-    const orderDate = () => {
-      const today = new Date();
-      const orderDate = new Date(date);
-      const dayBefore = today.getDate() - orderDate.getDate();
-
-      return (
-        <FormattedDate
-          date={
-            new Date(
-              orderDate.getFullYear(),
-              orderDate.getMonth(),
-              orderDate.getDate() - dayBefore,
-              orderDate.getHours(),
-              orderDate.getMinutes() - 1,
-              0
-            )
-          }
-        />
-      );
-    };
+    }, [ingredients]);
 
     const checkLocation = () => {
       if (location.pathname === "/profile/orders") {
@@ -80,14 +59,14 @@ export const OrderCard: FC<TOrderCardType> = React.memo(
         <li className={styles.container}>
           <div className={styles.wrapper}>
             <p className="text text_type_digits-default">{`#${number}`}</p>
-            {orderDate()}
+            <OrderDate createdDate={date} />
           </div>
           <p className="text text_type_main-medium">{name}</p>
           {children}
           <div className={styles.wrapper}>
             <ul className={styles.list}>
-              {ingredient &&
-                ingredient.slice(0, 5).map((ingr) => {
+              {ingredients &&
+                ingredients.slice(0, 5).map((ingr) => {
                   return (
                     <IngredientIcon
                       key={ingr._id}
@@ -102,7 +81,7 @@ export const OrderCard: FC<TOrderCardType> = React.memo(
                 "text text_type_digits-default",
               ])}
             >
-              {price}
+              {totalPrice}
               <CurrencyIcon type="primary" />
             </span>
           </div>

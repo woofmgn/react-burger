@@ -15,7 +15,6 @@ import { ResetPassword } from "../../pages/ResetPassword/ResetPassword";
 import { resetDetails } from "../../services/actions/details";
 import { getIndredients } from "../../services/actions/getIngredients";
 import { checkAuthUser } from "../../services/actions/user";
-// import { WS_CONNECTION_START } from "../../utils/constants";
 import { Footer } from "../Footer/Footer";
 import { Header } from "../Header/Header";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
@@ -40,6 +39,18 @@ function App() {
     dispatch(checkAuthUser());
     dispatch(getIndredients());
   }, [dispatch]);
+
+  // useEffect(() => {
+  //   if (location.pathname.includes("/feed")) {
+  //     dispatch({ type: WS_CONNECTION_START_ALL_ORDERS });
+  //   } else if (location.pathname.includes("profile/orders")) {
+  //     dispatch({ type: WS_CONNECTION_START_USER_ORDERS });
+  //   }
+
+  //   return () => {
+  //     dispatch({ type: WS_CONNECTION_CLOSED });
+  //   };
+  // }, [dispatch, location.pathname]);
 
   return (
     <div className={styles.app}>
@@ -70,6 +81,14 @@ function App() {
           />
           <Route
             path="/feed/:id"
+            element={
+              <OrderPage>
+                <OrderInfo />
+              </OrderPage>
+            }
+          />
+          <Route
+            path="/profile/orders/:id"
             element={
               <OrderPage>
                 <OrderInfo />
