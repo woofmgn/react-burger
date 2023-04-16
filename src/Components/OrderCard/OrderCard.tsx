@@ -47,7 +47,7 @@ export const OrderCard: FC<TOrderCardType> = React.memo(
           <div className={styles.wrapper}>
             <ul className={styles.list}>
               {ingredients &&
-                ingredients.slice(0, 5).map((ingr) => {
+                ingredients.slice(0, 6).map((ingr) => {
                   return (
                     <IngredientIcon
                       key={ingr._id}
@@ -56,6 +56,9 @@ export const OrderCard: FC<TOrderCardType> = React.memo(
                     />
                   );
                 })}
+              {ingredients && ingredients.length > 6 && (
+                <p className={styles.count}>+{ingredients.length - 6}</p>
+              )}
             </ul>
             <span
               className={classNames(styles.price, {}, [

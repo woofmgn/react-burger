@@ -25,9 +25,24 @@
   padding-left: 0px;
   margin: 0;
   max-width: 304px;
-  width: 100%;
+  width: fit-content;
   display: flex;
+  flex-direction: row-reverse;
   list-style-type: none;
+  position: relative;
+}
+
+.count {
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  right: 25px;
+  transform: translateY(-50%);
+  margin: 0;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: white;
 }
 
 .price {
