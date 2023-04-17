@@ -22,7 +22,7 @@ export function setCookie(
       updatedCookie += "=" + propValue;
     }
   }
-  document.cookie = updatedCookie;
+  document.cookie = `${updatedCookie};path=/`;
 }
 
 export function getCookie(name: string) {

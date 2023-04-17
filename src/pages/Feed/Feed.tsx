@@ -3,11 +3,12 @@ import { OrderCard } from "../../Components/OrderCard/OrderCard";
 import { OrderFeedList } from "../../Components/OrderFeedList/OrderFeedList";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useAppSelector } from "../../hooks/useAppSelector";
-import { TWSState, WSOrders } from "../../services/reducers/wsReducer";
 import {
-  WS_CONNECTION_CLOSED,
-  WS_CONNECTION_START_ALL_ORDERS,
-} from "../../utils/constants";
+  TWSState,
+  WSOrders,
+  wsActionsOptions,
+} from "../../services/reducers/wsReducer";
+import { WS_BASE_URL } from "../../utils/constants";
 import styles from "./styles.module.css";
 
 export const Feed: FC = () => {
@@ -15,10 +16,10 @@ export const Feed: FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch({ type: WS_CONNECTION_START_ALL_ORDERS });
+    dispatch({ type: wsActionsOptions.wsInit, payload: `${WS_BASE_URL}/all` });
 
     return () => {
-      dispatch({ type: WS_CONNECTION_CLOSED });
+      dispatch({ type: wsActionsOptions.wsClose });
     };
   }, [dispatch]);
 

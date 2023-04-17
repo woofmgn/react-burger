@@ -5,7 +5,6 @@ import {
   legacy_createStore as createStore
 } from "redux";
 import thunk, { ThunkDispatch } from "redux-thunk";
-import { WS_BASE_URL } from '../utils/constants';
 import { TConstructorActions } from './actions/constructor';
 import { TDetailsAction } from './actions/details';
 import { IGetIngredientsActions } from './actions/getIngredients';
@@ -17,7 +16,7 @@ import { detailsReducer } from "./reducers/detailsReduser";
 import { ingredientsReducer } from "./reducers/ingredientsReducer";
 import { orderReducer } from "./reducers/orderReducer";
 import { userReducer } from "./reducers/userReducer";
-import { TWSActions, wsReducer } from './reducers/wsReducer';
+import { TWSActions, wsActionsOptions, wsReducer } from './reducers/wsReducer';
 
 const composeEnhancers =
   // @ts-ignore
@@ -39,7 +38,7 @@ const store = createStore(
   rootReducer,
   composeEnhancers(applyMiddleware(
     thunk, 
-    socketMiddleware(WS_BASE_URL)
+    socketMiddleware(wsActionsOptions)
   ))
 );
 

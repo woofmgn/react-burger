@@ -40,18 +40,6 @@ function App() {
     dispatch(getIndredients());
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   if (location.pathname.includes("/feed")) {
-  //     dispatch({ type: WS_CONNECTION_START_ALL_ORDERS });
-  //   } else if (location.pathname.includes("profile/orders")) {
-  //     dispatch({ type: WS_CONNECTION_START_USER_ORDERS });
-  //   }
-
-  //   return () => {
-  //     dispatch({ type: WS_CONNECTION_CLOSED });
-  //   };
-  // }, [dispatch, location.pathname]);
-
   return (
     <div className={styles.app}>
       <Header />
@@ -66,6 +54,7 @@ function App() {
             path="/profile/orders"
             element={<ProtectedRoute element={<HistoryOrders />} />}
           />
+          {/* <Route path="/profile/orders" element={<HistoryOrders />} /> */}
           <Route path="/feed" element={<Feed />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
@@ -87,12 +76,24 @@ function App() {
               </OrderPage>
             }
           />
-          <Route
+          {/* <Route
             path="/profile/orders/:id"
             element={
               <OrderPage>
                 <OrderInfo />
               </OrderPage>
+            }
+          /> */}
+          <Route
+            path="/profile/orders/:id"
+            element={
+              <ProtectedRoute
+                element={
+                  <OrderPage>
+                    <OrderInfo />
+                  </OrderPage>
+                }
+              />
             }
           />
         </Routes>

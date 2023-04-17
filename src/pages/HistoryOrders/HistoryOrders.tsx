@@ -4,10 +4,9 @@ import { OrderCard } from "../../Components/OrderCard/OrderCard";
 import { OrderStatus } from "../../Components/OrderStatus/OrderStatus";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useAppSelector } from "../../hooks/useAppSelector";
-import {
-  WS_CONNECTION_CLOSED,
-  WS_CONNECTION_START_USER_ORDERS,
-} from "../../utils/constants";
+import { wsActionsOptions } from "../../services/reducers/wsReducer";
+import { WS_BASE_URL } from "../../utils/constants";
+import { getCookie } from "../../utils/cookies";
 import styles from "./styles.module.css";
 
 export const HistoryOrders: FC = () => {
@@ -16,10 +15,14 @@ export const HistoryOrders: FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch({ type: WS_CONNECTION_START_USER_ORDERS });
+    const token = getCookie("token")?.replaceAll(" ", "");
+    dispatch({
+      type: wsActionsOptions.wsInit,
+      payload: `${WS_BASE_URL}?token=${token}`,
+    });
 
     return () => {
-      dispatch({ type: WS_CONNECTION_CLOSED });
+      dispatch({ type: wsActionsOptions.wsClose });
     };
   }, [dispatch]);
 

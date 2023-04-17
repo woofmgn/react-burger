@@ -1,10 +1,9 @@
 import { FC, ReactNode, memo, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
-import {
-  WS_CONNECTION_START_ALL_ORDERS,
-  WS_CONNECTION_START_USER_ORDERS,
-} from "../../utils/constants";
+import { wsActionsOptions } from "../../services/reducers/wsReducer";
+import { WS_BASE_URL } from "../../utils/constants";
+import { getCookie } from "../../utils/cookies";
 import styles from "./styles.module.css";
 
 type TOrderProps = {
@@ -17,9 +16,16 @@ export const OrderPage: FC<TOrderProps> = memo(({ children }) => {
 
   useEffect(() => {
     if (location.pathname.includes("/feed")) {
-      dispatch({ type: WS_CONNECTION_START_ALL_ORDERS });
+      dispatch({
+        type: wsActionsOptions.wsInit,
+        payload: `${WS_BASE_URL}/all`,
+      });
     } else {
-      dispatch({ type: WS_CONNECTION_START_USER_ORDERS });
+      const token = getCookie("token")?.replaceAll(" ", "");
+      dispatch({
+        type: wsActionsOptions.wsInit,
+        payload: `${WS_BASE_URL}?token=${token}`,
+      });
     }
   }, [dispatch, location.pathname]);
 

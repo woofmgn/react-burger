@@ -50,8 +50,7 @@ export const BurgerConstructor: FC = React.memo(() => {
   const handleToggleOpenModal = useCallback(() => {
     if (logged) {
       const newOrder: string[] = [];
-      ingredients.forEach((item: TIngredients) => newOrder.push(item._id));
-      // @ts-ignore
+      ingredients.forEach((item) => newOrder.push(item._id));
       dispatch(setOrder(newOrder));
       setIsVisible((prev) => !prev);
     } else {
@@ -66,7 +65,7 @@ export const BurgerConstructor: FC = React.memo(() => {
   }, [dispatch]);
 
   const filteredBun = React.useMemo(() => {
-    return ingredients.filter((item: TIngredients) => item.types === BUN);
+    return ingredients.filter((item) => item.types === BUN);
   }, [ingredients]);
 
   const calculateTotalOrder = React.useMemo(() => {
@@ -95,7 +94,7 @@ export const BurgerConstructor: FC = React.memo(() => {
         )}
         <ul className={styles.list}>
           {ingredients.length ? (
-            ingredients.map((item: TIngredients) => {
+            ingredients.map((item) => {
               if (item.types !== BUN) {
                 return <Ingredient key={item.keyId} element={item} />;
               }
