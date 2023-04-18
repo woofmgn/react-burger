@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Navigate, RouteProps, useLocation } from "react-router-dom";
+import { Loader } from "../../Components/Loader/Loader";
 import { useAppSelector } from "../../hooks/useAppSelector";
 
 type TProtectedRouteProps = {
@@ -15,7 +16,7 @@ export const ProtectedRoute: FC<TProtectedRouteProps> = ({
   const location = useLocation();
 
   if (background && !logged) {
-    return <h1>Loading...</h1>;
+    return <Loader />;
   }
 
   return logged ? (

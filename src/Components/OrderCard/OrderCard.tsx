@@ -36,15 +36,7 @@ export const OrderCard: FC<TOrderCardType> = React.memo(
         to={checkLocation()}
         state={{
           background: location,
-          redirectTo: {
-            ...location,
-            pathname: `${location.pathname}/${_id}`,
-          },
         }}
-        // onClick={handleClick}
-        // state={{
-        //   background: { ...location, pathname: `${location.pathname}/${_id}` },
-        // }}
         className={styles.link}
       >
         <li className={styles.container}>

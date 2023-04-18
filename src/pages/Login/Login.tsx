@@ -5,6 +5,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FormEvent, useEffect } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Loader } from "../../Components/Loader/Loader";
 import { TLoginUser } from "../../api/Auth";
 import { classNames } from "../../helpers/classNames";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
@@ -28,13 +29,11 @@ export const Login = () => {
     dispatch(loginUser(values as TLoginUser));
   };
 
-  const location = useLocation();
-  console.log(location);
-
   useEffect(() => {
     if (logged) {
       if (locationState) {
         const { redirectTo } = locationState;
+        console.log(redirectTo);
         navigate(`${redirectTo.pathname}${redirectTo.search}`);
       }
     }
@@ -47,7 +46,7 @@ export const Login = () => {
   return (
     <>
       {feedRequest ? (
-        <div>Loading...</div>
+        <Loader />
       ) : (
         <section className={styles.block}>
           <div className={styles.container}>

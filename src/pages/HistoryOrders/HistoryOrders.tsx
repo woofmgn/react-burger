@@ -1,4 +1,5 @@
 import { FC, useEffect } from "react";
+import { Loader } from "../../Components/Loader/Loader";
 import { NavMenu } from "../../Components/NavMenu/NavMenu";
 import { OrderCard } from "../../Components/OrderCard/OrderCard";
 import { OrderStatus } from "../../Components/OrderStatus/OrderStatus";
@@ -10,7 +11,7 @@ import { getCookie } from "../../utils/cookies";
 import styles from "./styles.module.css";
 
 export const HistoryOrders: FC = () => {
-  const { orders } = useAppSelector((state) => state.wsReducer);
+  const { orders, success } = useAppSelector((state) => state.wsReducer);
 
   const dispatch = useAppDispatch();
 
@@ -27,24 +28,30 @@ export const HistoryOrders: FC = () => {
   }, [dispatch]);
 
   return (
-    <section className={styles.section}>
-      <NavMenu />
-      <ul className={styles.container}>
-        {orders &&
-          orders.reverse().map((order) => {
-            return (
-              <OrderCard
-                key={order._id}
-                number={order.number}
-                _id={order._id}
-                name={order.name}
-                ingredientsList={order.ingredients}
-                date={order.createdAt}
-                children={<OrderStatus status={order.status} />}
-              />
-            );
-          })}
-      </ul>
-    </section>
+    <>
+      {!success ? (
+        <Loader />
+      ) : (
+        <section className={styles.section}>
+          <NavMenu />
+          <ul className={styles.container}>
+            {orders &&
+              orders.reverse().map((order) => {
+                return (
+                  <OrderCard
+                    key={order._id}
+                    number={order.number}
+                    _id={order._id}
+                    name={order.name}
+                    ingredientsList={order.ingredients}
+                    date={order.createdAt}
+                    children={<OrderStatus status={order.status} />}
+                  />
+                );
+              })}
+          </ul>
+        </section>
+      )}
+    </>
   );
 };

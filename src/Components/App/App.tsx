@@ -59,7 +59,6 @@ function App() {
               />
             }
           />
-          {/* <Route path="/profile/orders" element={<HistoryOrders />} /> */}
           <Route path="/feed" element={<Feed />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
@@ -81,14 +80,6 @@ function App() {
               </OrderPage>
             }
           />
-          {/* <Route
-            path="/profile/orders/:id"
-            element={
-              <OrderPage>
-                <OrderInfo />
-              </OrderPage>
-            }
-          /> */}
           <Route
             path="/profile/orders/:id"
             element={
