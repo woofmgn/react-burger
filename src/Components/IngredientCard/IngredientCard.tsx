@@ -1,20 +1,27 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import styles from "./styles.module.css";
 
 type TIngredientCardProps = {
   name: string;
   image: string;
   price: number;
-  type: string;
+  ingredient: string[];
+  id: string;
 };
 
 export const IngredientCard: FC<TIngredientCardProps> = ({
   name,
   image,
   price,
-  type,
+  ingredient,
+  id,
 }) => {
+  const ingredientCount = useMemo(() => {
+    const ingrRepeatCount = ingredient.filter((ingrItem) => ingrItem === id);
+    return ingrRepeatCount.length;
+  }, [id, ingredient]);
+
   return (
     <li className={styles.item}>
       <div className={styles.wrapper}>
@@ -25,7 +32,7 @@ export const IngredientCard: FC<TIngredientCardProps> = ({
       </div>
       <div className={styles.wrapper}>
         <p className="text text_type_digits-default mr-2">
-          {type === "bun" ? 2 : 1} x {price}
+          {ingredientCount} x {price}
         </p>
         <CurrencyIcon type="primary" />
       </div>

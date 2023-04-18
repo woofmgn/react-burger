@@ -3,6 +3,7 @@ import { FC, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
 import { useAppSelector } from "../../hooks/useAppSelector";
+import { TCard } from "../../utils/@types";
 import { IngredientCard } from "../IngredientCard/IngredientCard";
 import { OrderDate } from "../OrderDate/OrderDate";
 import { OrderStatus } from "../OrderStatus/OrderStatus";
@@ -26,15 +27,24 @@ export const OrderInfo: FC = () => {
   }, [data, order]);
 
   const totalPrice = useMemo(() => {
-    if (ingredients) {
-      return ingredients.reduce((acc, item) => {
-        if (item.type === "bun") {
-          return (acc += item.price * 2);
-        }
+    const ingrArr: TCard[] = [];
+    if (order && data) {
+      order.ingredients.forEach((ingr) => {
+        // eslint-disable-next-line array-callback-return
+        data.find((card) => {
+          if (ingr === card._id) {
+            ingrArr.push(card);
+          }
+        });
+      });
+    }
+
+    if (ingrArr) {
+      return ingrArr.reduce((acc, item) => {
         return (acc += item.price);
       }, 0);
     }
-  }, [ingredients]);
+  }, [data, order]);
 
   return (
     <>
@@ -58,10 +68,11 @@ export const OrderInfo: FC = () => {
                 return (
                   <IngredientCard
                     key={card._id}
+                    id={card._id}
                     name={card.name}
                     image={card.image_mobile!}
                     price={card.price}
-                    type={card.type!}
+                    ingredient={order!.ingredients}
                   />
                 );
               })}

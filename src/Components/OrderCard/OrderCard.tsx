@@ -41,6 +41,9 @@ export const OrderCard: FC<TOrderCardType> = React.memo(
             pathname: `${location.pathname}/${_id}`,
           },
         }}
+        // state={{
+        //   background: { ...location, pathname: `${location.pathname}/${_id}` },
+        // }}
         className={styles.link}
       >
         <li className={styles.container}>

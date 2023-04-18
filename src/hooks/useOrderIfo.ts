@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { TCard } from '../utils/@types';
 import { useAppSelector } from './useAppSelector';
 
 export const useOrderInfo = (order: string[]) => {
@@ -11,15 +12,24 @@ export const useOrderInfo = (order: string[]) => {
   }, [data, order]);
 
   const totalPrice = useMemo(() => {
-    if (ingredients) {
-      return ingredients.reduce((acc, item) => {
-        if (item.type === "bun") {
-          return (acc += item.price * 2);
-        }
+    const ingrArr: TCard[] = [];
+    if (order && data) {
+      order.forEach((ingr) => {
+        // eslint-disable-next-line array-callback-return
+        data.find((card) => {
+          if (ingr === card._id) {
+            ingrArr.push(card);
+          }
+        });
+      });
+    }
+
+    if (ingrArr) {
+      return ingrArr.reduce((acc, item) => {
         return (acc += item.price);
       }, 0);
     }
-  }, [ingredients]);
+  }, [data, order]);
 
   return {
     ingredients,
