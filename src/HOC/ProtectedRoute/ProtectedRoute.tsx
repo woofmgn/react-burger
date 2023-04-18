@@ -4,11 +4,19 @@ import { useAppSelector } from "../../hooks/useAppSelector";
 
 type TProtectedRouteProps = {
   element: JSX.Element;
+  background?: Location;
 } & RouteProps;
 
-export const ProtectedRoute: FC<TProtectedRouteProps> = ({ element }) => {
+export const ProtectedRoute: FC<TProtectedRouteProps> = ({
+  element,
+  background = null,
+}) => {
   const { logged } = useAppSelector((state) => state.userReducer);
   const location = useLocation();
+
+  if (background && !logged) {
+    return <h1>Loading...</h1>;
+  }
 
   return logged ? (
     element

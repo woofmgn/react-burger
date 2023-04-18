@@ -28,6 +28,9 @@ export const Login = () => {
     dispatch(loginUser(values as TLoginUser));
   };
 
+  const location = useLocation();
+  console.log(location);
+
   useEffect(() => {
     if (logged) {
       if (locationState) {

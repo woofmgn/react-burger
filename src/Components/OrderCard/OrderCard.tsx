@@ -41,6 +41,7 @@ export const OrderCard: FC<TOrderCardType> = React.memo(
             pathname: `${location.pathname}/${_id}`,
           },
         }}
+        // onClick={handleClick}
         // state={{
         //   background: { ...location, pathname: `${location.pathname}/${_id}` },
         // }}

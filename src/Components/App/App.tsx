@@ -52,7 +52,12 @@ function App() {
           />
           <Route
             path="/profile/orders"
-            element={<ProtectedRoute element={<HistoryOrders />} />}
+            element={
+              <ProtectedRoute
+                background={background}
+                element={<HistoryOrders />}
+              />
+            }
           />
           {/* <Route path="/profile/orders" element={<HistoryOrders />} /> */}
           <Route path="/feed" element={<Feed />} />
