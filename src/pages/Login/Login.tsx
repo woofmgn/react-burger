@@ -4,33 +4,36 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FormEvent, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Loader } from "../../Components/Loader/Loader";
+import { TLoginUser } from "../../api/Auth";
 import { classNames } from "../../helpers/classNames";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { useAppSelector } from "../../hooks/useAppSelector";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import { loginUser } from "../../services/actions/user";
 import styles from "./styles.module.css";
 
 export const Login = () => {
-  const { logged, feedRequest } = useSelector(
-    (state: any) => state.userReducer
-  );
+  const { logged, feedRequest } = useAppSelector((state) => state.userReducer);
+
   const { values, handleChange, errors, isValid } = useFormAndValidation();
   const { state: locationState } = useLocation();
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
+  const dispatch = useAppDispatch();
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    // @ts-ignore
-    dispatch(loginUser(values));
+    dispatch(loginUser(values as TLoginUser));
   };
 
   useEffect(() => {
     if (logged) {
       if (locationState) {
         const { redirectTo } = locationState;
+        console.log(redirectTo);
         navigate(`${redirectTo.pathname}${redirectTo.search}`);
       }
     }
@@ -43,7 +46,7 @@ export const Login = () => {
   return (
     <>
       {feedRequest ? (
-        <div>Loading...</div>
+        <Loader />
       ) : (
         <section className={styles.block}>
           <div className={styles.container}>

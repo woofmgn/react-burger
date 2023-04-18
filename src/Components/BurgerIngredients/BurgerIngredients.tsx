@@ -1,10 +1,10 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import React, { createRef, FC, useCallback, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import { useDispatch, useSelector } from "react-redux";
 import { classNames } from "../../helpers/classNames";
-import { setDetails } from "../../services/actions/details";
-import { TCard } from "../../utils/@types";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { useAppSelector } from "../../hooks/useAppSelector";
+import { setDetails, TDetails } from "../../services/actions/details";
 import { BUN, FILLING, SAUCE } from "../../utils/constants";
 import { Card } from "../Card/Card";
 import styles from "./styles.module.css";
@@ -16,10 +16,9 @@ export const BurgerIngredients: FC = React.memo(() => {
   // const fillingRef = createRef(null);
   const containerRef = createRef<HTMLDivElement>();
 
-  const { data, feedRequest }: { data: TCard[]; feedRequest: boolean } =
-    useSelector((state: any) => state.ingredientsReducer);
+  const { data } = useAppSelector((state) => state.ingredientsReducer);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [bunRef, inViewBun] = useInView({
     root: containerRef.current,
@@ -37,13 +36,13 @@ export const BurgerIngredients: FC = React.memo(() => {
   });
 
   const handleOpenModal = useCallback(
-    (card: any) => {
-      dispatch(setDetails(card));
+    (card: TDetails) => {
+      return dispatch(setDetails(card));
     },
     [dispatch]
   );
 
-  // код закомментирован для себя, планирую переделать реализацию intersection observer
+  // переделать реализацию intersection observer
 
   // const handleScrollToRef = (isRef, str) => {
   //   isRef.current.scrollIntoView({ behavior: "smooth" }, true);
@@ -99,63 +98,59 @@ export const BurgerIngredients: FC = React.memo(() => {
           Начинки
         </Tab>
       </div>
-      {feedRequest ? (
-        <div>Loading...</div>
-      ) : (
-        <div className={styles.container}>
-          <h2 ref={bunRef} className="text text_type_main-medium">
-            Булки
-          </h2>
-          <ul className={styles.grid}>
-            {data &&
-              data
-                .filter((item) => item.type === BUN)
-                .map((item) => {
-                  return (
-                    <Card
-                      key={item._id}
-                      onOpen={handleOpenModal}
-                      props={{ ...item }}
-                    />
-                  );
-                })}
-          </ul>
-          <h2 ref={sauceRef} className="mt-10 text text_type_main-medium">
-            Соусы
-          </h2>
-          <ul className={styles.grid}>
-            {data &&
-              data
-                .filter((item) => item.type === SAUCE)
-                .map((item) => {
-                  return (
-                    <Card
-                      key={item._id}
-                      onOpen={handleOpenModal}
-                      props={{ ...item }}
-                    />
-                  );
-                })}
-          </ul>
-          <h2 ref={fillingRef} className="mt-10 text text_type_main-medium">
-            Начинка
-          </h2>
-          <ul className={styles.grid}>
-            {data &&
-              data
-                .filter((item) => item.type === "main")
-                .map((item) => {
-                  return (
-                    <Card
-                      key={item._id}
-                      onOpen={handleOpenModal}
-                      props={{ ...item }}
-                    />
-                  );
-                })}
-          </ul>
-        </div>
-      )}
+      <div className={styles.container}>
+        <h2 ref={bunRef} className="text text_type_main-medium">
+          Булки
+        </h2>
+        <ul className={styles.grid}>
+          {data &&
+            data
+              .filter((item) => item.type === BUN)
+              .map((item) => {
+                return (
+                  <Card
+                    key={item._id}
+                    onOpen={handleOpenModal}
+                    props={{ ...item }}
+                  />
+                );
+              })}
+        </ul>
+        <h2 ref={sauceRef} className="mt-10 text text_type_main-medium">
+          Соусы
+        </h2>
+        <ul className={styles.grid}>
+          {data &&
+            data
+              .filter((item) => item.type === SAUCE)
+              .map((item) => {
+                return (
+                  <Card
+                    key={item._id}
+                    onOpen={handleOpenModal}
+                    props={{ ...item }}
+                  />
+                );
+              })}
+        </ul>
+        <h2 ref={fillingRef} className="mt-10 text text_type_main-medium">
+          Начинка
+        </h2>
+        <ul className={styles.grid}>
+          {data &&
+            data
+              .filter((item) => item.type === "main")
+              .map((item) => {
+                return (
+                  <Card
+                    key={item._id}
+                    onOpen={handleOpenModal}
+                    props={{ ...item }}
+                  />
+                );
+              })}
+        </ul>
+      </div>
     </section>
   );
 });

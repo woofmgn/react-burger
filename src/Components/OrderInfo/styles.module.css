@@ -1,0 +1,42 @@
+.container {
+  max-width: 640px;
+  width: 100%;
+}
+
+.list {
+  margin: 24px 0 0;
+  padding: 0;
+  list-style-type: none;
+  max-height: 316px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.list::-webkit-scrollbar {
+  height: 464px;
+  width: 8px;
+  background-color: #2F2F37;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background: #8585AD;
+}
+
+.number {
+  display: block;
+  text-align: center;
+}
+
+.wrapper {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+}

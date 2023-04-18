@@ -4,24 +4,25 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React, { FC } from "react";
 import { useDrag } from "react-dnd";
-import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { classNames } from "../../helpers/classNames";
+import { useAppSelector } from "../../hooks/useAppSelector";
+import { TDetails } from "../../services/actions/details";
 import { TCard } from "../../utils/@types";
 import styles from "./styles.module.css";
 
-type TCardData = {
+export type TCardData = {
   name: string;
-  imageLarge: string;
+  imageLarge?: string;
   calories: number;
   proteins: number;
   fat: number;
   carbohydrates: number;
 };
 
-interface TCardProps {
+export interface TCardProps {
   props: TCard;
-  onOpen: (data: TCardData) => void;
+  onOpen: (data: TDetails) => void;
 }
 
 export const Card: FC<TCardProps> = React.memo(({ props, onOpen }) => {
@@ -39,7 +40,7 @@ export const Card: FC<TCardProps> = React.memo(({ props, onOpen }) => {
 
   const location = useLocation();
 
-  const { ingredients } = useSelector((state: any) => state.constructorReducer);
+  const { ingredients } = useAppSelector((state) => state.constructorReducer);
 
   const [, dragRef] = useDrag({
     type: "ingredient",
@@ -56,7 +57,7 @@ export const Card: FC<TCardProps> = React.memo(({ props, onOpen }) => {
   const handlerOpenModal = () => {
     onOpen({
       name: name,
-      imageLarge: image_large,
+      imageLarge: image_large!,
       calories: calories,
       proteins: proteins,
       fat: fat,

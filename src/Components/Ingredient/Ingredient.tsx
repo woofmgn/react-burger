@@ -4,7 +4,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FC } from "react";
 import { useDrag, useDrop } from "react-dnd";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
 
 import {
   removeIngredients,
@@ -24,7 +24,7 @@ type TIngredientProps = {
 export const Ingredient: FC<TIngredientProps> = ({ element }) => {
   const { image, name, price, keyId } = element;
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "ingredientConstructor",

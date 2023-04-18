@@ -1,7 +1,7 @@
 export type TCard = {
   _id: string;
   name: string;
-  type: string;
+  type?: string;
   proteins: number;
   fat: number;
   carbohydrates: number;
@@ -9,7 +9,7 @@ export type TCard = {
   price: number;
   image: string;
   image_mobile?: string;
-  image_large: string;
+  image_large?: string;
   __v?: number;
 }
 

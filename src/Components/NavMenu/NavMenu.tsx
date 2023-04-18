@@ -1,7 +1,7 @@
-import { useDispatch } from "react-redux";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../../api/Auth";
 import { classNames } from "../../helpers/classNames";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { removeUser } from "../../services/actions/user";
 import { ORDER_PAGE_TEXT, PROFILE_PAGE_TEXT } from "../../utils/constants";
 import { setCookie } from "../../utils/cookies";
@@ -11,7 +11,8 @@ export const NavMenu = () => {
   const { pathname } = useLocation();
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
+  const dispatch = useAppDispatch();
 
   const checkLocation = () => {
     if (pathname === "/profile") {
@@ -32,10 +33,6 @@ export const NavMenu = () => {
     });
   };
 
-  const activeLink = ({ isActive }: { isActive: boolean }) => ({
-    color: isActive ? "#F5F6F7" : "",
-  });
-
   return (
     <div className={styles.container}>
       <nav className={styles.navMenu}>
@@ -44,7 +41,7 @@ export const NavMenu = () => {
           className={classNames(styles.navlink, {}, [
             "text text_type_main-medium text_color_inactive",
           ])}
-          style={activeLink}
+          style={pathname === "/profile" ? { color: "#F5F6F7" } : {}}
         >
           <p>Профиль</p>
         </NavLink>
@@ -53,7 +50,7 @@ export const NavMenu = () => {
           className={classNames(styles.navlink, {}, [
             "text text_type_main-medium text_color_inactive",
           ])}
-          style={activeLink}
+          style={pathname === "/profile/orders" ? { color: "#F5F6F7" } : {}}
         >
           <p>История заказов</p>
         </NavLink>

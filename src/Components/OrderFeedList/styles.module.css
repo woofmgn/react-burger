@@ -1,0 +1,10 @@
+.container {
+  max-width: 584px;
+  width: 100%;
+}
+
+.statusWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}

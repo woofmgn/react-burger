@@ -4,9 +4,11 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FC, FormEvent, SyntheticEvent, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { NavMenu } from "../../Components/NavMenu/NavMenu";
+import { TNewUserData } from "../../api/UserData";
 import { classNames } from "../../helpers/classNames";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { useAppSelector } from "../../hooks/useAppSelector";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import { setUser } from "../../services/actions/user";
 import styles from "./styles.module.css";
@@ -17,12 +19,12 @@ export const Profile: FC = () => {
   const { values, errors, isValid, handleChange, setValues, setErrors } =
     useFormAndValidation();
 
-  const { user, logged } = useSelector((state: any) => state.userReducer);
+  const { user, logged } = useAppSelector((state) => state.userReducer);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleCheckNewValue = () => {
-    if (values.name !== user.name || values.email !== user.email) {
+    if (values.name !== user!.name || values.email !== user!.email) {
       setIsVisible(true);
     } else {
       setIsVisible(false);
@@ -31,16 +33,15 @@ export const Profile: FC = () => {
 
   const handleSumbit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    // @ts-ignore
-    dispatch(setUser(values));
+    dispatch(setUser(values as TNewUserData));
     setIsVisible((prev) => !prev);
   };
 
   const handleResetChange = (evt: SyntheticEvent) => {
     evt.preventDefault();
     setValues({
-      name: user.name,
-      email: user.email,
+      name: user!.name,
+      email: user!.email,
       password: "******",
     });
     setErrors({});
@@ -55,7 +56,7 @@ export const Profile: FC = () => {
 
   useEffect(() => {
     if (logged) {
-      setValues({ name: user.name, email: user.email, password: "******" });
+      setValues({ name: user!.name, email: user!.email, password: "******" });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [logged]);

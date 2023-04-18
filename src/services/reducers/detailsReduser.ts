@@ -1,12 +1,19 @@
 import { SET_INGREDIENTS } from "../../utils/constants";
+import { TDetails, TDetailsAction } from '../actions/details';
 
-const initialState = {
+type TDetailsState = {
+  feedReq: boolean;
+  feedRes: boolean;
+  details: TDetails | null;
+}
+
+const initialState: TDetailsState = {
   feedReq: false,
   feedRes: false,
   details: null,
 };
 
-export function detailsReducer(state = initialState, action) {
+export function detailsReducer(state = initialState, action: TDetailsAction): TDetailsState {
   switch (action.type) {
     case SET_INGREDIENTS: {
       return {
