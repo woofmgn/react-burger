@@ -21,7 +21,7 @@ interface ISetOrderSuccessAction {
 }
 
 interface ISetOrderAction {
-  readonly type: typeof SET_ORDER
+  readonly type: typeof SET_ORDER,
 }
 
 interface ISetOrderFailedAction {
@@ -39,16 +39,16 @@ export type ISetOrderActions =
   | ISetOrderRemove;
 
 export const setOrderAction = (): ISetOrderAction => ({
-  type: SET_ORDER
+  type: SET_ORDER,
 })
 
 export const setOrderSuccessAction = (order: TOrderRes): ISetOrderSuccessAction => ({
   type: SET_ORDER_SUCCES,
-  order: order
+  order
 })
 
 export const setOrderFailedAction = (): ISetOrderFailedAction => ({
-  type: SET_ORDER_FAILED
+  type: SET_ORDER_FAILED,
 })
 
 export const removeOrder = (): ISetOrderRemove => ({
@@ -60,7 +60,7 @@ export const setOrder = (payload: string[]) => (dispatch: AppDispatch) => {
   dispatch(setOrderAction());
   api
     .newOrder(payload)
-    .then((res: TOrderRes) => {
+    .then((res) => {
       if (res) {
         dispatch(setOrderSuccessAction(res));
       } else {

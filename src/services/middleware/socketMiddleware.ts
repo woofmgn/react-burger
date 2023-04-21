@@ -1,5 +1,5 @@
 import type { Middleware, MiddlewareAPI } from 'redux';
-import { TWsActonsOptions } from '../reducers/wsReducer';
+import { TWsActonsOptions } from '../reducers/wsReducer/wsReducer';
 import type { AppDispatch, RootState, TAppActions } from '../store';
 
 export const socketMiddleware = (wsActions: TWsActonsOptions): Middleware => {

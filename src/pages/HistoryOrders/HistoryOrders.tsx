@@ -5,7 +5,7 @@ import { OrderCard } from "../../Components/OrderCard/OrderCard";
 import { OrderStatus } from "../../Components/OrderStatus/OrderStatus";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useAppSelector } from "../../hooks/useAppSelector";
-import { wsActionsOptions } from "../../services/reducers/wsReducer";
+import { wsActionsOptions } from "../../services/reducers/wsReducer/wsReducer";
 import { WS_BASE_URL } from "../../utils/constants";
 import { getCookie } from "../../utils/cookies";
 import styles from "./styles.module.css";

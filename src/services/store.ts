@@ -14,9 +14,9 @@ import { socketMiddleware } from './middleware/socketMiddleware';
 import { constructorReducer } from "./reducers/constructorReducer/constructorReducer";
 import { detailsReducer } from "./reducers/detailsReduser/detailsReduser";
 import { ingredientsReducer } from "./reducers/ingredientsReducer/ingredientsReducer";
-import { orderReducer } from "./reducers/orderReducer";
-import { userReducer } from "./reducers/userReducer";
-import { TWSActions, wsActionsOptions, wsReducer } from './reducers/wsReducer';
+import { orderReducer } from "./reducers/orderReducer/orderReducer";
+import { userReducer } from "./reducers/userReducer/userReducer";
+import { TWSActions, wsActionsOptions, wsReducer } from './reducers/wsReducer/wsReducer';
 
 const composeEnhancers =
   // @ts-ignore

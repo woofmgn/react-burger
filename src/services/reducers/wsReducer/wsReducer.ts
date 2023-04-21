@@ -5,7 +5,7 @@ import {
   WS_CONNECTION_SUCCESS,
   WS_GET_MESSAGE,
   WS_SEND_MESSAGE
-} from '../../utils/constants';
+} from '../../../utils/constants';
 
 export type WSOrders = {
   ingredients: string[];
@@ -66,7 +66,7 @@ export type TWSState = {
   error?: Event;
 }
 
-const initialState: TWSState = {
+export const initialState: TWSState = {
   wsConnection: false,
   success: false,
   orders: null,

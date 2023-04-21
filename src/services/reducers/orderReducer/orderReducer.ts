@@ -3,8 +3,8 @@ import {
   SET_ORDER_FAILED,
   SET_ORDER_REMOVE,
   SET_ORDER_SUCCES,
-} from "../../utils/constants";
-import { ISetOrderActions } from '../actions/order';
+} from "../../../utils/constants";
+import { ISetOrderActions } from '../../actions/order';
 
 type TOrderState = {
   feedReq: boolean;
@@ -16,7 +16,7 @@ type TOrderState = {
   success: boolean;
 }
 
-const initialState: TOrderState = {
+export const initialState: TOrderState = {
   feedReq: false,
   feedFailed: false,
   name: "",
