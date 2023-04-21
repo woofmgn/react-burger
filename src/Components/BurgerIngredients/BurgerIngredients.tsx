@@ -11,9 +11,6 @@ import styles from "./styles.module.css";
 
 export const BurgerIngredients: FC = React.memo(() => {
   const [current, setCurrent] = useState(BUN);
-  // const bunRef = createRef(null);
-  // const sauceRef = createRef(null);
-  // const fillingRef = createRef(null);
   const containerRef = createRef<HTMLDivElement>();
 
   const { data } = useAppSelector((state) => state.ingredientsReducer);
@@ -42,13 +39,6 @@ export const BurgerIngredients: FC = React.memo(() => {
     [dispatch]
   );
 
-  // переделать реализацию intersection observer
-
-  // const handleScrollToRef = (isRef, str) => {
-  //   isRef.current.scrollIntoView({ behavior: "smooth" }, true);
-  //   setCurrent(str);
-  // };
-
   React.useEffect(() => {
     if (inViewBun) {
       setCurrent(BUN);
@@ -76,7 +66,6 @@ export const BurgerIngredients: FC = React.memo(() => {
         <Tab
           value={BUN}
           active={current === BUN}
-          // onClick={() => handleScrollToRef(bunRef, "bun")}
           onClick={() => setCurrent(BUN)}
         >
           Булки
@@ -84,7 +73,6 @@ export const BurgerIngredients: FC = React.memo(() => {
         <Tab
           value={SAUCE}
           active={current === SAUCE}
-          // onClick={() => handleScrollToRef(sauceRef, "sauce")}
           onClick={() => setCurrent(SAUCE)}
         >
           Соусы
@@ -92,7 +80,6 @@ export const BurgerIngredients: FC = React.memo(() => {
         <Tab
           value={FILLING}
           active={current === FILLING}
-          // onClick={() => handleScrollToRef(fillingRef, "filling")}
           onClick={() => setCurrent(FILLING)}
         >
           Начинки

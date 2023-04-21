@@ -16,16 +16,11 @@ import {
   removeAllIngredients,
 } from "../../services/actions/constructor";
 import { removeOrder, setOrder } from "../../services/actions/order";
-// import { TCard } from "../../utils/@types";
 import { BUN } from "../../utils/constants";
 import { Ingredient } from "../Ingredient/Ingredient";
 import { Modal } from "../Modal/Modal";
 import { OrderDetails } from "../OrderDetails/OrderDetails";
 import styles from "./styles.module.css";
-
-// type TIngredientsData = {
-//   onOpen: () => void;
-// } & TIngredients;
 
 export const BurgerConstructor: FC = React.memo(() => {
   const [isVisible, setIsVisible] = React.useState(false);
