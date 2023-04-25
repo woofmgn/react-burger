@@ -71,13 +71,13 @@ export const BurgerConstructor: FC = React.memo(() => {
   }, [ingredients]);
 
   return (
-    <section className={styles.section}>
+    <section className={styles.section} test-id={"constructor"} id="cytest">
       <div
         ref={dropTargetRef}
         className={classNames(styles.container, {}, ["ml-4"])}
       >
         {filteredBun[0] && (
-          <div className="ml-8">
+          <div className="ml-8" test-id={"bun-container"}>
             <ConstructorElement
               type="top"
               isLocked={true}
