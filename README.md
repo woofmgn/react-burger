@@ -18,6 +18,4 @@ npm run start - запуск проекта
 npm run build - сборка проекта
 ```
 
-#### Для установки приложения:
-
 Демо https://woofmgn.github.io/react-burger
