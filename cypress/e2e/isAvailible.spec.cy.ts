@@ -2,7 +2,7 @@ import '@4tw/cypress-drag-drop';
 
 describe("service is available", () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000');
+    cy.visit('http://localhost:3000/react-burger');
   });
 
   it('should open ingredient modal', () => {
