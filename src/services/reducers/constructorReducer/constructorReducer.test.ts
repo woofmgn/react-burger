@@ -58,16 +58,4 @@ describe('constructor Reducer', () => {
         ingredients: [],
       })
   })
-
-  // it('should REPLASE_INGREDIENT', () => {
-  //   expect(constructorReducer(initialState, {
-  //     type: REPLASE_INGREDIENT,
-  //     dragItem: 'dragItem',
-  //     hoverItem: 'hoverItem',
-  //   }))
-  //     .toEqual({
-  //       ...initialState,
-  //       ingredients: [ingredient]
-  //     })
-  // })
 })

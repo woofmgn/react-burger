@@ -15,7 +15,7 @@ export const OrderDetails: FC = () => {
       >
         {order!.number}
       </h2>
-      <p className="text text_type_main-medium mt-8">индентификатор заказа</p>
+      <p className="text text_type_main-medium mt-8">идентификатор заказа</p>
       <div className={styles.icon}></div>
       <p className="text text_type_main-default mt-15">
         Ваш заказ начали готовить
