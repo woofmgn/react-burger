@@ -8,7 +8,7 @@ import {
   TWSState,
   WSOrders,
   wsActionsOptions,
-} from "../../services/reducers/wsReducer";
+} from "../../services/reducers/wsReducer/wsReducer";
 import { WS_BASE_URL } from "../../utils/constants";
 import styles from "./styles.module.css";
 

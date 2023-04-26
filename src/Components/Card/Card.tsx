@@ -68,6 +68,7 @@ export const Card: FC<TCardProps> = React.memo(({ props, onOpen }) => {
   return (
     <Link
       key={_id}
+      test-id={"card"}
       to={`/ingredients/${_id}`}
       state={{ background: location }}
       className={classNames(styles.link, {}, [

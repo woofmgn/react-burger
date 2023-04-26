@@ -5,23 +5,18 @@
   flex-direction: column;
   justify-content: space-between;
   padding-top: 100px;
-  /* height: 100%; */
 }
 
 .container {
   display: flex;
-  /* max-width: 600px;
-  width: 100%; */
   height: 100%;
   flex-direction: column;
-  /* justify-content: space-between; */
   justify-content: center;
   gap: 10px;
 }
 
 .list {
   max-height: 42vh;
-  /* height: 100%; */
   margin: 0;
   padding: 0;
   list-style: none;

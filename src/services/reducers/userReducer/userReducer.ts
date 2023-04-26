@@ -10,8 +10,8 @@ import {
   SET_USER,
   SET_USER_FAILED,
   SET_USER_SUCCESS
-} from "../../utils/constants";
-import { IUserActions, TCurrentUser } from '../actions/user';
+} from "../../../utils/constants";
+import { IUserActions, TCurrentUser } from '../../actions/user';
 
 type TUserState = {
   feedRequest: boolean;
@@ -20,7 +20,7 @@ type TUserState = {
   user: TCurrentUser | null;
 }
 
-const initialState: TUserState = {
+export const initialState: TUserState = {
   feedRequest: false,
   feedFailed: false,
   logged: false,

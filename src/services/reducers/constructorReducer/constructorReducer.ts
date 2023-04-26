@@ -3,8 +3,8 @@ import {
   REMOVE_ALL_INGREDIENTS,
   REMOVE_INGREDIENTS,
   REPLASE_INGREDIENT,
-} from "../../utils/constants";
-import { TConstructorActions, TIngredients } from '../actions/constructor';
+} from "../../../utils/constants";
+import { TConstructorActions, TIngredients } from '../../actions/constructor';
 
 type TCounstructorState = {
   feedRequest: boolean;
@@ -12,7 +12,7 @@ type TCounstructorState = {
   ingredients: TIngredients[] | [];
 }
 
-const initialState: TCounstructorState = {
+export const initialState: TCounstructorState = {
   feedRequest: false,
   feedFailed: false,
   ingredients: [],

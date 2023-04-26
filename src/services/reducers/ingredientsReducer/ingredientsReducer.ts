@@ -1,10 +1,10 @@
-import { TCard } from '../../utils/@types';
+import { TCard } from '../../../utils/@types';
 import {
   GET_INGREDIENTS,
   GET_INGREDIENTS_FAILED,
   GET_INGREDIENTS_SUCCES,
-} from "../../utils/constants";
-import { IGetIngredientsActions } from '../actions/getIngredients';
+} from "../../../utils/constants";
+import { IGetIngredientsActions } from '../../actions/getIngredients';
 
 type TIngredientsState = {
   feedRequest: boolean;
@@ -12,7 +12,7 @@ type TIngredientsState = {
   data: TCard[] | null;
 }
 
-const initialState: TIngredientsState = {
+export const initialState: TIngredientsState = {
   feedRequest: false,
   feedFailed: false,
   data: null,

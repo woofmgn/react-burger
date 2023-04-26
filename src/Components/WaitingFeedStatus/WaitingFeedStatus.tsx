@@ -1,6 +1,6 @@
 import React, { FC, useMemo } from "react";
 import { useAppSelector } from "../../hooks/useAppSelector";
-import { TWSState } from "../../services/reducers/wsReducer";
+import { TWSState } from "../../services/reducers/wsReducer/wsReducer";
 import styles from "./styles.module.css";
 
 export const WaitingFeedStatus: FC = React.memo(() => {

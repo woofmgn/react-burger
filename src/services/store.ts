@@ -11,12 +11,12 @@ import { IGetIngredientsActions } from './actions/getIngredients';
 import { ISetOrderActions } from './actions/order';
 import { IUserActions } from './actions/user';
 import { socketMiddleware } from './middleware/socketMiddleware';
-import { constructorReducer } from "./reducers/constructorReducer";
-import { detailsReducer } from "./reducers/detailsReduser";
-import { ingredientsReducer } from "./reducers/ingredientsReducer";
-import { orderReducer } from "./reducers/orderReducer";
-import { userReducer } from "./reducers/userReducer";
-import { TWSActions, wsActionsOptions, wsReducer } from './reducers/wsReducer';
+import { constructorReducer } from "./reducers/constructorReducer/constructorReducer";
+import { detailsReducer } from "./reducers/detailsReduser/detailsReduser";
+import { ingredientsReducer } from "./reducers/ingredientsReducer/ingredientsReducer";
+import { orderReducer } from "./reducers/orderReducer/orderReducer";
+import { userReducer } from "./reducers/userReducer/userReducer";
+import { TWSActions, wsActionsOptions, wsReducer } from './reducers/wsReducer/wsReducer';
 
 const composeEnhancers =
   // @ts-ignore

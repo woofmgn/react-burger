@@ -1,5 +1,5 @@
-import { SET_INGREDIENTS } from "../../utils/constants";
-import { TDetails, TDetailsAction } from '../actions/details';
+import { SET_INGREDIENTS } from "../../../utils/constants";
+import { TDetails, TDetailsAction } from '../../actions/details';
 
 type TDetailsState = {
   feedReq: boolean;
@@ -7,7 +7,7 @@ type TDetailsState = {
   details: TDetails | null;
 }
 
-const initialState: TDetailsState = {
+export const initialState: TDetailsState = {
   feedReq: false,
   feedRes: false,
   details: null,
