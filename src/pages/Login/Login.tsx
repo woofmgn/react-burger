@@ -33,7 +33,6 @@ export const Login = () => {
     if (logged) {
       if (locationState) {
         const { redirectTo } = locationState;
-        console.log(redirectTo);
         navigate(`${redirectTo.pathname}${redirectTo.search}`);
       }
     }
