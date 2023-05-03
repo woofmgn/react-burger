@@ -38,6 +38,21 @@ export const BurgerIngredients: FC = React.memo(() => {
     },
     [dispatch]
   );
+  
+  const filteredCard = useCallback((ingrType: string) => {
+    if (data) {
+      return data.filter((item) => item.type === ingrType)
+      .map((item) => {
+        return (
+          <Card
+            key={item._id}
+            onOpen={handleOpenModal}
+            props={{ ...item }}
+          />
+        );
+      })
+    }
+  }, [data, handleOpenModal])
 
   React.useEffect(() => {
     if (inViewBun) {
@@ -90,52 +105,25 @@ export const BurgerIngredients: FC = React.memo(() => {
           Булки
         </h2>
         <ul className={styles.grid}>
-          {data &&
-            data
-              .filter((item) => item.type === BUN)
-              .map((item) => {
-                return (
-                  <Card
-                    key={item._id}
-                    onOpen={handleOpenModal}
-                    props={{ ...item }}
-                  />
-                );
-              })}
+          {
+            data && filteredCard(BUN)
+          }
         </ul>
         <h2 ref={sauceRef} className="mt-10 text text_type_main-medium">
           Соусы
         </h2>
         <ul className={styles.grid}>
-          {data &&
-            data
-              .filter((item) => item.type === SAUCE)
-              .map((item) => {
-                return (
-                  <Card
-                    key={item._id}
-                    onOpen={handleOpenModal}
-                    props={{ ...item }}
-                  />
-                );
-              })}
+          {
+            data && filteredCard(SAUCE)
+          }
         </ul>
         <h2 ref={fillingRef} className="mt-10 text text_type_main-medium">
           Начинка
         </h2>
         <ul className={styles.grid}>
-          {data &&
-            data
-              .filter((item) => item.type === "main")
-              .map((item) => {
-                return (
-                  <Card
-                    key={item._id}
-                    onOpen={handleOpenModal}
-                    props={{ ...item }}
-                  />
-                );
-              })}
+          {
+            data && filteredCard("main")
+          }
         </ul>
       </div>
     </section>
